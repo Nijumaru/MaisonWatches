@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maison Watches — Gérez votre collection de montres de luxe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8D5A3;
+    --gold-dark: #8B6914;
+    --black: #0D0D0D;
+    --dark: #1A1A1A;
+    --surface: #141414;
+    --surface2: #1E1E1E;
+    --border: rgba(201,168,76,0.15);
+    --border-strong: rgba(201,168,76,0.35);
+    --text: #F0EDE8;
+    --text-muted: #8A8580;
+    --text-dim: #4A4845;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--black);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(13,13,13,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 400; letter-spacing: 0.12em;
+    color: var(--gold); text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; align-items: center; }
+  .nav-links a { font-size: 13px; color: var(--text-muted); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+  .btn-nav {
+    font-size: 12px; font-weight: 500; letter-spacing: 0.08em;
+    padding: 8px 20px; border-radius: 2px;
+    border: 0.5px solid var(--gold);
+    color: var(--gold); background: transparent;
+    cursor: pointer; text-decoration: none;
+    transition: all 0.2s;
+  }
+  .btn-nav:hover { background: var(--gold); color: var(--black); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 8rem 2rem 4rem;
+    position: relative;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 40%, rgba(201,168,76,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .eyebrow {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.2em;
+    color: var(--gold); text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .eyebrow::before, .eyebrow::after {
+    content: ''; display: block; width: 32px; height: 0.5px; background: var(--gold-dark);
+  }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 300; line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+  }
+  h1 em { font-style: italic; color: var(--gold); }
+  .hero-sub {
+    font-size: 16px; color: var(--text-muted);
+    max-width: 520px; margin: 0 auto 2.5rem;
+    line-height: 1.7; font-weight: 300;
+  }
+  .hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    font-size: 13px; font-weight: 500; letter-spacing: 0.06em;
+    padding: 14px 32px; border-radius: 2px;
+    background: var(--gold); color: var(--black);
+    border: none; cursor: pointer; text-decoration: none;
+    transition: all 0.2s;
+  }
+  .btn-primary:hover { background: var(--gold-light); }
+  .btn-ghost {
+    font-size: 13px; letter-spacing: 0.06em;
+    padding: 14px 32px; border-radius: 2px;
+    background: transparent; color: var(--text-muted);
+    border: 0.5px solid var(--border-strong); cursor: pointer; text-decoration: none;
+    transition: all 0.2s;
+  }
+  .btn-ghost:hover { color: var(--text); border-color: var(--text-muted); }
+
+  /* TICKER */
+  .ticker {
+    width: 100%; overflow: hidden;
+    border-top: 0.5px solid var(--border);
+    border-bottom: 0.5px solid var(--border);
+    padding: 10px 0; margin: 3rem 0;
+    background: var(--surface);
+  }
+  .ticker-inner {
+    display: flex; gap: 3rem; white-space: nowrap;
+    animation: scroll 24s linear infinite;
+  }
+  .ticker-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; letter-spacing: 0.08em; color: var(--text-muted);
+  }
+  .ticker-ref { color: var(--gold); font-weight: 500; }
+  .ticker-val { color: var(--text); }
+  .ticker-up { color: #4CAF50; font-size: 11px; }
+  .ticker-down { color: #E53935; font-size: 11px; }
+  @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* STATS */
+  .stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 0; border: 0.5px solid var(--border);
+    max-width: 700px; margin: 0 auto 6rem;
+  }
+  .stat {
+    padding: 2rem 1.5rem; text-align: center;
+    border-right: 0.5px solid var(--border);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem; font-weight: 300; color: var(--gold);
+    display: block; line-height: 1;
+  }
+  .stat-label { font-size: 12px; color: var(--text-muted); letter-spacing: 0.06em; margin-top: 6px; }
+
+  /* FEATURES */
+  section { padding: 5rem 3rem; }
+  .section-label {
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold-dark); margin-bottom: 1rem; font-weight: 500;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem); font-weight: 300;
+    line-height: 1.15; max-width: 520px;
+  }
+  .features-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px; background: var(--border); margin-top: 4rem;
+    border: 0.5px solid var(--border);
+  }
+  .feature-card {
+    background: var(--black); padding: 2.5rem 2rem;
+    transition: background 0.2s;
+  }
+  .feature-card:hover { background: var(--surface); }
+  .feature-icon {
+    width: 36px; height: 36px; margin-bottom: 1.5rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .feature-icon svg { width: 24px; height: 24px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+  .feature-title {
+    font-size: 15px; font-weight: 500; margin-bottom: 8px; color: var(--text);
+  }
+  .feature-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; font-weight: 300; }
+
+  /* PRICING */
+  .pricing { background: var(--surface); border-top: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); }
+  .pricing-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px; background: var(--border);
+    margin-top: 3rem; border: 0.5px solid var(--border);
+  }
+  .plan {
+    background: var(--surface2); padding: 2rem 1.75rem;
+    position: relative;
+  }
+  .plan.featured { background: var(--dark); }
+  .plan-badge {
+    position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    background: var(--gold); color: var(--black);
+    padding: 3px 14px; font-weight: 500;
+  }
+  .plan-name { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem; }
+  .plan-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; font-weight: 300; color: var(--text); line-height: 1;
+  }
+  .plan-price span { font-size: 1rem; font-family: 'DM Sans', sans-serif; color: var(--text-muted); }
+  .plan-desc { font-size: 12px; color: var(--text-muted); margin: 0.75rem 0 1.5rem; }
+  .plan-features { list-style: none; margin-bottom: 2rem; }
+  .plan-features li {
+    font-size: 13px; color: var(--text-muted); padding: 6px 0;
+    border-bottom: 0.5px solid var(--border);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .plan-features li::before { content: '–'; color: var(--gold-dark); }
+  .plan-features li.active { color: var(--text); }
+  .plan-features li.active::before { content: '✓'; color: var(--gold); }
+
+  /* FOOTER */
+  footer {
+    padding: 3rem; border-top: 0.5px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; color: var(--gold-dark); letter-spacing: 0.1em;
+  }
+  footer p { font-size: 12px; color: var(--text-dim); }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.25rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.25rem; }
+    .stats { grid-template-columns: 1fr; }
+    .stat { border-right: none; border-bottom: 0.5px solid var(--border); }
+    footer { flex-direction: column; padding: 2rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Maison Watches</a>
+  <div class="nav-links">
+    <a href="#features">Fonctionnalités</a>
+    <a href="#pricing">Tarifs</a>
+    <a href="dashboard.html" class="btn-nav">Accéder à l'app →</a>
+  </div>
+</nav>
+
+<main>
+  <div class="hero">
+    <div class="eyebrow">Gestionnaire de collection</div>
+    <h1>Votre collection,<br><em>sa vraie valeur</em></h1>
+    <p class="hero-sub">Suivez en temps réel ce que valent vos montres sur le marché secondaire. Alertes prix, historique, rapport d'assurance.</p>
+    <div id="signup-form" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;max-width:440px;margin:0 auto;">
+      <input type="email" id="email-input" placeholder="votre@email.com" style="flex:1;min-width:200px;padding:13px 16px;border-radius:2px;border:0.5px solid rgba(201,168,76,0.4);background:rgba(255,255,255,0.04);color:#F0EDE8;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;">
+      <button class="btn-primary" onclick="submitEmail()">Accès anticipé gratuit</button>
+    </div>
+    <p style="font-size:12px;color:var(--text-muted);margin-top:12px;">Déjà <span id="counter">47</span> collectionneurs inscrits · Sans engagement</p>
+    <div id="signup-success" style="display:none;text-align:center;">
+      <div style="font-size:15px;color:var(--gold);margin-bottom:6px;">✓ Vous êtes sur la liste</div>
+      <p style="font-size:13px;color:var(--text-muted);">On vous contacte en priorité au lancement.</p>
+      <a href="dashboard.html" style="font-size:13px;color:var(--gold-dark);text-decoration:underline;margin-top:8px;display:inline-block;">Voir la démo →</a>
+    </div>
+  </div>
+
+  <div class="ticker">
+    <div class="ticker-inner" id="ticker">
+      <span class="ticker-item"><span class="ticker-ref">Rolex Submariner 124060</span><span class="ticker-val">9 200€</span><span class="ticker-up">▲ +3.2%</span></span>
+      <span class="ticker-item"><span class="ticker-ref">Patek Philippe Nautilus 5711</span><span class="ticker-val">128 000€</span><span class="ticker-up">▲ +1.8%</span></span>
+      <span class="ticker-item"><span class="ticker-ref">AP Royal Oak 15500ST</span><span class="ticker-val">32 500€</span><span class="ticker-down">▼ -0.9%</span></span>
+      <span class="ticker-item"><span class="ticker-ref">Rolex Daytona 116500LN</span><span class="ticker-val">26 800€</span><span class="ticker-up">▲ +5.1%</span></span>
+      <span class="ticker-item"><span class="ticker-ref">IWC Portugieser 5001</span><span class="ticker-val">7 400€</span><span class="ticker-down">▼ -1.2%</span></span>
+      <span class="ticker-item"><span class="ticker-ref">Omega Speedmaster 310.30</span><span class="ticker-val">5 100€</span><span class="ticker-up">▲ +2.4%</span></span>
+      <span class="ticker-item"><span class="ticker-ref">Rolex GMT-Master II 126710BLRO</span><span class="ticker-val">14 200€</span><span class="ticker-up">▲ +4.7%</span></span>
+      <!-- duplicated for seamless scroll -->
+      <span class="ticker-item"><span class="ticker-ref">Rolex Submariner 124060</span><span class="ticker-val">9 200€</span><span class="ticker-up">▲ +3.2%</span></span>
+      <span class="ticker-item"><span class="ticker-ref">Patek Philippe Nautilus 5711</span><span class="ticker-val">128 000€</span><span class="ticker-up">▲ +1.8%</span></span>
+      <span class="ticker-item"><span class="ticker-ref">AP Royal Oak 15500ST</span><span class="ticker-val">32 500€</span><span class="ticker-down">▼ -0.9%</span></span>
+      <span class="ticker-item"><span class="ticker-ref">Rolex Daytona 116500LN</span><span class="ticker-val">26 800€</span><span class="ticker-up">▲ +5.1%</span></span>
+      <span class="ticker-item"><span class="ticker-ref">IWC Portugieser 5001</span><span class="ticker-val">7 400€</span><span class="ticker-down">▼ -1.2%</span></span>
+      <span class="ticker-item"><span class="ticker-ref">Omega Speedmaster 310.30</span><span class="ticker-val">5 100€</span><span class="ticker-up">▲ +2.4%</span></span>
+      <span class="ticker-item"><span class="ticker-ref">Rolex GMT-Master II 126710BLRO</span><span class="ticker-val">14 200€</span><span class="ticker-up">▲ +4.7%</span></span>
+    </div>
+  </div>
+
+  <div style="padding: 0 3rem;">
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-num">12 400</span>
+        <div class="stat-label">Références suivies</div>
+      </div>
+      <div class="stat">
+        <span class="stat-num">94%</span>
+        <div class="stat-label">Précision des prix</div>
+      </div>
+      <div class="stat">
+        <span class="stat-num">24h</span>
+        <div class="stat-label">Mise à jour des données</div>
+      </div>
+    </div>
+  </div>
+
+  <section id="features">
+    <div class="section-label">Ce que Maison Watches fait pour vous</div>
+    <h2 class="section-title">Tout ce dont un collectionneur sérieux a besoin</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <div class="feature-title">Inventaire complet</div>
+        <div class="feature-desc">Référence, année, état, prix d'achat, photos. Tout en un endroit. Jusqu'à 3 montres en version gratuite.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="feature-title">Valeur en temps réel</div>
+        <div class="feature-desc">Prix actuels du marché secondaire mis à jour quotidiennement. Graphique d'évolution sur 6 et 12 mois.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        </div>
+        <div class="feature-title">Alertes prix</div>
+        <div class="feature-desc">Ajoutez des montres à votre watchlist. Recevez une alerte email quand le prix passe sous votre seuil cible.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <div class="feature-title">Rapport assurance PDF</div>
+        <div class="feature-desc">Export PDF valorisé pour votre compagnie d'assurance ou en cas de succession. Mis à jour automatiquement.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="feature-title">Historique complet</div>
+        <div class="feature-desc">Chaque achat, vente, entretien. Un carnet de vie numérique qui valorise votre montre à la revente.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="feature-title">Données sécurisées</div>
+        <div class="feature-desc">Chiffrement bout-en-bout. Vos données de collection ne sont jamais partagées ni vendues.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" class="pricing">
+    <div class="section-label">Tarifs simples</div>
+    <h2 class="section-title">Commencez gratuitement, évoluez quand vous êtes prêt</h2>
+    <div class="pricing-grid">
+      <div class="plan">
+        <div class="plan-name">Gratuit</div>
+        <div class="plan-price">0€ <span>/ mois</span></div>
+        <div class="plan-desc">Pour découvrir Maison Watches</div>
+        <ul class="plan-features">
+          <li class="active">Jusqu'à 3 montres</li>
+          <li class="active">Inventaire et photos</li>
+          <li>Suivi de valeur</li>
+          <li>Alertes prix</li>
+          <li>Export assurance</li>
+        </ul>
+        <a href="dashboard.html" class="btn-ghost" style="display:block;text-align:center;text-decoration:none;padding:12px;">Commencer</a>
+      </div>
+      <div class="plan featured">
+        <div class="plan-badge">Le plus populaire</div>
+        <div class="plan-name">Pro</div>
+        <div class="plan-price">15€ <span>/ mois</span></div>
+        <div class="plan-desc">Pour le collectionneur actif</div>
+        <ul class="plan-features">
+          <li class="active">Montres illimitées</li>
+          <li class="active">Inventaire et photos</li>
+          <li class="active">Suivi de valeur temps réel</li>
+          <li class="active">Alertes prix illimitées</li>
+          <li>Export assurance PDF</li>
+        </ul>
+        <a href="dashboard.html" class="btn-primary" style="display:block;text-align:center;text-decoration:none;padding:12px;">Essayer 14 jours</a>
+      </div>
+      <div class="plan">
+        <div class="plan-name">Premium</div>
+        <div class="plan-price">29€ <span>/ mois</span></div>
+        <div class="plan-desc">Pour les collections importantes</div>
+        <ul class="plan-features">
+          <li class="active">Tout du plan Pro</li>
+          <li class="active">Export assurance PDF</li>
+          <li class="active">Historique 5 ans</li>
+          <li class="active">Support prioritaire</li>
+          <li class="active">API accès données</li>
+        </ul>
+        <a href="dashboard.html" class="btn-ghost" style="display:block;text-align:center;text-decoration:none;padding:12px;">Commencer</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-logo">Maison Watches</div>
+  <p>© 2026 Maison Watches — Tous droits réservés</p>
+  <p style="font-size:11px;color:#2a2a2a;">Prix indicatifs, non contractuels</p>
+</footer>
+
+<script>
+function submitEmail() {
+  const email = document.getElementById('email-input').value.trim();
+  if (!email || !email.includes('@')) {
+    document.getElementById('email-input').style.borderColor = 'rgba(229,57,53,0.6)';
+    return;
+  }
+  // Stocker localement (remplacer par Mailchimp/Brevo en prod)
+  const emails = JSON.parse(localStorage.getItem('mw_leads') || '[]');
+  emails.push({ email, date: new Date().toISOString() });
+  localStorage.setItem('mw_leads', JSON.stringify(emails));
+  // Incrémenter compteur
+  const c = document.getElementById('counter');
+  c.textContent = parseInt(c.textContent) + 1;
+  // Afficher succès
+  document.getElementById('signup-form').style.display = 'none';
+  document.getElementById('signup-success').style.display = 'block';
+}
+document.getElementById('email-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') submitEmail();
+  e.target.style.borderColor = 'rgba(201,168,76,0.4)';
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maison Watches — Ma collection</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --gold: #C9A84C; --gold-light: #E8D5A3; --gold-dark: #8B6914;
+  --black: #0D0D0D; --dark: #111111; --surface: #161616; --surface2: #1C1C1C; --surface3: #222222;
+  --border: rgba(201,168,76,0.12); --border-mid: rgba(201,168,76,0.25); --border-strong: rgba(255,255,255,0.08);
+  --text: #F0EDE8; --text-muted: #7A7572; --text-dim: #3A3835;
+  --green: #4CAF50; --red: #E53935;
+}
+body { font-family: 'DM Sans', sans-serif; background: var(--dark); color: var(--text); display: flex; min-height: 100vh; }
+
+/* SIDEBAR */
+.sidebar {
+  width: 220px; flex-shrink: 0;
+  background: var(--black); border-right: 0.5px solid var(--border);
+  display: flex; flex-direction: column;
+  padding: 1.5rem 0; position: fixed; top: 0; left: 0; bottom: 0; z-index: 50;
+}
+.sidebar-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem; color: var(--gold); letter-spacing: 0.1em;
+  padding: 0 1.25rem 1.5rem; border-bottom: 0.5px solid var(--border);
+}
+.sidebar-nav { padding: 1.25rem 0.75rem; flex: 1; }
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 12px; border-radius: 4px; cursor: pointer;
+  font-size: 13px; color: var(--text-muted); margin-bottom: 2px;
+  transition: all 0.15s; border: none; background: none; width: 100%; text-align: left;
+}
+.nav-item:hover { background: var(--surface); color: var(--text); }
+.nav-item.active { background: var(--surface2); color: var(--text); }
+.nav-item svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; flex-shrink: 0; }
+.nav-section-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); padding: 12px 12px 4px; }
+.sidebar-bottom { padding: 1rem 0.75rem; border-top: 0.5px solid var(--border); }
+.user-pill {
+  display: flex; align-items: center; gap: 10px; padding: 8px 10px;
+  border-radius: 4px; background: var(--surface);
+}
+.user-avatar {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 500; color: var(--black); flex-shrink: 0;
+}
+.user-name { font-size: 12px; color: var(--text); font-weight: 500; }
+.user-plan { font-size: 10px; color: var(--gold-dark); }
+
+/* MAIN */
+.main { margin-left: 220px; flex: 1; display: flex; flex-direction: column; min-height: 100vh; }
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 2rem; border-bottom: 0.5px solid var(--border-strong);
+  background: var(--dark); position: sticky; top: 0; z-index: 40;
+}
+.page-title { font-size: 15px; font-weight: 500; color: var(--text); }
+.topbar-actions { display: flex; gap: 8px; }
+.btn-sm {
+  font-size: 12px; padding: 7px 16px; border-radius: 3px; cursor: pointer;
+  font-weight: 500; letter-spacing: 0.04em; border: none; transition: all 0.15s;
+}
+.btn-gold { background: var(--gold); color: var(--black); }
+.btn-gold:hover { background: var(--gold-light); }
+.btn-outline { background: transparent; color: var(--text-muted); border: 0.5px solid var(--border-mid); }
+.btn-outline:hover { color: var(--text); }
+
+/* CONTENT */
+.content { padding: 2rem; flex: 1; }
+
+/* METRICS ROW */
+.metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 2rem; }
+.metric-card {
+  background: var(--surface); border: 0.5px solid var(--border-strong);
+  border-radius: 4px; padding: 1.25rem;
+}
+.metric-label { font-size: 11px; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px; }
+.metric-val { font-family: 'Cormorant Garamond', serif; font-size: 1.85rem; font-weight: 300; color: var(--text); line-height: 1; }
+.metric-delta { font-size: 11px; margin-top: 6px; }
+.delta-up { color: var(--green); }
+.delta-down { color: var(--red); }
+.delta-neu { color: var(--text-muted); }
+
+/* GRID 2 COL */
+.grid-2 { display: grid; grid-template-columns: 1fr 340px; gap: 16px; margin-bottom: 2rem; }
+.panel {
+  background: var(--surface); border: 0.5px solid var(--border-strong);
+  border-radius: 4px; overflow: hidden;
+}
+.panel-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 1.25rem; border-bottom: 0.5px solid var(--border);
+}
+.panel-title { font-size: 13px; font-weight: 500; color: var(--text); }
+.panel-body { padding: 1.25rem; }
+.chart-wrap { padding: 1rem 1.25rem 1.25rem; position: relative; height: 220px; }
+
+/* COLLECTION TABLE */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+thead th {
+  font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-muted); font-weight: 500; padding: 10px 1.25rem;
+  text-align: left; border-bottom: 0.5px solid var(--border);
+}
+tbody tr {
+  border-bottom: 0.5px solid var(--border);
+  transition: background 0.1s; cursor: pointer;
+}
+tbody tr:hover { background: var(--surface2); }
+tbody td { padding: 12px 1.25rem; font-size: 13px; color: var(--text); }
+.watch-thumb {
+  width: 36px; height: 36px; border-radius: 4px;
+  background: var(--surface3); border: 0.5px solid var(--border-mid);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.watch-thumb svg { width: 18px; height: 18px; stroke: var(--gold-dark); fill: none; stroke-width: 1.5; }
+.watch-info { display: flex; align-items: center; gap: 10px; }
+.watch-brand { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+.badge-cond {
+  font-size: 10px; padding: 2px 8px; border-radius: 2px; letter-spacing: 0.04em;
+}
+.badge-mint { background: rgba(76,175,80,0.1); color: var(--green); }
+.badge-good { background: rgba(201,168,76,0.1); color: var(--gold); }
+.badge-fair { background: rgba(229,57,53,0.1); color: var(--red); }
+.pnl-up { color: var(--green); font-size: 12px; }
+.pnl-down { color: var(--red); font-size: 12px; }
+
+/* WATCHLIST */
+.watchlist-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 0; border-bottom: 0.5px solid var(--border);
+}
+.watchlist-item:last-child { border-bottom: none; }
+.wl-name { font-size: 13px; color: var(--text); }
+.wl-target { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+.wl-current { text-align: right; }
+.wl-price { font-size: 13px; font-weight: 500; color: var(--text); }
+.wl-diff { font-size: 11px; margin-top: 2px; }
+.alert-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); display: inline-block; margin-right: 4px; }
+
+/* MODAL */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75);
+  z-index: 200; align-items: center; justify-content: center;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--surface); border: 0.5px solid var(--border-mid);
+  border-radius: 6px; width: 100%; max-width: 520px; margin: 1rem;
+  max-height: 90vh; overflow-y: auto;
+}
+.modal-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.25rem 1.5rem; border-bottom: 0.5px solid var(--border);
+}
+.modal-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 400; }
+.modal-close { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 20px; line-height: 1; }
+.modal-body { padding: 1.5rem; }
+.form-row { margin-bottom: 1.25rem; }
+.form-row label { display: block; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+.form-row input, .form-row select {
+  width: 100%; background: var(--surface2); border: 0.5px solid var(--border-mid);
+  border-radius: 3px; padding: 9px 12px; color: var(--text); font-size: 13px;
+  font-family: 'DM Sans', sans-serif;
+}
+.form-row input:focus, .form-row select:focus { outline: none; border-color: var(--gold-dark); }
+.form-row select option { background: var(--surface2); }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.modal-footer { display: flex; justify-content: flex-end; gap: 8px; padding: 1rem 1.5rem; border-top: 0.5px solid var(--border); }
+
+/* EMPTY STATE */
+.empty { text-align: center; padding: 3rem 1rem; }
+.empty-icon { font-size: 2rem; margin-bottom: 1rem; opacity: 0.3; }
+.empty-title { font-size: 14px; color: var(--text-muted); margin-bottom: 6px; }
+
+/* TOAST */
+.toast {
+  position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 300;
+  background: var(--surface3); border: 0.5px solid var(--border-mid);
+  border-radius: 4px; padding: 12px 16px; font-size: 13px; color: var(--text);
+  transform: translateY(80px); opacity: 0; transition: all 0.25s;
+  display: flex; align-items: center; gap: 8px;
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+
+@media (max-width: 1100px) {
+  .metrics { grid-template-columns: repeat(2, 1fr); }
+  .grid-2 { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .main { margin-left: 0; }
+  .metrics { grid-template-columns: repeat(2, 1fr); }
+  .content { padding: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-logo">Maison Watches</div>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Collection</div>
+    <button class="nav-item active" onclick="showView('collection')">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      Ma collection
+    </button>
+    <button class="nav-item" onclick="showView('watchlist')">
+      <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      Alertes prix
+    </button>
+    <button class="nav-item" onclick="showView('stats')">
+      <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Évolution
+    </button>
+    <div class="nav-section-label">Compte</div>
+    <button class="nav-item">
+      <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      Export PDF
+    </button>
+    <button class="nav-item" onclick="window.location.href='index.html'">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Accueil
+    </button>
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="user-pill">
+      <div class="user-avatar">CL</div>
+      <div>
+        <div class="user-name">Clément</div>
+        <div class="user-plan">Plan Gratuit</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="topbar">
+    <div class="page-title" id="page-title">Ma collection</div>
+    <div class="topbar-actions">
+      <button class="btn-sm btn-outline" onclick="exportPDF()">Export PDF</button>
+      <button class="btn-sm btn-gold" onclick="openModal()">+ Ajouter une montre</button>
+    </div>
+  </div>
+
+  <div class="content">
+    <!-- VIEW: COLLECTION -->
+    <div id="view-collection">
+      <!-- Metrics -->
+      <div class="metrics">
+        <div class="metric-card">
+          <div class="metric-label">Valeur totale</div>
+          <div class="metric-val" id="total-value">—</div>
+          <div class="metric-delta delta-up" id="total-delta">—</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Coût d'acquisition</div>
+          <div class="metric-val" id="total-cost">—</div>
+          <div class="metric-delta delta-neu">Prix d'achat cumulé</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Plus-value latente</div>
+          <div class="metric-val" id="total-pnl">—</div>
+          <div class="metric-delta" id="pnl-pct">—</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Montres</div>
+          <div class="metric-val" id="watch-count">0</div>
+          <div class="metric-delta delta-neu">dans la collection</div>
+        </div>
+      </div>
+
+      <!-- Chart + Watchlist -->
+      <div class="grid-2">
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">Valeur de la collection — 12 mois</div>
+            <select style="font-size:11px;background:var(--surface2);border:0.5px solid var(--border-mid);color:var(--text-muted);padding:4px 8px;border-radius:3px;" onchange="updateChart(this.value)">
+              <option value="12">12 mois</option>
+              <option value="6">6 mois</option>
+              <option value="3">3 mois</option>
+            </select>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="valueChart"></canvas>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">Alertes actives</div>
+            <button class="btn-sm btn-outline" onclick="showView('watchlist')">Gérer</button>
+          </div>
+          <div class="panel-body" id="watchlist-preview"></div>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">Inventaire</div>
+          <span style="font-size:11px;color:var(--text-muted);" id="limit-badge"></span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Montre</th>
+                <th>Référence</th>
+                <th>Année</th>
+                <th>État</th>
+                <th>Prix achat</th>
+                <th>Valeur actuelle</th>
+                <th>+/−</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="watch-table"></tbody>
+          </table>
+          <div id="empty-state" class="empty" style="display:none;">
+            <div class="empty-icon">⌚</div>
+            <div class="empty-title">Aucune montre dans votre collection</div>
+            <button class="btn-sm btn-gold" style="margin-top:1rem;" onclick="openModal()">Ajouter ma première montre</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW: WATCHLIST -->
+    <div id="view-watchlist" style="display:none;">
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">Alertes prix — Watchlist</div>
+          <button class="btn-sm btn-gold" onclick="openAlertModal()">+ Nouvelle alerte</button>
+        </div>
+        <div class="panel-body" id="full-watchlist"></div>
+      </div>
+    </div>
+
+    <!-- VIEW: STATS -->
+    <div id="view-stats" style="display:none;">
+      <div class="panel">
+        <div class="panel-header"><div class="panel-title">Évolution de la collection</div></div>
+        <div style="padding:2rem;height:400px;"><canvas id="statsChart"></canvas></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL AJOUTER -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Ajouter une montre</div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <label>Marque</label>
+        <input type="text" id="f-brand" placeholder="ex: Rolex, Patek Philippe...">
+      </div>
+      <div class="form-row">
+        <label>Modèle</label>
+        <input type="text" id="f-model" placeholder="ex: Submariner, Nautilus...">
+      </div>
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Référence</label>
+          <input type="text" id="f-ref" placeholder="ex: 124060">
+        </div>
+        <div class="form-row">
+          <label>Année</label>
+          <input type="number" id="f-year" placeholder="2019" min="1900" max="2026">
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Prix d'achat (€)</label>
+          <input type="number" id="f-price" placeholder="8500">
+        </div>
+        <div class="form-row">
+          <label>État</label>
+          <select id="f-cond">
+            <option value="mint">Neuf / Mint</option>
+            <option value="good" selected>Très bon état</option>
+            <option value="fair">Bon état</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Notes</label>
+        <input type="text" id="f-notes" placeholder="Achetée chez AD Rolex Paris, boîte + papiers">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-sm btn-outline" onclick="closeModal()">Annuler</button>
+      <button class="btn-sm btn-gold" onclick="addWatch()">Ajouter à la collection</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL ALERTE -->
+<div class="modal-overlay" id="alert-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Nouvelle alerte prix</div>
+      <button class="modal-close" onclick="closeAlertModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <label>Marque & Modèle</label>
+        <input type="text" id="al-name" placeholder="ex: Rolex GMT-Master II 126710BLRO">
+      </div>
+      <div class="form-grid">
+        <div class="form-row">
+          <label>Prix actuel estimé (€)</label>
+          <input type="number" id="al-current" placeholder="14200">
+        </div>
+        <div class="form-row">
+          <label>Alerte si prix ≤ (€)</label>
+          <input type="number" id="al-target" placeholder="12000">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-sm btn-outline" onclick="closeAlertModal()">Annuler</button>
+      <button class="btn-sm btn-gold" onclick="addAlert()">Créer l'alerte</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">
+  <span class="toast-dot"></span>
+  <span id="toast-msg"></span>
+</div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────
+const PLAN_LIMIT = 3;
+
+let watches = JSON.parse(localStorage.getItem('wv_watches') || '[]');
+let alerts = JSON.parse(localStorage.getItem('wv_alerts') || '[]');
+
+// Market prices simulation (ref → current value)
+const marketPrices = {
+  '124060': 9200, '126610LV': 14800, '116500LN': 26800,
+  '126710BLRO': 14200, '5711': 128000, '15500ST': 32500,
+  '310.30.42.50.01.001': 5100, '79360N': 7200,
+  'default': null
+};
+
+function getMarketPrice(watch) {
+  const base = marketPrices[watch.ref] || (watch.purchasePrice * (1 + (Math.random() * 0.4 - 0.05)));
+  return Math.round(base);
+}
+
+function save() {
+  localStorage.setItem('wv_watches', JSON.stringify(watches));
+  localStorage.setItem('wv_alerts', JSON.stringify(alerts));
+}
+
+function fmt(n) {
+  return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n);
+}
+
+// ── VIEWS ─────────────────────────────────────────────────────────
+function showView(v) {
+  ['collection','watchlist','stats'].forEach(id => {
+    document.getElementById('view-' + id).style.display = id === v ? '' : 'none';
+  });
+  const titles = { collection: 'Ma collection', watchlist: 'Alertes prix', stats: 'Évolution' };
+  document.getElementById('page-title').textContent = titles[v];
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  if (v === 'collection') document.querySelectorAll('.nav-item')[0].classList.add('active');
+  if (v === 'watchlist') document.querySelectorAll('.nav-item')[1].classList.add('active');
+  if (v === 'stats') { document.querySelectorAll('.nav-item')[2].classList.add('active'); renderStatsChart(); }
+  if (v === 'watchlist') renderFullWatchlist();
+}
+
+// ── METRICS ───────────────────────────────────────────────────────
+function renderMetrics() {
+  const totalCost = watches.reduce((s, w) => s + w.purchasePrice, 0);
+  const totalValue = watches.reduce((s, w) => s + getMarketPrice(w), 0);
+  const pnl = totalValue - totalCost;
+  const pct = totalCost > 0 ? ((pnl / totalCost) * 100).toFixed(1) : 0;
+
+  document.getElementById('total-value').textContent = watches.length ? fmt(totalValue) : '—';
+  document.getElementById('total-cost').textContent = watches.length ? fmt(totalCost) : '—';
+  document.getElementById('total-pnl').textContent = watches.length ? fmt(pnl) : '—';
+  document.getElementById('total-delta').textContent = watches.length ? `↑ Mis à jour aujourd'hui` : '';
+  document.getElementById('watch-count').textContent = watches.length;
+
+  const pnlEl = document.getElementById('pnl-pct');
+  if (watches.length) {
+    pnlEl.textContent = (pnl >= 0 ? '▲ +' : '▼ ') + pct + '%';
+    pnlEl.className = 'metric-delta ' + (pnl >= 0 ? 'delta-up' : 'delta-down');
+  } else {
+    pnlEl.textContent = '—'; pnlEl.className = 'metric-delta delta-neu';
+  }
+  document.getElementById('limit-badge').textContent = `${watches.length}/${PLAN_LIMIT} (plan gratuit)`;
+}
+
+// ── TABLE ─────────────────────────────────────────────────────────
+function renderTable() {
+  const tbody = document.getElementById('watch-table');
+  const empty = document.getElementById('empty-state');
+  if (!watches.length) { tbody.innerHTML = ''; empty.style.display = ''; return; }
+  empty.style.display = 'none';
+  tbody.innerHTML = watches.map((w, i) => {
+    const mv = getMarketPrice(w);
+    const diff = mv - w.purchasePrice;
+    const diffPct = ((diff / w.purchasePrice) * 100).toFixed(1);
+    const condClass = { mint: 'badge-mint', good: 'badge-good', fair: 'badge-fair' }[w.condition];
+    const condLabel = { mint: 'Neuf', good: 'Très bon', fair: 'Bon état' }[w.condition];
+    return `<tr>
+      <td><div class="watch-info">
+        <div class="watch-thumb"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><polyline points="12 9 12 12 13.5 13.5"/><path d="M16.51 17.35l-.35 3.83a2 2 0 0 1-1.99 1.82H9.83a2 2 0 0 1-1.99-1.82l-.35-3.83m.01-10.7l.35-3.83A2 2 0 0 1 9.83 1h4.34a2 2 0 0 1 1.99 1.82l.35 3.83"/></svg></div>
+        <div><div style="font-weight:500;">${w.brand}</div><div class="watch-brand">${w.model}</div></div>
+      </div></td>
+      <td style="font-family:monospace;font-size:12px;color:var(--text-muted);">${w.ref || '—'}</td>
+      <td style="color:var(--text-muted);">${w.year || '—'}</td>
+      <td><span class="badge-cond ${condClass}">${condLabel}</span></td>
+      <td>${fmt(w.purchasePrice)}</td>
+      <td style="font-weight:500;">${fmt(mv)}</td>
+      <td class="${diff >= 0 ? 'pnl-up' : 'pnl-down'}">${diff >= 0 ? '+' : ''}${fmt(diff)}<br><span style="font-size:10px;">${diff >= 0 ? '+' : ''}${diffPct}%</span></td>
+      <td><button onclick="removeWatch(${i})" style="background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:16px;padding:4px 8px;" title="Supprimer">×</button></td>
+    </tr>`;
+  }).join('');
+}
+
+// ── CHART ─────────────────────────────────────────────────────────
+let chart;
+function renderChart(months = 12) {
+  const totalValue = watches.reduce((s, w) => s + getMarketPrice(w), 0);
+  if (!totalValue) return;
+  const labels = [];
+  const data = [];
+  const now = new Date();
+  for (let i = months - 1; i >= 0; i--) {
+    const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    labels.push(d.toLocaleString('fr-FR', { month: 'short', year: '2-digit' }));
+    const factor = 1 - (i / months) * 0.12 + (Math.random() * 0.03 - 0.01);
+    data.push(Math.round(totalValue * factor));
+  }
+  data[data.length - 1] = totalValue;
+
+  const ctx = document.getElementById('valueChart').getContext('2d');
+  if (chart) chart.destroy();
+  chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        data,
+        borderColor: '#C9A84C', borderWidth: 1.5,
+        backgroundColor: (ctx) => {
+          const g = ctx.chart.ctx.createLinearGradient(0, 0, 0, 200);
+          g.addColorStop(0, 'rgba(201,168,76,0.12)'); g.addColorStop(1, 'rgba(201,168,76,0)');
+          return g;
+        },
+        fill: true, tension: 0.4, pointRadius: 0, pointHoverRadius: 4,
+        pointHoverBackgroundColor: '#C9A84C'
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: {
+        backgroundColor: '#1C1C1C', borderColor: 'rgba(201,168,76,0.3)', borderWidth: 1,
+        titleColor: '#7A7572', bodyColor: '#F0EDE8', bodyFont: { size: 13 },
+        callbacks: { label: ctx => ' ' + fmt(ctx.parsed.y) }
+      }},
+      scales: {
+        x: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#4A4845', font: { size: 10 } } },
+        y: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#4A4845', font: { size: 10 }, callback: v => fmt(v) } }
+      }
+    }
+  });
+}
+
+function updateChart(v) { renderChart(parseInt(v)); }
+
+// ── WATCHLIST ─────────────────────────────────────────────────────
+function renderWatchlistPreview() {
+  const el = document.getElementById('watchlist-preview');
+  if (!alerts.length) {
+    el.innerHTML = '<div style="text-align:center;padding:1.5rem;color:var(--text-muted);font-size:13px;">Aucune alerte configurée.<br><button onclick="showView(\'watchlist\')" style="background:none;border:none;color:var(--gold);cursor:pointer;font-size:13px;margin-top:8px;">Créer une alerte →</button></div>';
+    return;
+  }
+  el.innerHTML = alerts.slice(0, 4).map(a => {
+    const below = a.current <= a.target;
+    return `<div class="watchlist-item">
+      <div><div class="wl-name">${a.name}</div><div class="wl-target">Alerte ≤ ${fmt(a.target)}</div></div>
+      <div class="wl-current">
+        <div class="wl-price">${fmt(a.current)}</div>
+        <div class="wl-diff ${below ? 'delta-up' : 'delta-neu'}">${below ? '<span class="alert-dot"></span>En alerte' : 'En surveillance'}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderFullWatchlist() {
+  const el = document.getElementById('full-watchlist');
+  if (!alerts.length) {
+    el.innerHTML = '<div style="text-align:center;padding:3rem;color:var(--text-muted);font-size:13px;">Aucune alerte. Ajoutez des montres à surveiller.</div>';
+    return;
+  }
+  el.innerHTML = alerts.map((a, i) => {
+    const below = a.current <= a.target;
+    const diff = a.current - a.target;
+    return `<div class="watchlist-item">
+      <div><div class="wl-name" style="font-size:14px;">${a.name}</div><div class="wl-target">Seuil d'alerte : ${fmt(a.target)}</div></div>
+      <div style="text-align:center;">
+        <div style="font-size:12px;color:var(--text-muted);">Prix actuel</div>
+        <div class="wl-price">${fmt(a.current)}</div>
+        <div class="wl-diff ${diff <= 0 ? 'delta-up' : 'delta-down'}">${diff <= 0 ? '✓ Objectif atteint' : fmt(diff) + ' au-dessus'}</div>
+      </div>
+      <button onclick="removeAlert(${i})" style="background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:16px;padding:4px 8px;">×</button>
+    </div>`;
+  }).join('');
+}
+
+// ── STATS CHART ───────────────────────────────────────────────────
+let statsChart;
+function renderStatsChart() {
+  const ctx = document.getElementById('statsChart').getContext('2d');
+  if (statsChart) statsChart.destroy();
+  if (!watches.length) return;
+  const labels = watches.map(w => `${w.brand} ${w.model}`);
+  const purchasePrices = watches.map(w => w.purchasePrice);
+  const marketValues = watches.map(w => getMarketPrice(w));
+  statsChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        { label: "Prix d'achat", data: purchasePrices, backgroundColor: 'rgba(201,168,76,0.2)', borderColor: 'rgba(201,168,76,0.6)', borderWidth: 1 },
+        { label: 'Valeur actuelle', data: marketValues, backgroundColor: 'rgba(76,175,80,0.2)', borderColor: 'rgba(76,175,80,0.6)', borderWidth: 1 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { labels: { color: '#7A7572', font: { size: 12 } } }, tooltip: { callbacks: { label: ctx => ' ' + fmt(ctx.parsed.y) } } },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: '#4A4845', font: { size: 11 } } },
+        y: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#4A4845', font: { size: 10 }, callback: v => fmt(v) } }
+      }
+    }
+  });
+}
+
+// ── MODAL ─────────────────────────────────────────────────────────
+function openModal() {
+  if (watches.length >= PLAN_LIMIT) {
+    showToast('Limite de 3 montres atteinte — passez en Pro pour continuer 🔓');
+    return;
+  }
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+
+function addWatch() {
+  const brand = document.getElementById('f-brand').value.trim();
+  const model = document.getElementById('f-model').value.trim();
+  const price = parseFloat(document.getElementById('f-price').value);
+  if (!brand || !model || !price) { showToast('Veuillez remplir les champs obligatoires'); return; }
+  watches.push({
+    brand, model,
+    ref: document.getElementById('f-ref').value.trim(),
+    year: document.getElementById('f-year').value,
+    purchasePrice: price,
+    condition: document.getElementById('f-cond').value,
+    notes: document.getElementById('f-notes').value.trim(),
+    addedAt: new Date().toISOString()
+  });
+  save(); closeModal(); render();
+  showToast(`${brand} ${model} ajoutée à la collection`);
+  ['f-brand','f-model','f-ref','f-year','f-price','f-notes'].forEach(id => document.getElementById(id).value = '');
+}
+
+function removeWatch(i) {
+  watches.splice(i, 1); save(); render();
+  showToast('Montre supprimée');
+}
+
+function openAlertModal() { document.getElementById('alert-modal').classList.add('open'); }
+function closeAlertModal() { document.getElementById('alert-modal').classList.remove('open'); }
+
+function addAlert() {
+  const name = document.getElementById('al-name').value.trim();
+  const current = parseFloat(document.getElementById('al-current').value);
+  const target = parseFloat(document.getElementById('al-target').value);
+  if (!name || !current || !target) { showToast('Veuillez remplir tous les champs'); return; }
+  alerts.push({ name, current, target, createdAt: new Date().toISOString() });
+  save(); closeAlertModal(); render();
+  renderFullWatchlist();
+  showToast('Alerte créée pour ' + name);
+  ['al-name','al-current','al-target'].forEach(id => document.getElementById(id).value = '');
+}
+
+function removeAlert(i) {
+  alerts.splice(i, 1); save();
+  renderFullWatchlist(); renderWatchlistPreview();
+  showToast('Alerte supprimée');
+}
+
+// ── TOAST ─────────────────────────────────────────────────────────
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3200);
+}
+
+// ── EXPORT ────────────────────────────────────────────────────────
+function exportPDF() { showToast('Export PDF disponible en plan Premium'); }
+
+// ── INIT ──────────────────────────────────────────────────────────
+function render() {
+  renderMetrics();
+  renderTable();
+  if (watches.length) renderChart(12);
+  renderWatchlistPreview();
+}
+
+// Add demo data if empty
+if (!watches.length && !localStorage.getItem('wv_init')) {
+  watches = [
+    { brand: 'Rolex', model: 'Submariner', ref: '124060', year: '2021', purchasePrice: 8200, condition: 'good', notes: 'Achetée chez AD Paris, boîte + papiers', addedAt: new Date().toISOString() },
+    { brand: 'Omega', model: 'Speedmaster', ref: '310.30.42.50.01.001', year: '2020', purchasePrice: 4800, condition: 'mint', notes: 'Édition Moonwatch Professional', addedAt: new Date().toISOString() }
+  ];
+  alerts = [
+    { name: 'Rolex GMT-Master II 126710BLRO', current: 14200, target: 12500, createdAt: new Date().toISOString() },
+    { name: 'AP Royal Oak 15500ST', current: 32500, target: 28000, createdAt: new Date().toISOString() }
+  ];
+  localStorage.setItem('wv_init', '1');
+  save();
+}
+
+render();
+</script>
+</body>
+</html>
