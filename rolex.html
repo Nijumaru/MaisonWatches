@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maison Watches — Rolex, toutes les références 2000–2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --gold: #C9A84C; --gold-light: #E8D5A3; --gold-dark: #8B6914;
+  --black: #0D0D0D; --dark: #111111; --surface: #161616; --surface2: #1C1C1C; --surface3: #222222;
+  --border: rgba(201,168,76,0.12); --border-mid: rgba(201,168,76,0.25); --border-strong: rgba(255,255,255,0.08);
+  --text: #F0EDE8; --text-muted: #7A7572; --text-dim: #3A3835;
+  --green: #4CAF50; --red: #E53935; --amber: #FF9800;
+}
+body { font-family: 'DM Sans', sans-serif; background: var(--dark); color: var(--text); display: flex; min-height: 100vh; }
+
+.sidebar { width: 220px; flex-shrink: 0; background: var(--black); border-right: 0.5px solid var(--border); display: flex; flex-direction: column; padding: 1.5rem 0; position: fixed; top: 0; left: 0; bottom: 0; z-index: 50; }
+.sidebar-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--gold); letter-spacing: 0.1em; padding: 0 1.25rem 1.5rem; border-bottom: 0.5px solid var(--border); }
+.sidebar-nav { padding: 1.25rem 0.75rem; flex: 1; }
+.nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 4px; cursor: pointer; font-size: 13px; color: var(--text-muted); margin-bottom: 2px; transition: all 0.15s; border: none; background: none; width: 100%; text-align: left; text-decoration: none; }
+.nav-item:hover { background: var(--surface); color: var(--text); }
+.nav-item.active { background: var(--surface2); color: var(--text); }
+.nav-item svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; flex-shrink: 0; }
+.nav-section-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); padding: 12px 12px 4px; }
+.sidebar-bottom { padding: 1rem 0.75rem; border-top: 0.5px solid var(--border); }
+.user-pill { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 4px; background: var(--surface); }
+.user-avatar { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, var(--gold-dark), var(--gold)); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; color: var(--black); flex-shrink: 0; }
+
+.main { margin-left: 220px; flex: 1; }
+.topbar { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; border-bottom: 0.5px solid var(--border-strong); background: var(--dark); position: sticky; top: 0; z-index: 40; }
+.page-title { font-size: 15px; font-weight: 500; }
+
+.hero-band { background: var(--surface); border-bottom: 0.5px solid var(--border); padding: 1.5rem 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.hero-band h1 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; }
+.hero-band h1 span { color: var(--gold); font-style: italic; }
+.hero-stats { display: flex; gap: 2rem; }
+.hero-stat { text-align: center; }
+.hero-stat-val { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--gold); }
+.hero-stat-label { font-size: 11px; color: var(--text-muted); }
+
+.content { padding: 1.5rem 2rem; }
+
+.controls { display: flex; gap: 10px; margin-bottom: 1.25rem; flex-wrap: wrap; align-items: center; }
+.search-wrap { position: relative; flex: 1; min-width: 200px; }
+.search-wrap svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; stroke: var(--text-muted); fill: none; stroke-width: 1.5; }
+.search-input { width: 100%; background: var(--surface); border: 0.5px solid var(--border-strong); border-radius: 4px; padding: 8px 10px 8px 32px; color: var(--text); font-size: 13px; font-family: 'DM Sans', sans-serif; }
+.search-input:focus { outline: none; border-color: var(--border-mid); }
+select.ctrl { background: var(--surface); border: 0.5px solid var(--border-strong); border-radius: 4px; padding: 8px 10px; color: var(--text-muted); font-size: 12px; font-family: 'DM Sans', sans-serif; cursor: pointer; }
+
+.collection-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1.25rem; }
+.cpill { font-size: 11px; padding: 4px 12px; border-radius: 20px; border: 0.5px solid var(--border-strong); color: var(--text-muted); cursor: pointer; transition: all 0.1s; background: none; font-family: 'DM Sans', sans-serif; }
+.cpill:hover { color: var(--text); }
+.cpill.active { background: rgba(201,168,76,0.1); color: var(--gold); border-color: var(--border-mid); }
+
+.results-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+.results-count { font-size: 12px; color: var(--text-muted); }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
+
+.card { background: var(--surface); border: 0.5px solid var(--border-strong); border-radius: 4px; padding: 1.1rem; transition: all 0.15s; position: relative; }
+.card:hover { background: var(--surface2); border-color: var(--border-mid); }
+.card-discontinued { border-color: rgba(229,57,53,0.2); }
+.card-new { border-color: rgba(201,168,76,0.3); }
+
+.badge { display: inline-block; font-size: 9px; padding: 2px 7px; border-radius: 2px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 500; margin-bottom: 6px; }
+.badge-disc { background: rgba(229,57,53,0.1); color: var(--red); }
+.badge-new { background: rgba(201,168,76,0.1); color: var(--gold); }
+.badge-current { background: rgba(76,175,80,0.08); color: var(--green); }
+.badge-nickname { background: var(--surface3); color: var(--text-muted); border: 0.5px solid var(--border); }
+
+.card-collection { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 3px; }
+.card-model { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 1px; }
+.card-ref { font-size: 11px; color: var(--text-muted); font-family: monospace; margin-bottom: 2px; }
+.card-desc { font-size: 11px; color: var(--text-dim); margin-bottom: 10px; line-height: 1.4; }
+.card-year { font-size: 10px; color: var(--text-dim); margin-bottom: 8px; }
+
+.card-prices { display: flex; flex-direction: column; gap: 3px; margin-bottom: 10px; padding: 8px; background: var(--surface3); border-radius: 3px; }
+.price-row { display: flex; justify-content: space-between; align-items: center; }
+.price-label { font-size: 10px; color: var(--text-muted); }
+.price-val { font-size: 13px; font-weight: 500; color: var(--text); }
+.price-retail { font-size: 11px; color: var(--text-dim); }
+.price-premium { font-size: 10px; font-weight: 500; }
+.prem-up { color: var(--green); }
+.prem-down { color: var(--red); }
+
+.card-footer { display: flex; align-items: center; justify-content: space-between; }
+.delta { font-size: 11px; font-weight: 500; }
+.delta-up { color: var(--green); }
+.delta-down { color: var(--red); }
+.delta-flat { color: var(--text-muted); }
+.card-btns { display: flex; gap: 5px; }
+.btn-xs { font-size: 10px; padding: 4px 9px; border-radius: 2px; cursor: pointer; border: 0.5px solid var(--border-mid); background: transparent; color: var(--text-muted); font-family: 'DM Sans', sans-serif; transition: all 0.1s; }
+.btn-xs:hover { color: var(--text); border-color: var(--gold-dark); }
+.btn-gold { background: var(--gold); color: var(--black); border-color: var(--gold); font-size: 10px; padding: 4px 9px; border-radius: 2px; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+.btn-gold:hover { background: var(--gold-light); }
+
+.toast { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 300; background: var(--surface3); border: 0.5px solid var(--border-mid); border-radius: 4px; padding: 12px 16px; font-size: 13px; color: var(--text); transform: translateY(80px); opacity: 0; transition: all 0.25s; display: flex; align-items: center; gap: 8px; }
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+
+@media (max-width: 768px) { .sidebar { display: none; } .main { margin-left: 0; } .content { padding: 1rem; } }
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-logo">Maison Watches</div>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Explorer</div>
+    <a href="dashboard.html" class="nav-item">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      Ma collection
+    </a>
+    <a href="references.html" class="nav-item">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      Toutes les références
+    </a>
+    <a href="rolex.html" class="nav-item active">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Rolex 2000–2026
+    </a>
+    <div class="nav-section-label">Compte</div>
+    <a href="index.html" class="nav-item">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+      Accueil
+    </a>
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="user-pill">
+      <div class="user-avatar">MW</div>
+      <div><div style="font-size:12px;color:var(--text);font-weight:500;">Visiteur</div><div style="font-size:10px;color:var(--gold-dark);">Plan Gratuit</div></div>
+    </div>
+  </div>
+</aside>
+
+<div class="main">
+  <div class="topbar">
+    <div class="page-title">Rolex — Toutes les références 2000–2026</div>
+    <a href="references.html" style="font-size:12px;color:var(--gold);text-decoration:none;">Toutes marques →</a>
+  </div>
+
+  <div class="hero-band">
+    <div>
+      <h1>Rolex · <span>Catalogue complet</span></h1>
+      <div style="font-size:13px;color:var(--text-muted);margin-top:4px;">Toutes les références de 2000 à 2026 — actives, discontinuées et nouveautés</div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-val" id="count-total">0</div><div class="hero-stat-label">Références</div></div>
+      <div class="hero-stat"><div class="hero-stat-val" style="color:var(--red);" id="count-disc">0</div><div class="hero-stat-label">Discontinuées</div></div>
+      <div class="hero-stat"><div class="hero-stat-val" style="color:var(--gold);" id="count-new">0</div><div class="hero-stat-label">Nouveautés 2026</div></div>
+      <div class="hero-stat"><div class="hero-stat-val delta-up">+8%</div><div class="hero-stat-label">Marché / 12 mois</div></div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="controls">
+      <div class="search-wrap">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" class="search-input" id="search" placeholder="Submariner, Daytona, 126610..." oninput="filter()">
+      </div>
+      <select class="ctrl" id="sel-status" onchange="filter()">
+        <option value="">Tous les statuts</option>
+        <option value="current">En production</option>
+        <option value="discontinued">Discontinuées</option>
+        <option value="new">Nouveautés 2026</option>
+      </select>
+      <select class="ctrl" id="sel-budget" onchange="filter()">
+        <option value="">Tous budgets</option>
+        <option value="0-10000">Moins de 10 000€</option>
+        <option value="10000-20000">10 000 – 20 000€</option>
+        <option value="20000-50000">20 000 – 50 000€</option>
+        <option value="50000-999999">Plus de 50 000€</option>
+      </select>
+      <select class="ctrl" onchange="sort(this.value)">
+        <option value="collection">Par collection</option>
+        <option value="year-asc">Année croissante</option>
+        <option value="year-desc">Année décroissante</option>
+        <option value="price-asc">Prix croissant</option>
+        <option value="price-desc">Prix décroissant</option>
+        <option value="delta-desc">Plus forte hausse</option>
+      </select>
+    </div>
+
+    <div class="collection-pills" id="coll-pills"></div>
+
+    <div class="results-bar">
+      <div class="results-count" id="res-count"></div>
+    </div>
+
+    <div class="grid" id="grid"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"><span class="toast-dot"></span><span id="toast-msg"></span></div>
+
+<script>
+const DATA = [
+  // ═══════════════════════════════════════════
+  // SUBMARINER
+  // ═══════════════════════════════════════════
+  {col:"Submariner",model:"Submariner",ref:"16610",retail:2800,market:8200,delta:3.1,year:2000,end:2010,status:"discontinued",desc:"40mm, acier, lunette acier noire, calibre 3135",nickname:"Sub date classique"},
+  {col:"Submariner",model:"Submariner",ref:"14060M",retail:2600,market:7400,delta:2.8,year:2000,end:2010,status:"discontinued",desc:"40mm, sans date, acier, calibre 3130",nickname:"No-date pre-Cerachrom"},
+  {col:"Submariner",model:"Submariner Date",ref:"116610LN",retail:7500,market:10200,delta:4.2,year:2010,end:2020,status:"discontinued",desc:"40mm, lunette Cerachrom noire, calibre 3135",nickname:"Sub noire Cerachrom gen 1"},
+  {col:"Submariner",model:"Submariner Date",ref:"116610LV",retail:7900,market:15800,delta:8.1,year:2010,end:2020,status:"discontinued",desc:"40mm, lunette Cerachrom verte, calibre 3135",nickname:"Hulk"},
+  {col:"Submariner",model:"Submariner",ref:"114060",retail:6500,market:8800,delta:3.4,year:2012,end:2020,status:"discontinued",desc:"40mm, sans date, Cerachrom, calibre 3130",nickname:"No-date Cerachrom"},
+  {col:"Submariner",model:"Submariner Date",ref:"126610LN",retail:10200,market:13500,delta:6.1,year:2020,end:null,status:"current",desc:"41mm, lunette Cerachrom noire, calibre 3235",nickname:""},
+  {col:"Submariner",model:"Submariner Date",ref:"126610LV",retail:10400,market:16200,delta:8.3,year:2020,end:null,status:"current",desc:"41mm, lunette Cerachrom verte, calibre 3235",nickname:"Starbucks"},
+  {col:"Submariner",model:"Submariner",ref:"124060",retail:9950,market:10800,delta:4.2,year:2020,end:null,status:"current",desc:"41mm, sans date, Cerachrom noire, calibre 3230",nickname:""},
+  {col:"Submariner",model:"Submariner Date",ref:"126618LN",retail:39050,market:42000,delta:2.1,year:2020,end:null,status:"current",desc:"41mm, or jaune, lunette Cerachrom noire",nickname:"Yellow Gold Sub"},
+  {col:"Submariner",model:"Submariner Date",ref:"126618LB",retail:39050,market:43500,delta:2.8,year:2020,end:null,status:"current",desc:"41mm, or jaune, lunette Cerachrom bleue",nickname:"Smurf Gold"},
+  {col:"Submariner",model:"Submariner Date",ref:"126613LN",retail:14150,market:16800,delta:3.2,year:2020,end:null,status:"current",desc:"41mm, Rolesor or jaune, lunette noire",nickname:"Rolesor Sub"},
+  {col:"Submariner",model:"Submariner Date",ref:"126613LB",retail:14150,market:17200,delta:3.9,year:2020,end:null,status:"current",desc:"41mm, Rolesor or jaune, lunette bleue",nickname:"Bluesy"},
+  {col:"Submariner",model:"Submariner Date",ref:"126619LB",retail:44650,market:48000,delta:1.8,year:2020,end:2026,status:"discontinued",desc:"41mm, or blanc, lunette Cerachrom bleue — DISCONTINUÉE 2026",nickname:"Cookie Monster"},
+
+  // ═══════════════════════════════════════════
+  // GMT-MASTER II
+  // ═══════════════════════════════════════════
+  {col:"GMT-Master II",model:"GMT-Master II",ref:"16710",retail:3200,market:9800,delta:4.1,year:2000,end:2007,status:"discontinued",desc:"40mm, acier, lunette aluminium bicolore, calibre 3185",nickname:"Pepsi / Coke vintage"},
+  {col:"GMT-Master II",model:"GMT-Master II",ref:"116710LN",retail:7500,market:10800,delta:3.8,year:2007,end:2019,status:"discontinued",desc:"40mm, lunette Cerachrom noire, calibre 3186",nickname:""},
+  {col:"GMT-Master II",model:"GMT-Master II",ref:"116710BLNR",retail:8200,market:14500,delta:6.2,year:2013,end:2019,status:"discontinued",desc:"40mm, lunette Cerachrom bleu/noir, calibre 3186",nickname:"Batman gen 1"},
+  {col:"GMT-Master II",model:"GMT-Master II",ref:"126710BLRO",retail:12000,market:26000,delta:18.4,year:2018,end:2026,status:"discontinued",desc:"40mm, lunette Cerachrom rouge/bleu, jubilé — DISCONTINUÉE 2026",nickname:"Pepsi"},
+  {col:"GMT-Master II",model:"GMT-Master II",ref:"126710BLNR",retail:12000,market:14200,delta:3.8,year:2019,end:null,status:"current",desc:"40mm, lunette Cerachrom bleu/noir, jubilé, calibre 3285",nickname:"Batman"},
+  {col:"GMT-Master II",model:"GMT-Master II",ref:"126710BLNR",retail:11800,market:13800,delta:3.2,year:2019,end:null,status:"current",desc:"40mm, lunette Cerachrom bleu/noir, oyster, calibre 3285",nickname:"Batgirl"},
+  {col:"GMT-Master II",model:"GMT-Master II",ref:"126720BLRO",retail:12500,market:18900,delta:9.2,year:2022,end:null,status:"current",desc:"40mm, couronne à gauche, lunette Pepsi, jubilé",nickname:"Destro Pepsi"},
+  {col:"GMT-Master II",model:"GMT-Master II",ref:"126711CHNR",retail:14650,market:17200,delta:4.1,year:2019,end:null,status:"current",desc:"40mm, Rolesor or jaune, lunette brun/noir",nickname:"Root Beer"},
+  {col:"GMT-Master II",model:"GMT-Master II",ref:"126715CHNR",retail:38250,market:42000,delta:2.8,year:2019,end:null,status:"current",desc:"40mm, or Everose, lunette brun/noir",nickname:"Root Beer Everose"},
+  {col:"GMT-Master II",model:"GMT-Master II",ref:"126719BLRO",retail:44650,market:56000,delta:7.8,year:2018,end:2026,status:"discontinued",desc:"40mm, or blanc, lunette Pepsi saphirs — DISCONTINUÉE 2026",nickname:"Pepsi White Gold"},
+  {col:"GMT-Master II",model:"GMT-Master II",ref:"126713GRNR",retail:14650,market:16200,delta:2.4,year:2022,end:null,status:"current",desc:"40mm, Rolesor or jaune, lunette vert/noir",nickname:"Sprite"},
+  {col:"GMT-Master II",model:"GMT-Master II",ref:"126710BRNR",retail:12200,market:13400,delta:1.8,year:2023,end:null,status:"current",desc:"40mm, lunette Cerachrom brun/noir, jubilé",nickname:"Bruce Wayne"},
+
+  // ═══════════════════════════════════════════
+  // DAYTONA
+  // ═══════════════════════════════════════════
+  {col:"Daytona",model:"Cosmograph Daytona",ref:"116520",retail:9000,market:22000,delta:5.4,year:2000,end:2016,status:"discontinued",desc:"40mm, acier, lunette acier, calibre 4130 in-house",nickname:"Steel Daytona gen 1"},
+  {col:"Daytona",model:"Cosmograph Daytona",ref:"116523",retail:12000,market:18500,delta:3.2,year:2000,end:2016,status:"discontinued",desc:"40mm, Rolesor or jaune, lunette acier",nickname:"Rolesor Daytona"},
+  {col:"Daytona",model:"Cosmograph Daytona",ref:"116503",retail:15000,market:20000,delta:2.8,year:2016,end:2023,status:"discontinued",desc:"40mm, Rolesor or jaune, lunette Cerachrom noire",nickname:""},
+  {col:"Daytona",model:"Cosmograph Daytona",ref:"116500LN",retail:14550,market:28500,delta:9.4,year:2016,end:2023,status:"discontinued",desc:"40mm, acier, lunette Cerachrom noire, calibre 4130",nickname:""},
+  {col:"Daytona",model:"Cosmograph Daytona",ref:"116500LN",retail:14550,market:27800,delta:8.9,year:2016,end:2023,status:"discontinued",desc:"40mm, acier, lunette Cerachrom blanche, calibre 4130",nickname:"White Daytona"},
+  {col:"Daytona",model:"Cosmograph Daytona",ref:"126500LN",retail:16900,market:32000,delta:11.2,year:2023,end:null,status:"current",desc:"40mm, acier, lunette Cerachrom noire, calibre 4131",nickname:"Gen 3 Daytona"},
+  {col:"Daytona",model:"Cosmograph Daytona",ref:"126506",retail:29000,market:38000,delta:7.1,year:2023,end:null,status:"current",desc:"40mm, platine, lunette céramique ice blue",nickname:"Platinum Daytona"},
+  {col:"Daytona",model:"Cosmograph Daytona",ref:"126508",retail:38500,market:44000,delta:4.2,year:2023,end:null,status:"current",desc:"40mm, or jaune, lunette Cerachrom noire",nickname:"Gold Daytona"},
+  {col:"Daytona",model:"Cosmograph Daytona",ref:"126518LN",retail:32000,market:36000,delta:3.8,year:2023,end:null,status:"current",desc:"40mm, or blanc, lunette Cerachrom noire",nickname:"White Gold Daytona"},
+  {col:"Daytona",model:"Cosmograph Daytona",ref:"126502",retail:34500,market:58000,delta:14.2,year:2026,end:null,status:"new2026",desc:"40mm, Rolesium, cadran émail Grand Feu, fond saphir — NOUVEAUTÉ 2026",nickname:"Rolesium Daytona"},
+  {col:"Daytona",model:"Cosmograph Daytona",ref:"116598RBOW",retail:90000,market:320000,delta:22.1,year:2012,end:null,status:"current",desc:"40mm, or Everose, lunette saphirs multicolores",nickname:"Rainbow Daytona Everose"},
+  {col:"Daytona",model:"Cosmograph Daytona",ref:"116599RBOW",retail:90000,market:280000,delta:18.4,year:2012,end:null,status:"current",desc:"40mm, or blanc, lunette saphirs multicolores",nickname:"Rainbow Daytona White Gold"},
+
+  // ═══════════════════════════════════════════
+  // EXPLORER
+  // ═══════════════════════════════════════════
+  {col:"Explorer",model:"Explorer",ref:"114270",retail:3800,market:6200,delta:2.1,year:2001,end:2010,status:"discontinued",desc:"36mm, acier, calibre 3130",nickname:""},
+  {col:"Explorer",model:"Explorer",ref:"214270",retail:6000,market:7800,delta:1.8,year:2010,end:2021,status:"discontinued",desc:"39mm, acier, cadran noir, calibre 3132",nickname:"Explorer 39"},
+  {col:"Explorer",model:"Explorer",ref:"124270",retail:7150,market:8100,delta:2.1,year:2021,end:null,status:"current",desc:"36mm, acier, cadran noir, calibre 3230",nickname:"Explorer 36 retour"},
+  {col:"Explorer",model:"Explorer II",ref:"16570",retail:3500,market:8400,delta:3.4,year:2000,end:2011,status:"discontinued",desc:"40mm, acier, aiguille GMT orange, calibre 3185",nickname:""},
+  {col:"Explorer",model:"Explorer II",ref:"216570",retail:7900,market:10200,delta:2.8,year:2011,end:2021,status:"discontinued",desc:"42mm, acier, cadran blanc ou noir, calibre 3187",nickname:"Explorer II 42"},
+  {col:"Explorer",model:"Explorer II",ref:"226570",retail:8950,market:9800,delta:1.8,year:2021,end:null,status:"current",desc:"42mm, acier, cadran blanc ou noir, calibre 3285",nickname:""},
+
+  // ═══════════════════════════════════════════
+  // SEA-DWELLER / DEEPSEA
+  // ═══════════════════════════════════════════
+  {col:"Sea-Dweller",model:"Sea-Dweller",ref:"16600",retail:3800,market:10200,delta:4.8,year:2000,end:2008,status:"discontinued",desc:"40mm, acier, 1220m, calibre 3135",nickname:""},
+  {col:"Sea-Dweller",model:"Sea-Dweller",ref:"116600",retail:9200,market:12800,delta:3.9,year:2014,end:2017,status:"discontinued",desc:"40mm, acier, 1220m, 50e anniversaire",nickname:"50th Anniversary SD"},
+  {col:"Sea-Dweller",model:"Sea-Dweller",ref:"126600",retail:11600,market:13200,delta:3.4,year:2017,end:null,status:"current",desc:"43mm, acier, 1220m, Cerachrom, calibre 3235",nickname:""},
+  {col:"Sea-Dweller",model:"Deepsea",ref:"116660",retail:11200,market:14500,delta:4.1,year:2008,end:2018,status:"discontinued",desc:"44mm, acier, 3900m, D-Blue ou noir",nickname:"Deepsea gen 1"},
+  {col:"Sea-Dweller",model:"Deepsea",ref:"126660",retail:13400,market:14500,delta:1.9,year:2018,end:null,status:"current",desc:"44mm, acier, 3900m, calibre 3235",nickname:""},
+  {col:"Sea-Dweller",model:"Deepsea",ref:"136660",retail:15200,market:16400,delta:2.2,year:2023,end:null,status:"current",desc:"44mm, acier, 3900m, calibre 3250 — nouveau mouvement",nickname:"Deepsea gen 3"},
+
+  // ═══════════════════════════════════════════
+  // DATEJUST
+  // ═══════════════════════════════════════════
+  {col:"Datejust",model:"Datejust 36",ref:"116200",retail:5800,market:6200,delta:1.2,year:2007,end:2022,status:"discontinued",desc:"36mm, acier, lunette acier lisse, calibre 3135",nickname:"DJ36 classique"},
+  {col:"Datejust",model:"Datejust 36",ref:"116234",retail:6400,market:7100,delta:1.8,year:2007,end:2022,status:"discontinued",desc:"36mm, Rolesor, lunette diamants",nickname:""},
+  {col:"Datejust",model:"Datejust 36",ref:"126200",retail:6700,market:7200,delta:1.2,year:2022,end:null,status:"current",desc:"36mm, acier, cadrans variés, jubilé, calibre 3235",nickname:""},
+  {col:"Datejust",model:"Datejust 36",ref:"126233",retail:8900,market:9400,delta:1.4,year:2022,end:null,status:"current",desc:"36mm, Rolesor or jaune, lunette cannelée",nickname:""},
+  {col:"Datejust",model:"Datejust 41",ref:"116300",retail:7400,market:7900,delta:0.8,year:2009,end:2022,status:"discontinued",desc:"41mm, acier, jubilé, calibre 3235",nickname:"DJ41 gen 1"},
+  {col:"Datejust",model:"Datejust 41",ref:"126300",retail:7900,market:8400,delta:0.8,year:2022,end:null,status:"current",desc:"41mm, acier, cadrans variés, jubilé, calibre 3235",nickname:""},
+  {col:"Datejust",model:"Datejust 41",ref:"126334",retail:10200,market:10900,delta:1.1,year:2022,end:null,status:"current",desc:"41mm, Rolesor or blanc, lunette cannelée",nickname:""},
+  {col:"Datejust",model:"Datejust 41",ref:"126331",retail:11800,market:12500,delta:1.3,year:2022,end:null,status:"current",desc:"41mm, Rolesor or jaune, jubilé, cadran chocolat",nickname:"Chocolate DJ"},
+  {col:"Datejust",model:"Datejust 31",ref:"278271",retail:8200,market:8600,delta:0.9,year:2022,end:null,status:"current",desc:"31mm, or Everose, lunette diamants",nickname:""},
+  {col:"Datejust",model:"Datejust 28",ref:"279166",retail:7800,market:8100,delta:0.8,year:2022,end:null,status:"current",desc:"28mm, acier, dame",nickname:""},
+
+  // ═══════════════════════════════════════════
+  // DAY-DATE
+  // ═══════════════════════════════════════════
+  {col:"Day-Date",model:"Day-Date 36",ref:"118238",retail:28000,market:30000,delta:1.4,year:2000,end:2015,status:"discontinued",desc:"36mm, or jaune, président, calibre 3155",nickname:""},
+  {col:"Day-Date",model:"Day-Date 40",ref:"228238",retail:44000,market:46500,delta:2.3,year:2015,end:null,status:"current",desc:"40mm, or jaune 18ct, président, calibre 3255",nickname:""},
+  {col:"Day-Date",model:"Day-Date 40",ref:"228235",retail:46000,market:49000,delta:2.1,year:2015,end:null,status:"current",desc:"40mm, or Everose, président, lunette cannelée",nickname:""},
+  {col:"Day-Date",model:"Day-Date 40",ref:"228206",retail:68000,market:72000,delta:1.8,year:2019,end:null,status:"current",desc:"40mm, platine, cadran gris météorite",nickname:"Platinum DD"},
+  {col:"Day-Date",model:"Day-Date 36",ref:"128238",retail:38500,market:40000,delta:1.2,year:2019,end:null,status:"current",desc:"36mm, or jaune, président, calibre 3255",nickname:""},
+  {col:"Day-Date",model:"Day-Date 36",ref:"128396TBR",retail:98100,market:115000,delta:4.2,year:2026,end:null,status:"new2026",desc:"36mm, or blanc pavé diamants — NOUVEAUTÉ 2026, prix catalogue le plus élevé",nickname:"Diamond Pavé DD"},
+
+  // ═══════════════════════════════════════════
+  // OYSTER PERPETUAL
+  // ═══════════════════════════════════════════
+  {col:"Oyster Perpetual",model:"Oyster Perpetual 41",ref:"124300",retail:5900,market:6400,delta:1.4,year:2020,end:null,status:"current",desc:"41mm, cadrans colorés (bleu, rouge, jaune, vert...)",nickname:"Tiffany Blue / Candy"},
+  {col:"Oyster Perpetual",model:"Oyster Perpetual 36",ref:"126000",retail:5500,market:5900,delta:1.1,year:2020,end:null,status:"current",desc:"36mm, acier, cadrans variés",nickname:""},
+  {col:"Oyster Perpetual",model:"Oyster Perpetual 34",ref:"124200",retail:5200,market:5400,delta:0.8,year:2020,end:null,status:"current",desc:"34mm, acier, dame/homme",nickname:""},
+  {col:"Oyster Perpetual",model:"Oyster Perpetual 28",ref:"276200",retail:5100,market:5200,delta:0.5,year:2020,end:null,status:"current",desc:"28mm, acier, dame",nickname:""},
+  {col:"Oyster Perpetual",model:"Oyster Perpetual 41",ref:"124300-100",retail:9800,market:12500,delta:8.2,year:2026,end:null,status:"new2026",desc:"41mm, bicolore jubilé gold — 100e anniversaire OP, NOUVEAUTÉ 2026",nickname:"100th Anniversary OP"},
+
+  // ═══════════════════════════════════════════
+  // SKY-DWELLER
+  // ═══════════════════════════════════════════
+  {col:"Sky-Dweller",model:"Sky-Dweller",ref:"326934",retail:16250,market:17800,delta:2.9,year:2023,end:null,status:"current",desc:"42mm, acier, lunette cannelée, jubilé, calibre 9001",nickname:""},
+  {col:"Sky-Dweller",model:"Sky-Dweller",ref:"336934",retail:16250,market:17200,delta:2.4,year:2023,end:null,status:"current",desc:"42mm, acier, lunette cannelée, oyster",nickname:""},
+  {col:"Sky-Dweller",model:"Sky-Dweller",ref:"326938",retail:38500,market:42000,delta:2.8,year:2023,end:null,status:"current",desc:"42mm, or blanc, lunette cannelée, président",nickname:""},
+  {col:"Sky-Dweller",model:"Sky-Dweller",ref:"326935",retail:32500,market:35000,delta:2.2,year:2023,end:null,status:"current",desc:"42mm, or Everose, jubilé",nickname:""},
+  {col:"Sky-Dweller",model:"Sky-Dweller",ref:"336935",retail:32500,market:34500,delta:1.9,year:2023,end:null,status:"current",desc:"42mm, or Everose, oyster",nickname:""},
+
+  // ═══════════════════════════════════════════
+  // LAND-DWELLER
+  // ═══════════════════════════════════════════
+  {col:"Land-Dweller",model:"Land-Dweller",ref:"L128000",retail:16450,market:22000,delta:12.1,year:2025,end:null,status:"current",desc:"40mm, acier/or blanc, Jubilee Flat, calibre 7135 — NOUVEAUTÉ 2025",nickname:"Land-Dweller"},
+  {col:"Land-Dweller",model:"Land-Dweller",ref:"L128200",retail:38000,market:48000,delta:9.8,year:2025,end:null,status:"current",desc:"40mm, or blanc, Jubilee Flat — NOUVEAUTÉ 2025",nickname:"Land-Dweller WG"},
+
+  // ═══════════════════════════════════════════
+  // YACHT-MASTER
+  // ═══════════════════════════════════════════
+  {col:"Yacht-Master",model:"Yacht-Master 40",ref:"116621",retail:13800,market:14900,delta:1.8,year:2015,end:2022,status:"discontinued",desc:"40mm, Rolesor or Everose, Oysterflex",nickname:""},
+  {col:"Yacht-Master",model:"Yacht-Master 40",ref:"126621",retail:14350,market:14900,delta:0.5,year:2022,end:null,status:"current",desc:"40mm, Rolesor or Everose, lunette rhodium",nickname:""},
+  {col:"Yacht-Master",model:"Yacht-Master 42",ref:"226627",retail:26000,market:27500,delta:1.8,year:2019,end:null,status:"current",desc:"42mm, titane RLX, Oysterflex, lunette platine",nickname:"Titan YM"},
+  {col:"Yacht-Master",model:"Yacht-Master 37",ref:"268622",retail:12500,market:13200,delta:1.4,year:2019,end:null,status:"current",desc:"37mm, Rolesor or Everose, dame/homme",nickname:""},
+  {col:"Yacht-Master",model:"Yacht-Master II",ref:"116680",retail:18800,market:19200,delta:0.6,year:2013,end:2026,status:"discontinued",desc:"44mm, acier, programmable, cadran blanc",nickname:"YMII gen 1"},
+  {col:"Yacht-Master",model:"Yacht-Master II",ref:"m126680-0001",retail:21500,market:26000,delta:8.4,year:2026,end:null,status:"new2026",desc:"44mm, acier, aiguilles sens anti-horaire — REDESIGN COMPLET 2026",nickname:"YMII 2026"},
+
+  // ═══════════════════════════════════════════
+  // MILGAUSS
+  // ═══════════════════════════════════════════
+  {col:"Milgauss",model:"Milgauss",ref:"116400",retail:6500,market:8200,delta:3.8,year:2007,end:2023,status:"discontinued",desc:"40mm, acier, verre saphir, anti-magnétique",nickname:""},
+  {col:"Milgauss",model:"Milgauss",ref:"116400GV",retail:7800,market:10200,delta:4.8,year:2007,end:2023,status:"discontinued",desc:"40mm, acier, verre vert Z-Blue, calibre 3131",nickname:"Green Glass Milgauss"},
+  {col:"Milgauss",model:"Milgauss",ref:"116400GVSO",retail:9200,market:18500,delta:12.4,year:2014,end:2023,status:"discontinued",desc:"40mm, acier, verre vert, cadran orange Soleil — édition SO",nickname:"Orange Milgauss"},
+
+  // ═══════════════════════════════════════════
+  // AIR-KING
+  // ═══════════════════════════════════════════
+  {col:"Air-King",model:"Air-King",ref:"14010",retail:2800,market:5200,delta:2.4,year:2000,end:2007,status:"discontinued",desc:"34mm, acier, cadran uniforme",nickname:"Air-King vintage"},
+  {col:"Air-King",model:"Air-King",ref:"116900",retail:6500,market:7400,delta:2.1,year:2016,end:2022,status:"discontinued",desc:"40mm, acier, chiffres 3/6/9 verts, calibre 3131",nickname:"Air-King gen 2"},
+  {col:"Air-King",model:"Air-King",ref:"126900",retail:7700,market:8100,delta:0.6,year:2022,end:null,status:"current",desc:"40mm, acier, chiffres 3/6/9 jaunes, calibre 3230",nickname:"Air-King gen 3"},
+
+  // ═══════════════════════════════════════════
+  // 1908
+  // ═══════════════════════════════════════════
+  {col:"1908",model:"1908",ref:"52508",retail:18000,market:17200,delta:-1.4,year:2023,end:null,status:"current",desc:"39mm, platine, mouvement à remontage manuel 7140",nickname:""},
+  {col:"1908",model:"1908",ref:"52506",retail:16000,market:15200,delta:-1.8,year:2023,end:null,status:"current",desc:"39mm, or blanc, cadran lacqué",nickname:""},
+
+  // ═══════════════════════════════════════════
+  // CELLINI (hors Oyster)
+  // ═══════════════════════════════════════════
+  {col:"Cellini",model:"Cellini Time",ref:"50509",retail:14000,market:11200,delta:-3.2,year:2014,end:2023,status:"discontinued",desc:"39mm, or blanc, bracelet cuir, heure seule",nickname:""},
+  {col:"Cellini",model:"Cellini Date",ref:"50519",retail:16500,market:13800,delta:-2.8,year:2015,end:2023,status:"discontinued",desc:"39mm, or blanc, date instantanée",nickname:""},
+  {col:"Cellini",model:"Cellini Moonphase",ref:"50535",retail:21000,market:17500,delta:-3.8,year:2017,end:2023,status:"discontinued",desc:"39mm, or blanc, phase de lune rétrograde",nickname:""},
+];
+
+let filtered = [...DATA];
+let activeColl = '';
+
+function fmt(n) {
+  return new Intl.NumberFormat('fr-FR', {style:'currency',currency:'EUR',maximumFractionDigits:0}).format(n);
+}
+
+function getColls() {
+  return [...new Set(DATA.map(r => r.col))];
+}
+
+function renderPills() {
+  const el = document.getElementById('coll-pills');
+  el.innerHTML = `<button class="cpill ${activeColl===''?'active':''}" onclick="setColl('')">Toutes</button>` +
+    getColls().map(c => `<button class="cpill ${activeColl===c?'active':''}" onclick="setColl('${c}')">${c}</button>`).join('');
+}
+
+function setColl(c) { activeColl = c; renderPills(); filter(); }
+
+function filter() {
+  const q = document.getElementById('search').value.toLowerCase();
+  const status = document.getElementById('sel-status').value;
+  const budget = document.getElementById('sel-budget').value;
+
+  filtered = DATA.filter(r => {
+    const mq = !q || r.model.toLowerCase().includes(q) || r.ref.toLowerCase().includes(q) || (r.nickname&&r.nickname.toLowerCase().includes(q)) || r.desc.toLowerCase().includes(q) || r.col.toLowerCase().includes(q);
+    const mc = !activeColl || r.col === activeColl;
+    let ms = true;
+    if (status === 'current') ms = r.status === 'current';
+    if (status === 'discontinued') ms = r.status === 'discontinued';
+    if (status === 'new') ms = r.status === 'new2026';
+    let mb = true;
+    if (budget) {
+      const [mn,mx] = budget.split('-').map(Number);
+      mb = r.market >= mn && r.market <= mx;
+    }
+    return mq && mc && ms && mb;
+  });
+  render();
+}
+
+function sort(by) {
+  if (by==='collection') filtered.sort((a,b)=>a.col.localeCompare(b.col));
+  if (by==='year-asc') filtered.sort((a,b)=>a.year-b.year);
+  if (by==='year-desc') filtered.sort((a,b)=>b.year-a.year);
+  if (by==='price-asc') filtered.sort((a,b)=>a.market-b.market);
+  if (by==='price-desc') filtered.sort((a,b)=>b.market-a.market);
+  if (by==='delta-desc') filtered.sort((a,b)=>b.delta-a.delta);
+  render();
+}
+
+function addToCollection(r) {
+  const watches = JSON.parse(localStorage.getItem('wv_watches')||'[]');
+  if (watches.length >= 3) { showToast('Limite 3 montres atteinte — passez en Pro 🔓'); return; }
+  watches.push({brand:'Rolex',model:r.model,ref:r.ref,year:String(r.year),purchasePrice:r.market,condition:'good',notes:r.desc,addedAt:new Date().toISOString()});
+  localStorage.setItem('wv_watches',JSON.stringify(watches));
+  showToast(`${r.model} ${r.ref} ajoutée ✓`);
+}
+
+function addAlert(r) {
+  const alerts = JSON.parse(localStorage.getItem('wv_alerts')||'[]');
+  alerts.push({name:`Rolex ${r.model} ${r.ref}`,current:r.market,target:Math.round(r.market*0.88),createdAt:new Date().toISOString()});
+  localStorage.setItem('wv_alerts',JSON.stringify(alerts));
+  showToast(`Alerte créée pour ${r.model} ${r.ref} ✓`);
+}
+
+function render() {
+  document.getElementById('count-total').textContent = DATA.length;
+  document.getElementById('count-disc').textContent = DATA.filter(r=>r.status==='discontinued').length;
+  document.getElementById('count-new').textContent = DATA.filter(r=>r.status==='new2026').length;
+  document.getElementById('res-count').textContent = `${filtered.length} référence${filtered.length>1?'s':''} affichée${filtered.length>1?'s':''}`;
+
+  const grid = document.getElementById('grid');
+  grid.innerHTML = filtered.map(r => {
+    const premium = Math.round(((r.market-r.retail)/r.retail)*100);
+    const dClass = r.delta > 1 ? 'delta-up' : r.delta < -1 ? 'delta-down' : 'delta-flat';
+    const dSign = r.delta > 0 ? '+' : '';
+    const statusBadge = r.status==='discontinued'
+      ? `<span class="badge badge-disc">Discontinuée${r.end?' '+r.end:''}</span>`
+      : r.status==='new2026'
+      ? `<span class="badge badge-new">Nouveauté 2026</span>`
+      : `<span class="badge badge-current">En production</span>`;
+    const nickBadge = r.nickname ? `<span class="badge badge-nickname">${r.nickname}</span>` : '';
+    const cardClass = r.status==='discontinued' ? 'card card-discontinued' : r.status==='new2026' ? 'card card-new' : 'card';
+
+    return `<div class="${cardClass}">
+      <div>${statusBadge}${nickBadge}</div>
+      <div class="card-collection">${r.col}</div>
+      <div class="card-model">${r.model}</div>
+      <div class="card-ref">${r.ref}</div>
+      <div class="card-year">Introduit en ${r.year}${r.end?' · Arrêté '+r.end:''}</div>
+      <div class="card-desc">${r.desc}</div>
+      <div class="card-prices">
+        <div class="price-row"><span class="price-label">Marché secondaire</span><span class="price-val">${fmt(r.market)}</span></div>
+        <div class="price-row"><span class="price-label">Prix boutique</span><span class="price-retail">${fmt(r.retail)}</span></div>
+        <div class="price-row"><span class="price-label">Prime / décote</span><span class="price-premium ${premium>=0?'prem-up':'prem-down'}">${premium>=0?'+':''}${premium}%</span></div>
+      </div>
+      <div class="card-footer">
+        <div class="delta ${dClass}">${dSign}${r.delta}% / 12 mois</div>
+        <div class="card-btns">
+          <button class="btn-xs" onclick='addAlert(${JSON.stringify(r).replace(/'/g,"&#39;")})'>+ Alerte</button>
+          <button class="btn-gold" onclick='addToCollection(${JSON.stringify(r).replace(/'/g,"&#39;")})'>+ Collection</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3200);
+}
+
+renderPills();
+filter();
+</script>
+</body>
+</html>
