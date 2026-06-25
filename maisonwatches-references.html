@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maison Watches — Explorer les références</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --gold: #C9A84C; --gold-light: #E8D5A3; --gold-dark: #8B6914;
+  --black: #0D0D0D; --dark: #111111; --surface: #161616; --surface2: #1C1C1C; --surface3: #222222;
+  --border: rgba(201,168,76,0.12); --border-mid: rgba(201,168,76,0.25); --border-strong: rgba(255,255,255,0.08);
+  --text: #F0EDE8; --text-muted: #7A7572; --text-dim: #3A3835;
+  --green: #4CAF50; --red: #E53935;
+}
+body { font-family: 'DM Sans', sans-serif; background: var(--dark); color: var(--text); display: flex; min-height: 100vh; }
+
+.sidebar {
+  width: 220px; flex-shrink: 0;
+  background: var(--black); border-right: 0.5px solid var(--border);
+  display: flex; flex-direction: column;
+  padding: 1.5rem 0; position: fixed; top: 0; left: 0; bottom: 0; z-index: 50;
+}
+.sidebar-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--gold); letter-spacing: 0.1em; padding: 0 1.25rem 1.5rem; border-bottom: 0.5px solid var(--border); }
+.sidebar-nav { padding: 1.25rem 0.75rem; flex: 1; }
+.nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 4px; cursor: pointer; font-size: 13px; color: var(--text-muted); margin-bottom: 2px; transition: all 0.15s; border: none; background: none; width: 100%; text-align: left; text-decoration: none; }
+.nav-item:hover { background: var(--surface); color: var(--text); }
+.nav-item.active { background: var(--surface2); color: var(--text); }
+.nav-item svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; flex-shrink: 0; }
+.nav-section-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); padding: 12px 12px 4px; }
+.sidebar-bottom { padding: 1rem 0.75rem; border-top: 0.5px solid var(--border); }
+.user-pill { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 4px; background: var(--surface); }
+.user-avatar { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, var(--gold-dark), var(--gold)); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; color: var(--black); flex-shrink: 0; }
+.user-name { font-size: 12px; color: var(--text); font-weight: 500; }
+.user-plan { font-size: 10px; color: var(--gold-dark); }
+
+.main { margin-left: 220px; flex: 1; }
+.topbar { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; border-bottom: 0.5px solid var(--border-strong); background: var(--dark); position: sticky; top: 0; z-index: 40; }
+.page-title { font-size: 15px; font-weight: 500; }
+
+.content { padding: 2rem; }
+
+.search-bar { display: flex; gap: 12px; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.search-input-wrap { flex: 1; min-width: 200px; position: relative; }
+.search-input-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; stroke: var(--text-muted); fill: none; stroke-width: 1.5; }
+.search-input { width: 100%; background: var(--surface); border: 0.5px solid var(--border-strong); border-radius: 4px; padding: 9px 12px 9px 36px; color: var(--text); font-size: 13px; font-family: 'DM Sans', sans-serif; }
+.search-input:focus { outline: none; border-color: var(--border-mid); }
+.filter-select { background: var(--surface); border: 0.5px solid var(--border-strong); border-radius: 4px; padding: 9px 12px; color: var(--text-muted); font-size: 13px; font-family: 'DM Sans', sans-serif; cursor: pointer; }
+.filter-select:focus { outline: none; }
+
+.stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 1.5rem; }
+.stat-mini { background: var(--surface); border: 0.5px solid var(--border-strong); border-radius: 4px; padding: 1rem; }
+.stat-mini-label { font-size: 11px; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; }
+.stat-mini-val { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; color: var(--text); }
+
+.results-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+.results-count { font-size: 12px; color: var(--text-muted); }
+.sort-select { background: none; border: none; color: var(--text-muted); font-size: 12px; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+
+.refs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+
+.ref-card { background: var(--surface); border: 0.5px solid var(--border-strong); border-radius: 4px; padding: 1.25rem; cursor: pointer; transition: all 0.15s; position: relative; overflow: hidden; }
+.ref-card:hover { background: var(--surface2); border-color: var(--border-mid); }
+.ref-card-brand { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 4px; }
+.ref-card-model { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
+.ref-card-ref { font-size: 11px; color: var(--text-muted); font-family: monospace; margin-bottom: 12px; }
+.ref-card-price { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; color: var(--text); line-height: 1; margin-bottom: 4px; }
+.ref-card-retail { font-size: 11px; color: var(--text-muted); margin-bottom: 10px; }
+.ref-card-footer { display: flex; align-items: center; justify-content: space-between; }
+.ref-card-delta { font-size: 12px; font-weight: 500; }
+.delta-up { color: var(--green); }
+.delta-down { color: var(--red); }
+.delta-flat { color: var(--text-muted); }
+.ref-card-actions { display: flex; gap: 6px; }
+.btn-xs { font-size: 11px; padding: 5px 10px; border-radius: 3px; cursor: pointer; border: 0.5px solid var(--border-mid); background: transparent; color: var(--text-muted); transition: all 0.15s; font-family: 'DM Sans', sans-serif; }
+.btn-xs:hover { color: var(--text); border-color: var(--gold-dark); }
+.btn-xs-gold { background: var(--gold); color: var(--black); border-color: var(--gold); font-size: 11px; padding: 5px 10px; border-radius: 3px; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+.btn-xs-gold:hover { background: var(--gold-light); }
+
+.brand-pill { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 20px; background: var(--surface3); color: var(--text-muted); border: 0.5px solid var(--border); margin-right: 4px; margin-bottom: 6px; cursor: pointer; transition: all 0.1s; }
+.brand-pill.active { background: rgba(201,168,76,0.1); color: var(--gold); border-color: var(--border-mid); }
+.brand-pills { margin-bottom: 1.25rem; }
+
+.toast { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 300; background: var(--surface3); border: 0.5px solid var(--border-mid); border-radius: 4px; padding: 12px 16px; font-size: 13px; color: var(--text); transform: translateY(80px); opacity: 0; transition: all 0.25s; display: flex; align-items: center; gap: 8px; }
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+
+.empty-search { text-align: center; padding: 4rem 1rem; color: var(--text-muted); font-size: 14px; }
+
+@media (max-width: 1100px) { .stats-row { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) { .sidebar { display: none; } .main { margin-left: 0; } .content { padding: 1rem; } }
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-logo">Maison Watches</div>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Collection</div>
+    <a href="dashboard.html" class="nav-item">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      Ma collection
+    </a>
+    <a href="references.html" class="nav-item active">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      Explorer les références
+    </a>
+    <a href="dashboard.html" class="nav-item">
+      <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      Alertes prix
+    </a>
+    <div class="nav-section-label">Compte</div>
+    <a href="index.html" class="nav-item">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+      Accueil
+    </a>
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="user-pill">
+      <div class="user-avatar">MW</div>
+      <div><div class="user-name">Visiteur</div><div class="user-plan">Plan Gratuit</div></div>
+    </div>
+  </div>
+</aside>
+
+<div class="main">
+  <div class="topbar">
+    <div class="page-title">Explorer les références</div>
+    <a href="dashboard.html" style="font-size:12px;color:var(--gold);text-decoration:none;">Ma collection →</a>
+  </div>
+
+  <div class="content">
+    <div class="stats-row">
+      <div class="stat-mini"><div class="stat-mini-label">Références suivies</div><div class="stat-mini-val" id="total-refs">0</div></div>
+      <div class="stat-mini"><div class="stat-mini-label">Marques</div><div class="stat-mini-val">12</div></div>
+      <div class="stat-mini"><div class="stat-mini-label">Mise à jour</div><div class="stat-mini-val" style="font-size:1rem;padding-top:4px;">Aujourd'hui</div></div>
+      <div class="stat-mini"><div class="stat-mini-label">Tendance marché</div><div class="stat-mini-val delta-up" style="font-size:1rem;padding-top:4px;">↑ +4% / 6 mois</div></div>
+    </div>
+
+    <div class="search-bar">
+      <div class="search-input-wrap">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" class="search-input" id="search" placeholder="Rechercher une référence, un modèle..." oninput="filterRefs()">
+      </div>
+      <select class="filter-select" id="filter-range" onchange="filterRefs()">
+        <option value="">Tous les budgets</option>
+        <option value="0-5000">Moins de 5 000€</option>
+        <option value="5000-15000">5 000 – 15 000€</option>
+        <option value="15000-40000">15 000 – 40 000€</option>
+        <option value="40000-999999">Plus de 40 000€</option>
+      </select>
+      <select class="filter-select" id="filter-trend" onchange="filterRefs()">
+        <option value="">Toutes tendances</option>
+        <option value="up">En hausse</option>
+        <option value="down">En baisse</option>
+        <option value="flat">Stables</option>
+      </select>
+    </div>
+
+    <div class="brand-pills" id="brand-pills"></div>
+
+    <div class="results-meta">
+      <div class="results-count" id="results-count"></div>
+      <select class="sort-select" onchange="sortRefs(this.value)">
+        <option value="brand">Trier par marque</option>
+        <option value="price-asc">Prix croissant</option>
+        <option value="price-desc">Prix décroissant</option>
+        <option value="delta-desc">Plus forte hausse</option>
+        <option value="delta-asc">Plus forte baisse</option>
+      </select>
+    </div>
+
+    <div class="refs-grid" id="refs-grid"></div>
+    <div class="empty-search" id="empty-search" style="display:none;">Aucune référence trouvée pour cette recherche.</div>
+  </div>
+</div>
+
+<div class="toast" id="toast"><span class="toast-dot"></span><span id="toast-msg"></span></div>
+
+<script>
+const REFS = [
+  // ROLEX
+  {brand:"Rolex",model:"Submariner",ref:"124060",retail:9950,market:10800,delta:4.2,year:2020,desc:"Sans date, acier"},
+  {brand:"Rolex",model:"Submariner Date",ref:"126610LN",retail:10200,market:13500,delta:6.1,year:2020,desc:"Lunette céramique noire"},
+  {brand:"Rolex",model:"Submariner Date",ref:"126610LV",retail:10400,market:16200,delta:8.3,year:2020,desc:"Kermit, lunette verte"},
+  {brand:"Rolex",model:"GMT-Master II",ref:"126710BLRO",retail:12000,market:15800,delta:5.2,year:2019,desc:"Pepsi, acier"},
+  {brand:"Rolex",model:"GMT-Master II",ref:"126710BLNR",retail:12000,market:14200,delta:3.8,year:2019,desc:"Batman, acier"},
+  {brand:"Rolex",model:"GMT-Master II",ref:"126720BLRO",retail:12500,market:16900,delta:7.1,year:2022,desc:"Pepsi, couronne gauche"},
+  {brand:"Rolex",model:"Daytona",ref:"116500LN",retail:14550,market:28500,delta:9.4,year:2016,desc:"Lunette céramique blanche"},
+  {brand:"Rolex",model:"Daytona",ref:"126500LN",retail:16900,market:31200,delta:11.2,year:2023,desc:"Nouveau calibre 4131"},
+  {brand:"Rolex",model:"Explorer",ref:"124270",retail:7150,market:8100,delta:2.1,year:2021,desc:"36mm, acier"},
+  {brand:"Rolex",model:"Explorer II",ref:"226570",retail:8950,market:9800,delta:1.8,year:2021,desc:"42mm, blanc ou noir"},
+  {brand:"Rolex",model:"Datejust 36",ref:"126200",retail:6700,market:7200,delta:1.2,year:2019,desc:"Acier, jubilé"},
+  {brand:"Rolex",model:"Datejust 41",ref:"126300",retail:7400,market:7900,delta:0.8,year:2019,desc:"Acier, jubilé"},
+  {brand:"Rolex",model:"Day-Date 40",ref:"228238",retail:44000,market:46500,delta:2.3,year:2019,desc:"Or jaune 18ct"},
+  {brand:"Rolex",model:"Sky-Dweller",ref:"336934",retail:16250,market:17800,delta:2.9,year:2023,desc:"Acier, jubilé"},
+  {brand:"Rolex",model:"Yacht-Master 40",ref:"126621",retail:14350,market:14900,delta:0.5,year:2019,desc:"Rolesor, bracelet caoutchouc"},
+  {brand:"Rolex",model:"Sea-Dweller",ref:"126600",retail:11600,market:13200,delta:3.4,year:2017,desc:"43mm, acier"},
+  {brand:"Rolex",model:"Deepsea",ref:"126660",retail:13400,market:14500,delta:1.9,year:2018,desc:"44mm, 3900m"},
+  {brand:"Rolex",model:"Milgauss",ref:"116400GV",retail:8400,market:10200,delta:4.8,year:2007,desc:"Verre vert, anti-magnétique"},
+  {brand:"Rolex",model:"Air-King",ref:"126900",retail:7700,market:8100,delta:0.6,year:2022,desc:"40mm, acier"},
+  {brand:"Rolex",model:"Oyster Perpetual 41",ref:"124300",retail:5900,market:6400,delta:1.4,year:2020,desc:"Cadrans colorés"},
+
+  // PATEK PHILIPPE
+  {brand:"Patek Philippe",model:"Nautilus",ref:"5711/1A",retail:29000,market:48000,delta:6.4,year:2021,desc:"Discontinued 2021, acier"},
+  {brand:"Patek Philippe",model:"Nautilus",ref:"5726A",retail:52000,market:62000,delta:4.1,year:2019,desc:"Complication annuelle"},
+  {brand:"Patek Philippe",model:"Aquanaut",ref:"5168G",retail:36000,market:41000,delta:3.8,year:2018,desc:"Or blanc, bracelet caoutchouc"},
+  {brand:"Patek Philippe",model:"Aquanaut",ref:"5167A",retail:21000,market:28000,delta:5.2,year:2019,desc:"Acier, bracelet caoutchouc"},
+  {brand:"Patek Philippe",model:"Calatrava",ref:"5196P",retail:29000,market:31000,delta:1.2,year:2019,desc:"Platine, ultra-classique"},
+  {brand:"Patek Philippe",model:"Calatrava",ref:"6000G",retail:23000,market:24500,delta:0.9,year:2020,desc:"Or blanc, lunette sertie"},
+  {brand:"Patek Philippe",model:"Chronographe",ref:"5170G",retail:68000,market:74000,delta:2.8,year:2018,desc:"Or blanc, chronographe manuel"},
+  {brand:"Patek Philippe",model:"Perpetual Calendar",ref:"5320G",retail:89000,market:95000,delta:2.1,year:2021,desc:"Or blanc, calendrier perpétuel"},
+  {brand:"Patek Philippe",model:"Complications",ref:"5205G",retail:44000,market:47000,delta:1.8,year:2019,desc:"Or blanc, annuel"},
+  {brand:"Patek Philippe",model:"Gondolo",ref:"5200G",retail:18000,market:16500,delta:-2.1,year:2018,desc:"Or blanc, forme"},
+  {brand:"Patek Philippe",model:"Twenty~4",ref:"7300",retail:19000,market:18200,delta:-1.4,year:2019,desc:"Acier, quartz dame"},
+  {brand:"Patek Philippe",model:"Nautilus",ref:"7118/1A",retail:27000,market:32000,delta:4.8,year:2020,desc:"Dame acier, cadran bleu"},
+
+  // AUDEMARS PIGUET
+  {brand:"Audemars Piguet",model:"Royal Oak",ref:"15500ST",retail:26100,market:38000,delta:3.2,year:2019,desc:"41mm, acier, Jumbo"},
+  {brand:"Audemars Piguet",model:"Royal Oak",ref:"15202ST",retail:27500,market:52000,delta:5.8,year:2019,desc:"39mm Jumbo, extraplate"},
+  {brand:"Audemars Piguet",model:"Royal Oak",ref:"15400ST",retail:22000,market:28000,delta:2.4,year:2012,desc:"41mm, génération précédente"},
+  {brand:"Audemars Piguet",model:"Royal Oak Offshore",ref:"26420SO",retail:38000,market:35000,delta:-2.8,year:2022,desc:"42mm, saumon"},
+  {brand:"Audemars Piguet",model:"Royal Oak Offshore",ref:"26405CE",retail:29000,market:27000,delta:-3.1,year:2019,desc:"Céramique noire"},
+  {brand:"Audemars Piguet",model:"Royal Oak Chrono",ref:"26240ST",retail:32000,market:34500,delta:1.9,year:2020,desc:"Chronographe intégré"},
+  {brand:"Audemars Piguet",model:"Code 11.59",ref:"15210BC",retail:33000,market:28000,delta:-4.2,year:2019,desc:"Or blanc, nouvelle collection"},
+  {brand:"Audemars Piguet",model:"Royal Oak",ref:"77350ST",retail:23000,market:26000,delta:3.6,year:2021,desc:"Dame 34mm, acier"},
+  {brand:"Audemars Piguet",model:"Millenary",ref:"77247OR",retail:29000,market:25000,delta:-3.8,year:2018,desc:"Or rose, dame"},
+
+  // OMEGA
+  {brand:"Omega",model:"Speedmaster Moonwatch",ref:"310.30.42.50.01.001",retail:6300,market:5800,delta:-1.2,year:2021,desc:"Manuel, hommage Apollo 11"},
+  {brand:"Omega",model:"Speedmaster Moonwatch",ref:"310.30.42.50.02.001",retail:6300,market:5900,delta:-0.8,year:2021,desc:"Cadran noir"},
+  {brand:"Omega",model:"Seamaster 300M",ref:"210.30.42.20.01.001",retail:5200,market:5100,delta:0.2,year:2018,desc:"42mm, acier, céramique"},
+  {brand:"Omega",model:"Seamaster Aqua Terra",ref:"220.10.41.21.01.001",retail:5400,market:5000,delta:-0.6,year:2021,desc:"41mm, acier, baguettes"},
+  {brand:"Omega",model:"Constellation",ref:"131.10.39.20.06.001",retail:5100,market:4600,delta:-1.8,year:2020,desc:"39mm, griffes iconiques"},
+  {brand:"Omega",model:"De Ville Prestige",ref:"424.10.40.20.01.001",retail:4600,market:3900,delta:-2.4,year:2018,desc:"40mm, classique"},
+  {brand:"Omega",model:"Planet Ocean",ref:"215.30.44.21.01.001",retail:6800,market:6400,delta:-0.9,year:2019,desc:"43.5mm, Co-Axial"},
+  {brand:"Omega",model:"Speedmaster '57",ref:"332.10.41.51.01.001",retail:7200,market:6800,delta:-0.7,year:2022,desc:"Hommage première génération"},
+  {brand:"Omega",model:"Seamaster 1948",ref:"511.12.38.20.01.001",retail:5600,market:5100,delta:-1.1,year:2020,desc:"38mm, vintage inspired"},
+
+  // IWC
+  {brand:"IWC",model:"Portugieser Automatic",ref:"IW500705",retail:7500,market:7200,delta:-0.8,year:2019,desc:"40mm, acier, fondation"},
+  {brand:"IWC",model:"Portugieser Chrono",ref:"IW371601",retail:8200,market:7800,delta:-1.2,year:2020,desc:"41mm, chronographe"},
+  {brand:"IWC",model:"Portugieser 7 Days",ref:"IW500710",retail:12500,market:11800,delta:-1.6,year:2019,desc:"Réserve 7 jours"},
+  {brand:"IWC",model:"Pilot's Watch Mark XX",ref:"IW328201",retail:5400,market:5200,delta:-0.6,year:2022,desc:"40mm, acier"},
+  {brand:"IWC",model:"Pilot's Watch Chrono",ref:"IW388101",retail:6800,market:6400,delta:-1.1,year:2019,desc:"41mm, chronographe"},
+  {brand:"IWC",model:"Pilot's Watch Big Pilot",ref:"IW501001",retail:9400,market:9100,delta:-0.5,year:2020,desc:"46mm, automatique"},
+  {brand:"IWC",model:"Aquatimer",ref:"IW329001",retail:5800,market:5400,delta:-1.0,year:2019,desc:"Plongée, lunette intérieure"},
+  {brand:"IWC",model:"Ingenieur",ref:"IW328901",retail:6200,market:5900,delta:-0.7,year:2023,desc:"Réédition 1955"},
+
+  // JAEGER-LECOULTRE
+  {brand:"Jaeger-LeCoultre",model:"Reverso Classic",ref:"Q3858522",retail:6800,market:6200,delta:-1.4,year:2019,desc:"Large, acier, boîtier reversible"},
+  {brand:"Jaeger-LeCoultre",model:"Reverso Tribute",ref:"Q3978480",retail:8900,market:8400,delta:-0.8,year:2020,desc:"Duoface, nuit & jour"},
+  {brand:"Jaeger-LeCoultre",model:"Master Ultra Thin",ref:"Q1358420",retail:7400,market:6800,delta:-1.2,year:2018,desc:"39mm, acier, ultraplat"},
+  {brand:"Jaeger-LeCoultre",model:"Polaris",ref:"Q9068670",retail:6200,market:5800,delta:-0.9,year:2018,desc:"Automatique, acier"},
+  {brand:"Jaeger-LeCoultre",model:"Atmos",ref:"Q5163201",retail:5800,market:5100,delta:-2.1,year:2019,desc:"Pendule atmosphérique"},
+  {brand:"Jaeger-LeCoultre",model:"Master Calendar",ref:"Q4148420",retail:9800,market:9200,delta:-0.8,year:2019,desc:"Calendrier complet, phases de lune"},
+
+  // VACHERON CONSTANTIN
+  {brand:"Vacheron Constantin",model:"Patrimony",ref:"85180/000R-B516",retail:22000,market:20500,delta:-1.8,year:2019,desc:"Or rose, ultraplat"},
+  {brand:"Vacheron Constantin",model:"Overseas",ref:"4500V/110A-B483",retail:18500,market:19800,delta:1.9,year:2019,desc:"Acier, trois bracelets"},
+  {brand:"Vacheron Constantin",model:"Historiques",ref:"82035/000R-9359",retail:24000,market:22000,delta:-2.2,year:2020,desc:"Triple calendrier"},
+  {brand:"Vacheron Constantin",model:"Fiftysix",ref:"4600E/000A-B442",retail:13500,market:12200,delta:-2.8,year:2018,desc:"Acier, automatique"},
+
+  // CARTIER
+  {brand:"Cartier",model:"Santos de Cartier",ref:"WSSA0009",retail:6700,market:7100,delta:2.8,year:2018,desc:"Large, acier, interchangeable"},
+  {brand:"Cartier",model:"Tank Must",ref:"WSTA0041",retail:3200,market:3500,delta:3.2,year:2021,desc:"Acier, quartz SolarBeat"},
+  {brand:"Cartier",model:"Ballon Bleu 42",ref:"W69016Z4",retail:6600,market:6800,delta:0.8,year:2019,desc:"Acier, automatique"},
+  {brand:"Cartier",model:"Panthère",ref:"WSPN0007",retail:5400,market:5800,delta:2.1,year:2018,desc:"Acier, dame, quartz"},
+  {brand:"Cartier",model:"Pasha de Cartier",ref:"CRWGSA0010",retail:7800,market:7600,delta:-0.4,year:2020,desc:"Or blanc, dame"},
+  {brand:"Cartier",model:"Ronde Must",ref:"WSRN0035",retail:3100,market:3000,delta:-0.5,year:2021,desc:"Acier, automatique"},
+  {brand:"Cartier",model:"Rotonde Chrono",ref:"W1556204",retail:9800,market:9200,delta:-1.1,year:2019,desc:"Or rose, chronographe"},
+  {brand:"Cartier",model:"Drive de Cartier",ref:"WSNM0009",retail:7200,market:6900,delta:-0.6,year:2018,desc:"Acier, coussin"},
+
+  // TUDOR
+  {brand:"Tudor",model:"Black Bay 58",ref:"M79030N",retail:3400,market:3600,delta:1.8,year:2018,desc:"36mm, acier, vintage"},
+  {brand:"Tudor",model:"Black Bay 41",ref:"M79540",retail:3600,market:3700,delta:0.9,year:2021,desc:"41mm, acier"},
+  {brand:"Tudor",model:"Black Bay GMT",ref:"M79830RB",retail:3900,market:4100,delta:1.5,year:2018,desc:"Pepsi, acier"},
+  {brand:"Tudor",model:"Pelagos 39",ref:"M25407N",retail:3800,market:3700,delta:-0.4,year:2023,desc:"39mm, titane"},
+  {brand:"Tudor",model:"Ranger",ref:"M79950",retail:3100,market:2900,delta:-1.8,year:2022,desc:"39mm, acier, Explorer inspired"},
+  {brand:"Tudor",model:"Royal",ref:"M28500",retail:2800,market:2600,delta:-2.1,year:2021,desc:"Dame, acier"},
+  {brand:"Tudor",model:"Black Bay Chrono",ref:"M79360N",retail:4200,market:4000,delta:-0.7,year:2017,desc:"Chronographe, acier"},
+  {brand:"Tudor",model:"Glamour Double Date",ref:"M57000",retail:3000,market:2700,delta:-2.4,year:2019,desc:"Date double, acier"},
+
+  // RICHARD MILLE
+  {brand:"Richard Mille",model:"RM 011",ref:"RM011",retail:140000,market:185000,delta:8.2,year:2019,desc:"Felipe Massa, flyback"},
+  {brand:"Richard Mille",model:"RM 035",ref:"RM035",retail:95000,market:130000,delta:7.4,year:2019,desc:"Rafael Nadal, NTPT"},
+  {brand:"Richard Mille",model:"RM 055",ref:"RM055",retail:110000,market:142000,delta:6.8,year:2018,desc:"Bubba Watson, NTPT"},
+  {brand:"Richard Mille",model:"RM 010",ref:"RM010",retail:78000,market:98000,delta:5.9,year:2018,desc:"Or rose, automatique"},
+  {brand:"Richard Mille",model:"RM 067",ref:"RM067",retail:85000,market:92000,delta:2.8,year:2020,desc:"Extra flat, or rose"},
+
+  // A. LANGE & SÖHNE
+  {brand:"A. Lange & Söhne",model:"Lange 1",ref:"191.032",retail:32000,market:34500,delta:2.1,year:2018,desc:"Or jaune, grande date"},
+  {brand:"A. Lange & Söhne",model:"Saxonia Thin",ref:"211.032",retail:24000,market:22500,delta:-1.8,year:2019,desc:"Or jaune, ultraplat"},
+  {brand:"A. Lange & Söhne",model:"Datograph",ref:"405.035",retail:58000,market:65000,delta:3.4,year:2018,desc:"Or blanc, chronographe"},
+  {brand:"A. Lange & Söhne",model:"Zeitwerk",ref:"140.029",retail:62000,market:70000,delta:4.1,year:2019,desc:"Or blanc, affichage sautant"},
+  {brand:"A. Lange & Söhne",model:"1815",ref:"233.032",retail:22000,market:24000,delta:2.6,year:2018,desc:"Or rose, chronographe"},
+
+  // BREITLING
+  {brand:"Breitling",model:"Navitimer B01",ref:"AB0139211B1A1",retail:8400,market:8100,delta:-0.6,year:2020,desc:"43mm, chronographe aviateur"},
+  {brand:"Breitling",model:"Superocean Heritage 57",ref:"A10370121C1A1",retail:4100,market:3900,delta:-1.2,year:2020,desc:"Vintage inspired, acier"},
+  {brand:"Breitling",model:"Chronomat B01",ref:"AB0134101B1S1",retail:8200,market:7900,delta:-0.5,year:2020,desc:"44mm, acier, rouleaux"},
+  {brand:"Breitling",model:"Endurance Pro",ref:"X82310D51B1S1",retail:3600,market:3200,delta:-2.8,year:2020,desc:"Sport, Breitlight"},
+  {brand:"Breitling",model:"Premier B01",ref:"AB0118A11B1P1",retail:7400,market:6800,delta:-1.4,year:2019,desc:"42mm, vintage chic"},
+
+  // PANERAI
+  {brand:"Panerai",model:"Luminor Marina",ref:"PAM01313",retail:7500,market:7100,delta:-0.9,year:2020,desc:"44mm, acier, 3 jours"},
+  {brand:"Panerai",model:"Submersible",ref:"PAM01305",retail:8200,market:7800,delta:-0.7,year:2020,desc:"44mm, titanio, plongée"},
+  {brand:"Panerai",model:"Radiomir",ref:"PAM00574",retail:6800,market:6200,market:6200,delta:-1.8,year:2019,desc:"45mm, acier, manuel"},
+  {brand:"Panerai",model:"Luminor Due",ref:"PAM01043",retail:9400,market:8600,delta:-2.1,year:2020,desc:"38mm, acier, dame/homme"},
+
+  // HUBLOT
+  {brand:"Hublot",model:"Big Bang Unico",ref:"441.NX.1170.RX",retail:17500,market:15800,delta:-2.8,year:2021,desc:"44mm, titane, céramique"},
+  {brand:"Hublot",model:"Classic Fusion",ref:"542.NX.1170.RX",retail:8900,market:7800,delta:-3.2,year:2019,desc:"42mm, titane"},
+  {brand:"Hublot",model:"Spirit of Big Bang",ref:"601.NX.0173.LR",retail:19500,market:17200,delta:-3.8,year:2019,desc:"Tonneau, 45mm"},
+  {brand:"Hublot",model:"MP-09",ref:"909.ND.0001.RX",retail:68000,market:74000,delta:2.9,year:2018,desc:"Tourbillon bi-axial"},
+];
+
+let filtered = [...REFS];
+let activeBrand = '';
+
+function fmt(n) {
+  return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n);
+}
+
+function getBrands() {
+  return [...new Set(REFS.map(r => r.brand))].sort();
+}
+
+function renderBrandPills() {
+  const brands = getBrands();
+  const el = document.getElementById('brand-pills');
+  el.innerHTML = `<span class="brand-pill ${activeBrand === '' ? 'active' : ''}" onclick="setBrand('')">Toutes</span>` +
+    brands.map(b => `<span class="brand-pill ${activeBrand === b ? 'active' : ''}" onclick="setBrand('${b}')">${b}</span>`).join('');
+}
+
+function setBrand(b) {
+  activeBrand = b;
+  renderBrandPills();
+  filterRefs();
+}
+
+function filterRefs() {
+  const q = document.getElementById('search').value.toLowerCase();
+  const range = document.getElementById('filter-range').value;
+  const trend = document.getElementById('filter-trend').value;
+
+  filtered = REFS.filter(r => {
+    const matchQ = !q || r.brand.toLowerCase().includes(q) || r.model.toLowerCase().includes(q) || r.ref.toLowerCase().includes(q) || (r.desc && r.desc.toLowerCase().includes(q));
+    const matchBrand = !activeBrand || r.brand === activeBrand;
+    let matchRange = true;
+    if (range) {
+      const [min, max] = range.split('-').map(Number);
+      matchRange = r.market >= min && r.market <= max;
+    }
+    let matchTrend = true;
+    if (trend === 'up') matchTrend = r.delta > 1;
+    if (trend === 'down') matchTrend = r.delta < -1;
+    if (trend === 'flat') matchTrend = r.delta >= -1 && r.delta <= 1;
+    return matchQ && matchBrand && matchRange && matchTrend;
+  });
+
+  renderGrid();
+}
+
+function sortRefs(by) {
+  if (by === 'brand') filtered.sort((a,b) => a.brand.localeCompare(b.brand));
+  if (by === 'price-asc') filtered.sort((a,b) => a.market - b.market);
+  if (by === 'price-desc') filtered.sort((a,b) => b.market - a.market);
+  if (by === 'delta-desc') filtered.sort((a,b) => b.delta - a.delta);
+  if (by === 'delta-asc') filtered.sort((a,b) => a.delta - b.delta);
+  renderGrid();
+}
+
+function addToCollection(r) {
+  const watches = JSON.parse(localStorage.getItem('wv_watches') || '[]');
+  if (watches.length >= 3) { showToast('Limite 3 montres atteinte — passez en Pro 🔓'); return; }
+  const exists = watches.find(w => w.ref === r.ref);
+  if (exists) { showToast('Cette référence est déjà dans votre collection'); return; }
+  watches.push({ brand: r.brand, model: r.model, ref: r.ref, year: String(r.year), purchasePrice: r.market, condition: 'good', notes: r.desc, addedAt: new Date().toISOString() });
+  localStorage.setItem('wv_watches', JSON.stringify(watches));
+  showToast(`${r.brand} ${r.model} ajoutée à la collection ✓`);
+}
+
+function addAlert(r) {
+  const alerts = JSON.parse(localStorage.getItem('wv_alerts') || '[]');
+  const exists = alerts.find(a => a.name.includes(r.ref));
+  if (exists) { showToast('Une alerte existe déjà pour cette référence'); return; }
+  alerts.push({ name: `${r.brand} ${r.model} ${r.ref}`, current: r.market, target: Math.round(r.market * 0.9), createdAt: new Date().toISOString() });
+  localStorage.setItem('wv_alerts', JSON.stringify(alerts));
+  showToast(`Alerte créée pour ${r.brand} ${r.model} ✓`);
+}
+
+function renderGrid() {
+  const grid = document.getElementById('refs-grid');
+  const empty = document.getElementById('empty-search');
+  document.getElementById('results-count').textContent = `${filtered.length} référence${filtered.length > 1 ? 's' : ''} trouvée${filtered.length > 1 ? 's' : ''}`;
+
+  if (!filtered.length) { grid.innerHTML = ''; empty.style.display = ''; return; }
+  empty.style.display = 'none';
+
+  grid.innerHTML = filtered.map((r, i) => {
+    const deltaClass = r.delta > 1 ? 'delta-up' : r.delta < -1 ? 'delta-down' : 'delta-flat';
+    const deltaSign = r.delta > 0 ? '+' : '';
+    const premium = Math.round(((r.market - r.retail) / r.retail) * 100);
+    const premiumStr = premium > 0 ? `+${premium}% vs boutique` : premium < 0 ? `${premium}% vs boutique` : 'Au prix boutique';
+    return `<div class="ref-card">
+      <div class="ref-card-brand">${r.brand}</div>
+      <div class="ref-card-model">${r.model}</div>
+      <div class="ref-card-ref">${r.ref} · ${r.desc}</div>
+      <div class="ref-card-price">${fmt(r.market)}</div>
+      <div class="ref-card-retail">Boutique : ${fmt(r.retail)} · <span style="color:${premium >= 0 ? 'var(--green)' : 'var(--red)'}">${premiumStr}</span></div>
+      <div class="ref-card-footer">
+        <div class="ref-card-delta ${deltaClass}">${deltaSign}${r.delta}% / 6 mois</div>
+        <div class="ref-card-actions">
+          <button class="btn-xs" onclick="addAlert(${JSON.stringify(r).replace(/"/g,'&quot;')})">+ Alerte</button>
+          <button class="btn-xs-gold" onclick="addToCollection(${JSON.stringify(r).replace(/"/g,'&quot;')})">+ Collection</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('total-refs').textContent = REFS.length;
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3200);
+}
+
+renderBrandPills();
+filterRefs();
+</script>
+</body>
+</html>
