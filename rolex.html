@@ -3,473 +3,629 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maison Watches — Rolex, toutes les références 2000–2026</title>
+<title>Maison Watches — Rolex, catalogue complet 1999–2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --gold: #C9A84C; --gold-light: #E8D5A3; --gold-dark: #8B6914;
-  --black: #0D0D0D; --dark: #111111; --surface: #161616; --surface2: #1C1C1C; --surface3: #222222;
-  --border: rgba(201,168,76,0.12); --border-mid: rgba(201,168,76,0.25); --border-strong: rgba(255,255,255,0.08);
-  --text: #F0EDE8; --text-muted: #7A7572; --text-dim: #3A3835;
-  --green: #4CAF50; --red: #E53935; --amber: #FF9800;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#C9A84C;--gold-l:#E8D5A3;--gold-d:#8B6914;
+  --black:#0D0D0D;--dark:#111;--s1:#161616;--s2:#1C1C1C;--s3:#222;
+  --b1:rgba(201,168,76,.12);--b2:rgba(201,168,76,.25);--b3:rgba(255,255,255,.08);
+  --tx:#F0EDE8;--tm:#7A7572;--td:#3A3835;
+  --gr:#4CAF50;--rd:#E53935;
 }
-body { font-family: 'DM Sans', sans-serif; background: var(--dark); color: var(--text); display: flex; min-height: 100vh; }
-
-.sidebar { width: 220px; flex-shrink: 0; background: var(--black); border-right: 0.5px solid var(--border); display: flex; flex-direction: column; padding: 1.5rem 0; position: fixed; top: 0; left: 0; bottom: 0; z-index: 50; }
-.sidebar-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--gold); letter-spacing: 0.1em; padding: 0 1.25rem 1.5rem; border-bottom: 0.5px solid var(--border); }
-.sidebar-nav { padding: 1.25rem 0.75rem; flex: 1; }
-.nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 4px; cursor: pointer; font-size: 13px; color: var(--text-muted); margin-bottom: 2px; transition: all 0.15s; border: none; background: none; width: 100%; text-align: left; text-decoration: none; }
-.nav-item:hover { background: var(--surface); color: var(--text); }
-.nav-item.active { background: var(--surface2); color: var(--text); }
-.nav-item svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; flex-shrink: 0; }
-.nav-section-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); padding: 12px 12px 4px; }
-.sidebar-bottom { padding: 1rem 0.75rem; border-top: 0.5px solid var(--border); }
-.user-pill { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 4px; background: var(--surface); }
-.user-avatar { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, var(--gold-dark), var(--gold)); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; color: var(--black); flex-shrink: 0; }
-
-.main { margin-left: 220px; flex: 1; }
-.topbar { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; border-bottom: 0.5px solid var(--border-strong); background: var(--dark); position: sticky; top: 0; z-index: 40; }
-.page-title { font-size: 15px; font-weight: 500; }
-
-.hero-band { background: var(--surface); border-bottom: 0.5px solid var(--border); padding: 1.5rem 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-.hero-band h1 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; }
-.hero-band h1 span { color: var(--gold); font-style: italic; }
-.hero-stats { display: flex; gap: 2rem; }
-.hero-stat { text-align: center; }
-.hero-stat-val { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--gold); }
-.hero-stat-label { font-size: 11px; color: var(--text-muted); }
-
-.content { padding: 1.5rem 2rem; }
-
-.controls { display: flex; gap: 10px; margin-bottom: 1.25rem; flex-wrap: wrap; align-items: center; }
-.search-wrap { position: relative; flex: 1; min-width: 200px; }
-.search-wrap svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; stroke: var(--text-muted); fill: none; stroke-width: 1.5; }
-.search-input { width: 100%; background: var(--surface); border: 0.5px solid var(--border-strong); border-radius: 4px; padding: 8px 10px 8px 32px; color: var(--text); font-size: 13px; font-family: 'DM Sans', sans-serif; }
-.search-input:focus { outline: none; border-color: var(--border-mid); }
-select.ctrl { background: var(--surface); border: 0.5px solid var(--border-strong); border-radius: 4px; padding: 8px 10px; color: var(--text-muted); font-size: 12px; font-family: 'DM Sans', sans-serif; cursor: pointer; }
-
-.collection-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1.25rem; }
-.cpill { font-size: 11px; padding: 4px 12px; border-radius: 20px; border: 0.5px solid var(--border-strong); color: var(--text-muted); cursor: pointer; transition: all 0.1s; background: none; font-family: 'DM Sans', sans-serif; }
-.cpill:hover { color: var(--text); }
-.cpill.active { background: rgba(201,168,76,0.1); color: var(--gold); border-color: var(--border-mid); }
-
-.results-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
-.results-count { font-size: 12px; color: var(--text-muted); }
-
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
-
-.card { background: var(--surface); border: 0.5px solid var(--border-strong); border-radius: 4px; padding: 1.1rem; transition: all 0.15s; position: relative; }
-.card:hover { background: var(--surface2); border-color: var(--border-mid); }
-.card-discontinued { border-color: rgba(229,57,53,0.2); }
-.card-new { border-color: rgba(201,168,76,0.3); }
-
-.badge { display: inline-block; font-size: 9px; padding: 2px 7px; border-radius: 2px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 500; margin-bottom: 6px; }
-.badge-disc { background: rgba(229,57,53,0.1); color: var(--red); }
-.badge-new { background: rgba(201,168,76,0.1); color: var(--gold); }
-.badge-current { background: rgba(76,175,80,0.08); color: var(--green); }
-.badge-nickname { background: var(--surface3); color: var(--text-muted); border: 0.5px solid var(--border); }
-
-.card-collection { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 3px; }
-.card-model { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 1px; }
-.card-ref { font-size: 11px; color: var(--text-muted); font-family: monospace; margin-bottom: 2px; }
-.card-desc { font-size: 11px; color: var(--text-dim); margin-bottom: 10px; line-height: 1.4; }
-.card-year { font-size: 10px; color: var(--text-dim); margin-bottom: 8px; }
-
-.card-prices { display: flex; flex-direction: column; gap: 3px; margin-bottom: 10px; padding: 8px; background: var(--surface3); border-radius: 3px; }
-.price-row { display: flex; justify-content: space-between; align-items: center; }
-.price-label { font-size: 10px; color: var(--text-muted); }
-.price-val { font-size: 13px; font-weight: 500; color: var(--text); }
-.price-retail { font-size: 11px; color: var(--text-dim); }
-.price-premium { font-size: 10px; font-weight: 500; }
-.prem-up { color: var(--green); }
-.prem-down { color: var(--red); }
-
-.card-footer { display: flex; align-items: center; justify-content: space-between; }
-.delta { font-size: 11px; font-weight: 500; }
-.delta-up { color: var(--green); }
-.delta-down { color: var(--red); }
-.delta-flat { color: var(--text-muted); }
-.card-btns { display: flex; gap: 5px; }
-.btn-xs { font-size: 10px; padding: 4px 9px; border-radius: 2px; cursor: pointer; border: 0.5px solid var(--border-mid); background: transparent; color: var(--text-muted); font-family: 'DM Sans', sans-serif; transition: all 0.1s; }
-.btn-xs:hover { color: var(--text); border-color: var(--gold-dark); }
-.btn-gold { background: var(--gold); color: var(--black); border-color: var(--gold); font-size: 10px; padding: 4px 9px; border-radius: 2px; cursor: pointer; font-family: 'DM Sans', sans-serif; }
-.btn-gold:hover { background: var(--gold-light); }
-
-.toast { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 300; background: var(--surface3); border: 0.5px solid var(--border-mid); border-radius: 4px; padding: 12px 16px; font-size: 13px; color: var(--text); transform: translateY(80px); opacity: 0; transition: all 0.25s; display: flex; align-items: center; gap: 8px; }
-.toast.show { transform: translateY(0); opacity: 1; }
-.toast-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
-
-@media (max-width: 768px) { .sidebar { display: none; } .main { margin-left: 0; } .content { padding: 1rem; } }
+body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--tx);display:flex;min-height:100vh}
+.sb{width:220px;flex-shrink:0;background:var(--black);border-right:.5px solid var(--b1);display:flex;flex-direction:column;padding:1.5rem 0;position:fixed;top:0;left:0;bottom:0;z-index:50}
+.sb-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--gold);letter-spacing:.1em;padding:0 1.25rem 1.5rem;border-bottom:.5px solid var(--b1)}
+.sb-nav{padding:1.25rem .75rem;flex:1}
+.ni{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:4px;font-size:13px;color:var(--tm);margin-bottom:2px;transition:all .15s;border:none;background:none;width:100%;text-align:left;text-decoration:none}
+.ni:hover{background:var(--s1);color:var(--tx)}
+.ni.active{background:var(--s2);color:var(--tx)}
+.ni svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.5;flex-shrink:0}
+.nl{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--td);padding:12px 12px 4px}
+.sb-bot{padding:1rem .75rem;border-top:.5px solid var(--b1)}
+.up{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:4px;background:var(--s1)}
+.ua{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--gold-d),var(--gold));display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:var(--black);flex-shrink:0}
+.main{margin-left:220px;flex:1}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;border-bottom:.5px solid var(--b3);background:var(--dark);position:sticky;top:0;z-index:40}
+.pt{font-size:15px;font-weight:500}
+.hero{background:var(--s1);border-bottom:.5px solid var(--b1);padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300}
+.hero h1 span{color:var(--gold);font-style:italic}
+.hs{display:flex;gap:2rem}
+.hv{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--gold);text-align:center}
+.hl{font-size:11px;color:var(--tm);text-align:center}
+.cnt{padding:1.5rem 2rem}
+.ctrls{display:flex;gap:10px;margin-bottom:1.25rem;flex-wrap:wrap}
+.sw{position:relative;flex:1;min-width:200px}
+.sw svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:15px;height:15px;stroke:var(--tm);fill:none;stroke-width:1.5}
+.si{width:100%;background:var(--s1);border:.5px solid var(--b3);border-radius:4px;padding:8px 10px 8px 32px;color:var(--tx);font-size:13px;font-family:'DM Sans',sans-serif}
+.si:focus{outline:none;border-color:var(--b2)}
+select.ct{background:var(--s1);border:.5px solid var(--b3);border-radius:4px;padding:8px 10px;color:var(--tm);font-size:12px;font-family:'DM Sans',sans-serif;cursor:pointer}
+.pills{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.25rem}
+.pill{font-size:11px;padding:4px 12px;border-radius:20px;border:.5px solid var(--b3);color:var(--tm);cursor:pointer;transition:all .1s;background:none;font-family:'DM Sans',sans-serif}
+.pill:hover{color:var(--tx)}
+.pill.active{background:rgba(201,168,76,.1);color:var(--gold);border-color:var(--b2)}
+.rb{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.rc{font-size:12px;color:var(--tm)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.card{background:var(--s1);border:.5px solid var(--b3);border-radius:4px;overflow:hidden;transition:all .15s}
+.card:hover{background:var(--s2);border-color:var(--b2)}
+.card-disc{border-color:rgba(229,57,53,.2)}
+.card-new{border-color:rgba(201,168,76,.35)}
+.ci{width:100%;height:150px;background:var(--s3);display:flex;align-items:center;justify-content:center;overflow:hidden;border-bottom:.5px solid var(--b1);position:relative}
+.ci img{width:100%;height:100%;object-fit:contain;padding:8px;transition:transform .3s}
+.card:hover .ci img{transform:scale(1.04)}
+.ci-ph{display:flex;flex-direction:column;align-items:center;gap:6px}
+.ci-ph svg{width:36px;height:36px;stroke:var(--td);fill:none;stroke-width:1}
+.ci-ph span{font-size:10px;color:var(--td);font-family:monospace}
+.cb{padding:.9rem}
+.bdgs{margin-bottom:5px;display:flex;gap:3px;flex-wrap:wrap}
+.bdg{font-size:9px;padding:2px 6px;border-radius:2px;letter-spacing:.05em;text-transform:uppercase;font-weight:500}
+.b-disc{background:rgba(229,57,53,.1);color:var(--rd)}
+.b-new{background:rgba(201,168,76,.15);color:var(--gold)}
+.b-cur{background:rgba(76,175,80,.08);color:var(--gr)}
+.b-nick{background:var(--s3);color:var(--tm);border:.5px solid var(--b1)}
+.cc{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-d);margin-bottom:2px}
+.cm{font-size:13px;font-weight:500;color:var(--tx);margin-bottom:1px}
+.cr{font-size:11px;color:var(--tm);font-family:monospace}
+.cy{font-size:10px;color:var(--td);margin:3px 0 5px}
+.cd{font-size:11px;color:var(--td);line-height:1.4;margin-bottom:8px}
+.ps{background:var(--s3);border-radius:3px;padding:7px 8px;margin-bottom:8px}
+.pr{display:flex;justify-content:space-between;margin-bottom:2px}
+.pr:last-child{margin-bottom:0}
+.pl{font-size:10px;color:var(--tm)}
+.pv{font-size:12px;font-weight:500;color:var(--tx)}
+.pvs{font-size:11px;color:var(--td)}
+.pup{font-size:10px;font-weight:500;color:var(--gr)}
+.pdn{font-size:10px;font-weight:500;color:var(--rd)}
+.cf{display:flex;align-items:center;justify-content:space-between}
+.dl{font-size:11px;font-weight:500}
+.dup{color:var(--gr)}.ddn{color:var(--rd)}.dfl{color:var(--tm)}
+.btns{display:flex;gap:4px}
+.bx{font-size:10px;padding:4px 8px;border-radius:2px;cursor:pointer;border:.5px solid var(--b2);background:transparent;color:var(--tm);font-family:'DM Sans',sans-serif;transition:all .1s}
+.bx:hover{color:var(--tx);border-color:var(--gold-d)}
+.bg{background:var(--gold);color:var(--black);border:none;font-size:10px;padding:4px 8px;border-radius:2px;cursor:pointer;font-family:'DM Sans',sans-serif}
+.bg:hover{background:var(--gold-l)}
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;z-index:300;background:var(--s3);border:.5px solid var(--b2);border-radius:4px;padding:12px 16px;font-size:13px;color:var(--tx);transform:translateY(80px);opacity:0;transition:all .25s;display:flex;align-items:center;gap:8px}
+.toast.show{transform:translateY(0);opacity:1}
+.tdot{width:6px;height:6px;border-radius:50%;background:var(--gr);flex-shrink:0}
+@media(max-width:768px){.sb{display:none}.main{margin-left:0}.cnt{padding:1rem}}
 </style>
 </head>
 <body>
-
-<aside class="sidebar">
-  <div class="sidebar-logo">Maison Watches</div>
-  <nav class="sidebar-nav">
-    <div class="nav-section-label">Explorer</div>
-    <a href="dashboard.html" class="nav-item">
-      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-      Ma collection
-    </a>
-    <a href="references.html" class="nav-item">
-      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      Toutes les références
-    </a>
-    <a href="rolex.html" class="nav-item active">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-      Rolex 2000–2026
-    </a>
-    <div class="nav-section-label">Compte</div>
-    <a href="index.html" class="nav-item">
-      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-      Accueil
-    </a>
+<aside class="sb">
+  <div class="sb-logo">Maison Watches</div>
+  <nav class="sb-nav">
+    <div class="nl">Explorer</div>
+    <a href="dashboard.html" class="ni"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Ma collection</a>
+    <a href="references.html" class="ni"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>Toutes marques</a>
+    <a href="rolex.html" class="ni active"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Rolex 1999–2026</a>
+    <div class="nl">Compte</div>
+    <a href="index.html" class="ni"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Accueil</a>
   </nav>
-  <div class="sidebar-bottom">
-    <div class="user-pill">
-      <div class="user-avatar">MW</div>
-      <div><div style="font-size:12px;color:var(--text);font-weight:500;">Visiteur</div><div style="font-size:10px;color:var(--gold-dark);">Plan Gratuit</div></div>
-    </div>
+  <div class="sb-bot">
+    <div class="up"><div class="ua">MW</div><div><div style="font-size:12px;color:var(--tx);font-weight:500">Visiteur</div><div style="font-size:10px;color:var(--gold-d)">Plan Gratuit</div></div></div>
   </div>
 </aside>
 
 <div class="main">
   <div class="topbar">
-    <div class="page-title">Rolex — Toutes les références 2000–2026</div>
-    <a href="references.html" style="font-size:12px;color:var(--gold);text-decoration:none;">Toutes marques →</a>
+    <div class="pt">Rolex — Catalogue complet 1999–2026</div>
+    <a href="references.html" style="font-size:12px;color:var(--gold);text-decoration:none">Toutes marques →</a>
   </div>
-
-  <div class="hero-band">
-    <div>
-      <h1>Rolex · <span>Catalogue complet</span></h1>
-      <div style="font-size:13px;color:var(--text-muted);margin-top:4px;">Toutes les références de 2000 à 2026 — actives, discontinuées et nouveautés</div>
-    </div>
-    <div class="hero-stats">
-      <div class="hero-stat"><div class="hero-stat-val" id="count-total">0</div><div class="hero-stat-label">Références</div></div>
-      <div class="hero-stat"><div class="hero-stat-val" style="color:var(--red);" id="count-disc">0</div><div class="hero-stat-label">Discontinuées</div></div>
-      <div class="hero-stat"><div class="hero-stat-val" style="color:var(--gold);" id="count-new">0</div><div class="hero-stat-label">Nouveautés 2026</div></div>
-      <div class="hero-stat"><div class="hero-stat-val delta-up">+8%</div><div class="hero-stat-label">Marché / 12 mois</div></div>
+  <div class="hero">
+    <div><h1>Rolex · <span>~400 références</span></h1><div style="font-size:13px;color:var(--tm);margin-top:4px">Toutes collections · actives · discontinuées · nouveautés 2025-2026</div></div>
+    <div class="hs">
+      <div><div class="hv" id="cnt-t">0</div><div class="hl">Références</div></div>
+      <div><div class="hv" style="color:var(--rd)" id="cnt-d">0</div><div class="hl">Discontinuées</div></div>
+      <div><div class="hv" style="color:var(--gold)" id="cnt-n">0</div><div class="hl">Nouveautés 25-26</div></div>
+      <div><div class="hv dup">+8%</div><div class="hl">Marché / 12 mois</div></div>
     </div>
   </div>
-
-  <div class="content">
-    <div class="controls">
-      <div class="search-wrap">
-        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <input type="text" class="search-input" id="search" placeholder="Submariner, Daytona, 126610..." oninput="filter()">
-      </div>
-      <select class="ctrl" id="sel-status" onchange="filter()">
-        <option value="">Tous les statuts</option>
-        <option value="current">En production</option>
-        <option value="discontinued">Discontinuées</option>
-        <option value="new">Nouveautés 2026</option>
-      </select>
-      <select class="ctrl" id="sel-budget" onchange="filter()">
-        <option value="">Tous budgets</option>
-        <option value="0-10000">Moins de 10 000€</option>
-        <option value="10000-20000">10 000 – 20 000€</option>
-        <option value="20000-50000">20 000 – 50 000€</option>
-        <option value="50000-999999">Plus de 50 000€</option>
-      </select>
-      <select class="ctrl" onchange="sort(this.value)">
-        <option value="collection">Par collection</option>
-        <option value="year-asc">Année croissante</option>
-        <option value="year-desc">Année décroissante</option>
-        <option value="price-asc">Prix croissant</option>
-        <option value="price-desc">Prix décroissant</option>
-        <option value="delta-desc">Plus forte hausse</option>
-      </select>
+  <div class="cnt">
+    <div class="ctrls">
+      <div class="sw"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input type="text" class="si" id="search" placeholder="Submariner, Hulk, 116500LN, Pepsi, Rainbow..." oninput="go()"></div>
+      <select class="ct" id="sel-s" onchange="go()"><option value="">Tous statuts</option><option value="current">En production</option><option value="discontinued">Discontinuées</option><option value="new">Nouveautés 2025-26</option></select>
+      <select class="ct" id="sel-b" onchange="go()"><option value="">Tous budgets</option><option value="0-8000">< 8 000€</option><option value="8000-15000">8–15k€</option><option value="15000-30000">15–30k€</option><option value="30000-60000">30–60k€</option><option value="60000-9999999">> 60 000€</option></select>
+      <select class="ct" onchange="srt(this.value)"><option value="col">Collection</option><option value="ya">Année ↑</option><option value="yd">Année ↓</option><option value="pa">Prix ↑</option><option value="pd">Prix ↓</option><option value="dd">Hausse ↓</option></select>
     </div>
-
-    <div class="collection-pills" id="coll-pills"></div>
-
-    <div class="results-bar">
-      <div class="results-count" id="res-count"></div>
-    </div>
-
+    <div class="pills" id="pills"></div>
+    <div class="rb"><div class="rc" id="rc"></div></div>
     <div class="grid" id="grid"></div>
   </div>
 </div>
-
-<div class="toast" id="toast"><span class="toast-dot"></span><span id="toast-msg"></span></div>
+<div class="toast" id="toast"><span class="tdot"></span><span id="tmsg"></span></div>
 
 <script>
-const DATA = [
-  // ═══════════════════════════════════════════
-  // SUBMARINER
-  // ═══════════════════════════════════════════
-  {col:"Submariner",model:"Submariner",ref:"16610",retail:2800,market:8200,delta:3.1,year:2000,end:2010,status:"discontinued",desc:"40mm, acier, lunette acier noire, calibre 3135",nickname:"Sub date classique"},
-  {col:"Submariner",model:"Submariner",ref:"14060M",retail:2600,market:7400,delta:2.8,year:2000,end:2010,status:"discontinued",desc:"40mm, sans date, acier, calibre 3130",nickname:"No-date pre-Cerachrom"},
-  {col:"Submariner",model:"Submariner Date",ref:"116610LN",retail:7500,market:10200,delta:4.2,year:2010,end:2020,status:"discontinued",desc:"40mm, lunette Cerachrom noire, calibre 3135",nickname:"Sub noire Cerachrom gen 1"},
-  {col:"Submariner",model:"Submariner Date",ref:"116610LV",retail:7900,market:15800,delta:8.1,year:2010,end:2020,status:"discontinued",desc:"40mm, lunette Cerachrom verte, calibre 3135",nickname:"Hulk"},
-  {col:"Submariner",model:"Submariner",ref:"114060",retail:6500,market:8800,delta:3.4,year:2012,end:2020,status:"discontinued",desc:"40mm, sans date, Cerachrom, calibre 3130",nickname:"No-date Cerachrom"},
-  {col:"Submariner",model:"Submariner Date",ref:"126610LN",retail:10200,market:13500,delta:6.1,year:2020,end:null,status:"current",desc:"41mm, lunette Cerachrom noire, calibre 3235",nickname:""},
-  {col:"Submariner",model:"Submariner Date",ref:"126610LV",retail:10400,market:16200,delta:8.3,year:2020,end:null,status:"current",desc:"41mm, lunette Cerachrom verte, calibre 3235",nickname:"Starbucks"},
-  {col:"Submariner",model:"Submariner",ref:"124060",retail:9950,market:10800,delta:4.2,year:2020,end:null,status:"current",desc:"41mm, sans date, Cerachrom noire, calibre 3230",nickname:""},
-  {col:"Submariner",model:"Submariner Date",ref:"126618LN",retail:39050,market:42000,delta:2.1,year:2020,end:null,status:"current",desc:"41mm, or jaune, lunette Cerachrom noire",nickname:"Yellow Gold Sub"},
-  {col:"Submariner",model:"Submariner Date",ref:"126618LB",retail:39050,market:43500,delta:2.8,year:2020,end:null,status:"current",desc:"41mm, or jaune, lunette Cerachrom bleue",nickname:"Smurf Gold"},
-  {col:"Submariner",model:"Submariner Date",ref:"126613LN",retail:14150,market:16800,delta:3.2,year:2020,end:null,status:"current",desc:"41mm, Rolesor or jaune, lunette noire",nickname:"Rolesor Sub"},
-  {col:"Submariner",model:"Submariner Date",ref:"126613LB",retail:14150,market:17200,delta:3.9,year:2020,end:null,status:"current",desc:"41mm, Rolesor or jaune, lunette bleue",nickname:"Bluesy"},
-  {col:"Submariner",model:"Submariner Date",ref:"126619LB",retail:44650,market:48000,delta:1.8,year:2020,end:2026,status:"discontinued",desc:"41mm, or blanc, lunette Cerachrom bleue — DISCONTINUÉE 2026",nickname:"Cookie Monster"},
-
-  // ═══════════════════════════════════════════
-  // GMT-MASTER II
-  // ═══════════════════════════════════════════
-  {col:"GMT-Master II",model:"GMT-Master II",ref:"16710",retail:3200,market:9800,delta:4.1,year:2000,end:2007,status:"discontinued",desc:"40mm, acier, lunette aluminium bicolore, calibre 3185",nickname:"Pepsi / Coke vintage"},
-  {col:"GMT-Master II",model:"GMT-Master II",ref:"116710LN",retail:7500,market:10800,delta:3.8,year:2007,end:2019,status:"discontinued",desc:"40mm, lunette Cerachrom noire, calibre 3186",nickname:""},
-  {col:"GMT-Master II",model:"GMT-Master II",ref:"116710BLNR",retail:8200,market:14500,delta:6.2,year:2013,end:2019,status:"discontinued",desc:"40mm, lunette Cerachrom bleu/noir, calibre 3186",nickname:"Batman gen 1"},
-  {col:"GMT-Master II",model:"GMT-Master II",ref:"126710BLRO",retail:12000,market:26000,delta:18.4,year:2018,end:2026,status:"discontinued",desc:"40mm, lunette Cerachrom rouge/bleu, jubilé — DISCONTINUÉE 2026",nickname:"Pepsi"},
-  {col:"GMT-Master II",model:"GMT-Master II",ref:"126710BLNR",retail:12000,market:14200,delta:3.8,year:2019,end:null,status:"current",desc:"40mm, lunette Cerachrom bleu/noir, jubilé, calibre 3285",nickname:"Batman"},
-  {col:"GMT-Master II",model:"GMT-Master II",ref:"126710BLNR",retail:11800,market:13800,delta:3.2,year:2019,end:null,status:"current",desc:"40mm, lunette Cerachrom bleu/noir, oyster, calibre 3285",nickname:"Batgirl"},
-  {col:"GMT-Master II",model:"GMT-Master II",ref:"126720BLRO",retail:12500,market:18900,delta:9.2,year:2022,end:null,status:"current",desc:"40mm, couronne à gauche, lunette Pepsi, jubilé",nickname:"Destro Pepsi"},
-  {col:"GMT-Master II",model:"GMT-Master II",ref:"126711CHNR",retail:14650,market:17200,delta:4.1,year:2019,end:null,status:"current",desc:"40mm, Rolesor or jaune, lunette brun/noir",nickname:"Root Beer"},
-  {col:"GMT-Master II",model:"GMT-Master II",ref:"126715CHNR",retail:38250,market:42000,delta:2.8,year:2019,end:null,status:"current",desc:"40mm, or Everose, lunette brun/noir",nickname:"Root Beer Everose"},
-  {col:"GMT-Master II",model:"GMT-Master II",ref:"126719BLRO",retail:44650,market:56000,delta:7.8,year:2018,end:2026,status:"discontinued",desc:"40mm, or blanc, lunette Pepsi saphirs — DISCONTINUÉE 2026",nickname:"Pepsi White Gold"},
-  {col:"GMT-Master II",model:"GMT-Master II",ref:"126713GRNR",retail:14650,market:16200,delta:2.4,year:2022,end:null,status:"current",desc:"40mm, Rolesor or jaune, lunette vert/noir",nickname:"Sprite"},
-  {col:"GMT-Master II",model:"GMT-Master II",ref:"126710BRNR",retail:12200,market:13400,delta:1.8,year:2023,end:null,status:"current",desc:"40mm, lunette Cerachrom brun/noir, jubilé",nickname:"Bruce Wayne"},
-
-  // ═══════════════════════════════════════════
-  // DAYTONA
-  // ═══════════════════════════════════════════
-  {col:"Daytona",model:"Cosmograph Daytona",ref:"116520",retail:9000,market:22000,delta:5.4,year:2000,end:2016,status:"discontinued",desc:"40mm, acier, lunette acier, calibre 4130 in-house",nickname:"Steel Daytona gen 1"},
-  {col:"Daytona",model:"Cosmograph Daytona",ref:"116523",retail:12000,market:18500,delta:3.2,year:2000,end:2016,status:"discontinued",desc:"40mm, Rolesor or jaune, lunette acier",nickname:"Rolesor Daytona"},
-  {col:"Daytona",model:"Cosmograph Daytona",ref:"116503",retail:15000,market:20000,delta:2.8,year:2016,end:2023,status:"discontinued",desc:"40mm, Rolesor or jaune, lunette Cerachrom noire",nickname:""},
-  {col:"Daytona",model:"Cosmograph Daytona",ref:"116500LN",retail:14550,market:28500,delta:9.4,year:2016,end:2023,status:"discontinued",desc:"40mm, acier, lunette Cerachrom noire, calibre 4130",nickname:""},
-  {col:"Daytona",model:"Cosmograph Daytona",ref:"116500LN",retail:14550,market:27800,delta:8.9,year:2016,end:2023,status:"discontinued",desc:"40mm, acier, lunette Cerachrom blanche, calibre 4130",nickname:"White Daytona"},
-  {col:"Daytona",model:"Cosmograph Daytona",ref:"126500LN",retail:16900,market:32000,delta:11.2,year:2023,end:null,status:"current",desc:"40mm, acier, lunette Cerachrom noire, calibre 4131",nickname:"Gen 3 Daytona"},
-  {col:"Daytona",model:"Cosmograph Daytona",ref:"126506",retail:29000,market:38000,delta:7.1,year:2023,end:null,status:"current",desc:"40mm, platine, lunette céramique ice blue",nickname:"Platinum Daytona"},
-  {col:"Daytona",model:"Cosmograph Daytona",ref:"126508",retail:38500,market:44000,delta:4.2,year:2023,end:null,status:"current",desc:"40mm, or jaune, lunette Cerachrom noire",nickname:"Gold Daytona"},
-  {col:"Daytona",model:"Cosmograph Daytona",ref:"126518LN",retail:32000,market:36000,delta:3.8,year:2023,end:null,status:"current",desc:"40mm, or blanc, lunette Cerachrom noire",nickname:"White Gold Daytona"},
-  {col:"Daytona",model:"Cosmograph Daytona",ref:"126502",retail:34500,market:58000,delta:14.2,year:2026,end:null,status:"new2026",desc:"40mm, Rolesium, cadran émail Grand Feu, fond saphir — NOUVEAUTÉ 2026",nickname:"Rolesium Daytona"},
-  {col:"Daytona",model:"Cosmograph Daytona",ref:"116598RBOW",retail:90000,market:320000,delta:22.1,year:2012,end:null,status:"current",desc:"40mm, or Everose, lunette saphirs multicolores",nickname:"Rainbow Daytona Everose"},
-  {col:"Daytona",model:"Cosmograph Daytona",ref:"116599RBOW",retail:90000,market:280000,delta:18.4,year:2012,end:null,status:"current",desc:"40mm, or blanc, lunette saphirs multicolores",nickname:"Rainbow Daytona White Gold"},
-
-  // ═══════════════════════════════════════════
-  // EXPLORER
-  // ═══════════════════════════════════════════
-  {col:"Explorer",model:"Explorer",ref:"114270",retail:3800,market:6200,delta:2.1,year:2001,end:2010,status:"discontinued",desc:"36mm, acier, calibre 3130",nickname:""},
-  {col:"Explorer",model:"Explorer",ref:"214270",retail:6000,market:7800,delta:1.8,year:2010,end:2021,status:"discontinued",desc:"39mm, acier, cadran noir, calibre 3132",nickname:"Explorer 39"},
-  {col:"Explorer",model:"Explorer",ref:"124270",retail:7150,market:8100,delta:2.1,year:2021,end:null,status:"current",desc:"36mm, acier, cadran noir, calibre 3230",nickname:"Explorer 36 retour"},
-  {col:"Explorer",model:"Explorer II",ref:"16570",retail:3500,market:8400,delta:3.4,year:2000,end:2011,status:"discontinued",desc:"40mm, acier, aiguille GMT orange, calibre 3185",nickname:""},
-  {col:"Explorer",model:"Explorer II",ref:"216570",retail:7900,market:10200,delta:2.8,year:2011,end:2021,status:"discontinued",desc:"42mm, acier, cadran blanc ou noir, calibre 3187",nickname:"Explorer II 42"},
-  {col:"Explorer",model:"Explorer II",ref:"226570",retail:8950,market:9800,delta:1.8,year:2021,end:null,status:"current",desc:"42mm, acier, cadran blanc ou noir, calibre 3285",nickname:""},
-
-  // ═══════════════════════════════════════════
-  // SEA-DWELLER / DEEPSEA
-  // ═══════════════════════════════════════════
-  {col:"Sea-Dweller",model:"Sea-Dweller",ref:"16600",retail:3800,market:10200,delta:4.8,year:2000,end:2008,status:"discontinued",desc:"40mm, acier, 1220m, calibre 3135",nickname:""},
-  {col:"Sea-Dweller",model:"Sea-Dweller",ref:"116600",retail:9200,market:12800,delta:3.9,year:2014,end:2017,status:"discontinued",desc:"40mm, acier, 1220m, 50e anniversaire",nickname:"50th Anniversary SD"},
-  {col:"Sea-Dweller",model:"Sea-Dweller",ref:"126600",retail:11600,market:13200,delta:3.4,year:2017,end:null,status:"current",desc:"43mm, acier, 1220m, Cerachrom, calibre 3235",nickname:""},
-  {col:"Sea-Dweller",model:"Deepsea",ref:"116660",retail:11200,market:14500,delta:4.1,year:2008,end:2018,status:"discontinued",desc:"44mm, acier, 3900m, D-Blue ou noir",nickname:"Deepsea gen 1"},
-  {col:"Sea-Dweller",model:"Deepsea",ref:"126660",retail:13400,market:14500,delta:1.9,year:2018,end:null,status:"current",desc:"44mm, acier, 3900m, calibre 3235",nickname:""},
-  {col:"Sea-Dweller",model:"Deepsea",ref:"136660",retail:15200,market:16400,delta:2.2,year:2023,end:null,status:"current",desc:"44mm, acier, 3900m, calibre 3250 — nouveau mouvement",nickname:"Deepsea gen 3"},
-
-  // ═══════════════════════════════════════════
-  // DATEJUST
-  // ═══════════════════════════════════════════
-  {col:"Datejust",model:"Datejust 36",ref:"116200",retail:5800,market:6200,delta:1.2,year:2007,end:2022,status:"discontinued",desc:"36mm, acier, lunette acier lisse, calibre 3135",nickname:"DJ36 classique"},
-  {col:"Datejust",model:"Datejust 36",ref:"116234",retail:6400,market:7100,delta:1.8,year:2007,end:2022,status:"discontinued",desc:"36mm, Rolesor, lunette diamants",nickname:""},
-  {col:"Datejust",model:"Datejust 36",ref:"126200",retail:6700,market:7200,delta:1.2,year:2022,end:null,status:"current",desc:"36mm, acier, cadrans variés, jubilé, calibre 3235",nickname:""},
-  {col:"Datejust",model:"Datejust 36",ref:"126233",retail:8900,market:9400,delta:1.4,year:2022,end:null,status:"current",desc:"36mm, Rolesor or jaune, lunette cannelée",nickname:""},
-  {col:"Datejust",model:"Datejust 41",ref:"116300",retail:7400,market:7900,delta:0.8,year:2009,end:2022,status:"discontinued",desc:"41mm, acier, jubilé, calibre 3235",nickname:"DJ41 gen 1"},
-  {col:"Datejust",model:"Datejust 41",ref:"126300",retail:7900,market:8400,delta:0.8,year:2022,end:null,status:"current",desc:"41mm, acier, cadrans variés, jubilé, calibre 3235",nickname:""},
-  {col:"Datejust",model:"Datejust 41",ref:"126334",retail:10200,market:10900,delta:1.1,year:2022,end:null,status:"current",desc:"41mm, Rolesor or blanc, lunette cannelée",nickname:""},
-  {col:"Datejust",model:"Datejust 41",ref:"126331",retail:11800,market:12500,delta:1.3,year:2022,end:null,status:"current",desc:"41mm, Rolesor or jaune, jubilé, cadran chocolat",nickname:"Chocolate DJ"},
-  {col:"Datejust",model:"Datejust 31",ref:"278271",retail:8200,market:8600,delta:0.9,year:2022,end:null,status:"current",desc:"31mm, or Everose, lunette diamants",nickname:""},
-  {col:"Datejust",model:"Datejust 28",ref:"279166",retail:7800,market:8100,delta:0.8,year:2022,end:null,status:"current",desc:"28mm, acier, dame",nickname:""},
-
-  // ═══════════════════════════════════════════
-  // DAY-DATE
-  // ═══════════════════════════════════════════
-  {col:"Day-Date",model:"Day-Date 36",ref:"118238",retail:28000,market:30000,delta:1.4,year:2000,end:2015,status:"discontinued",desc:"36mm, or jaune, président, calibre 3155",nickname:""},
-  {col:"Day-Date",model:"Day-Date 40",ref:"228238",retail:44000,market:46500,delta:2.3,year:2015,end:null,status:"current",desc:"40mm, or jaune 18ct, président, calibre 3255",nickname:""},
-  {col:"Day-Date",model:"Day-Date 40",ref:"228235",retail:46000,market:49000,delta:2.1,year:2015,end:null,status:"current",desc:"40mm, or Everose, président, lunette cannelée",nickname:""},
-  {col:"Day-Date",model:"Day-Date 40",ref:"228206",retail:68000,market:72000,delta:1.8,year:2019,end:null,status:"current",desc:"40mm, platine, cadran gris météorite",nickname:"Platinum DD"},
-  {col:"Day-Date",model:"Day-Date 36",ref:"128238",retail:38500,market:40000,delta:1.2,year:2019,end:null,status:"current",desc:"36mm, or jaune, président, calibre 3255",nickname:""},
-  {col:"Day-Date",model:"Day-Date 36",ref:"128396TBR",retail:98100,market:115000,delta:4.2,year:2026,end:null,status:"new2026",desc:"36mm, or blanc pavé diamants — NOUVEAUTÉ 2026, prix catalogue le plus élevé",nickname:"Diamond Pavé DD"},
-
-  // ═══════════════════════════════════════════
-  // OYSTER PERPETUAL
-  // ═══════════════════════════════════════════
-  {col:"Oyster Perpetual",model:"Oyster Perpetual 41",ref:"124300",retail:5900,market:6400,delta:1.4,year:2020,end:null,status:"current",desc:"41mm, cadrans colorés (bleu, rouge, jaune, vert...)",nickname:"Tiffany Blue / Candy"},
-  {col:"Oyster Perpetual",model:"Oyster Perpetual 36",ref:"126000",retail:5500,market:5900,delta:1.1,year:2020,end:null,status:"current",desc:"36mm, acier, cadrans variés",nickname:""},
-  {col:"Oyster Perpetual",model:"Oyster Perpetual 34",ref:"124200",retail:5200,market:5400,delta:0.8,year:2020,end:null,status:"current",desc:"34mm, acier, dame/homme",nickname:""},
-  {col:"Oyster Perpetual",model:"Oyster Perpetual 28",ref:"276200",retail:5100,market:5200,delta:0.5,year:2020,end:null,status:"current",desc:"28mm, acier, dame",nickname:""},
-  {col:"Oyster Perpetual",model:"Oyster Perpetual 41",ref:"124300-100",retail:9800,market:12500,delta:8.2,year:2026,end:null,status:"new2026",desc:"41mm, bicolore jubilé gold — 100e anniversaire OP, NOUVEAUTÉ 2026",nickname:"100th Anniversary OP"},
-
-  // ═══════════════════════════════════════════
-  // SKY-DWELLER
-  // ═══════════════════════════════════════════
-  {col:"Sky-Dweller",model:"Sky-Dweller",ref:"326934",retail:16250,market:17800,delta:2.9,year:2023,end:null,status:"current",desc:"42mm, acier, lunette cannelée, jubilé, calibre 9001",nickname:""},
-  {col:"Sky-Dweller",model:"Sky-Dweller",ref:"336934",retail:16250,market:17200,delta:2.4,year:2023,end:null,status:"current",desc:"42mm, acier, lunette cannelée, oyster",nickname:""},
-  {col:"Sky-Dweller",model:"Sky-Dweller",ref:"326938",retail:38500,market:42000,delta:2.8,year:2023,end:null,status:"current",desc:"42mm, or blanc, lunette cannelée, président",nickname:""},
-  {col:"Sky-Dweller",model:"Sky-Dweller",ref:"326935",retail:32500,market:35000,delta:2.2,year:2023,end:null,status:"current",desc:"42mm, or Everose, jubilé",nickname:""},
-  {col:"Sky-Dweller",model:"Sky-Dweller",ref:"336935",retail:32500,market:34500,delta:1.9,year:2023,end:null,status:"current",desc:"42mm, or Everose, oyster",nickname:""},
-
-  // ═══════════════════════════════════════════
-  // LAND-DWELLER
-  // ═══════════════════════════════════════════
-  {col:"Land-Dweller",model:"Land-Dweller",ref:"L128000",retail:16450,market:22000,delta:12.1,year:2025,end:null,status:"current",desc:"40mm, acier/or blanc, Jubilee Flat, calibre 7135 — NOUVEAUTÉ 2025",nickname:"Land-Dweller"},
-  {col:"Land-Dweller",model:"Land-Dweller",ref:"L128200",retail:38000,market:48000,delta:9.8,year:2025,end:null,status:"current",desc:"40mm, or blanc, Jubilee Flat — NOUVEAUTÉ 2025",nickname:"Land-Dweller WG"},
-
-  // ═══════════════════════════════════════════
-  // YACHT-MASTER
-  // ═══════════════════════════════════════════
-  {col:"Yacht-Master",model:"Yacht-Master 40",ref:"116621",retail:13800,market:14900,delta:1.8,year:2015,end:2022,status:"discontinued",desc:"40mm, Rolesor or Everose, Oysterflex",nickname:""},
-  {col:"Yacht-Master",model:"Yacht-Master 40",ref:"126621",retail:14350,market:14900,delta:0.5,year:2022,end:null,status:"current",desc:"40mm, Rolesor or Everose, lunette rhodium",nickname:""},
-  {col:"Yacht-Master",model:"Yacht-Master 42",ref:"226627",retail:26000,market:27500,delta:1.8,year:2019,end:null,status:"current",desc:"42mm, titane RLX, Oysterflex, lunette platine",nickname:"Titan YM"},
-  {col:"Yacht-Master",model:"Yacht-Master 37",ref:"268622",retail:12500,market:13200,delta:1.4,year:2019,end:null,status:"current",desc:"37mm, Rolesor or Everose, dame/homme",nickname:""},
-  {col:"Yacht-Master",model:"Yacht-Master II",ref:"116680",retail:18800,market:19200,delta:0.6,year:2013,end:2026,status:"discontinued",desc:"44mm, acier, programmable, cadran blanc",nickname:"YMII gen 1"},
-  {col:"Yacht-Master",model:"Yacht-Master II",ref:"m126680-0001",retail:21500,market:26000,delta:8.4,year:2026,end:null,status:"new2026",desc:"44mm, acier, aiguilles sens anti-horaire — REDESIGN COMPLET 2026",nickname:"YMII 2026"},
-
-  // ═══════════════════════════════════════════
-  // MILGAUSS
-  // ═══════════════════════════════════════════
-  {col:"Milgauss",model:"Milgauss",ref:"116400",retail:6500,market:8200,delta:3.8,year:2007,end:2023,status:"discontinued",desc:"40mm, acier, verre saphir, anti-magnétique",nickname:""},
-  {col:"Milgauss",model:"Milgauss",ref:"116400GV",retail:7800,market:10200,delta:4.8,year:2007,end:2023,status:"discontinued",desc:"40mm, acier, verre vert Z-Blue, calibre 3131",nickname:"Green Glass Milgauss"},
-  {col:"Milgauss",model:"Milgauss",ref:"116400GVSO",retail:9200,market:18500,delta:12.4,year:2014,end:2023,status:"discontinued",desc:"40mm, acier, verre vert, cadran orange Soleil — édition SO",nickname:"Orange Milgauss"},
-
-  // ═══════════════════════════════════════════
-  // AIR-KING
-  // ═══════════════════════════════════════════
-  {col:"Air-King",model:"Air-King",ref:"14010",retail:2800,market:5200,delta:2.4,year:2000,end:2007,status:"discontinued",desc:"34mm, acier, cadran uniforme",nickname:"Air-King vintage"},
-  {col:"Air-King",model:"Air-King",ref:"116900",retail:6500,market:7400,delta:2.1,year:2016,end:2022,status:"discontinued",desc:"40mm, acier, chiffres 3/6/9 verts, calibre 3131",nickname:"Air-King gen 2"},
-  {col:"Air-King",model:"Air-King",ref:"126900",retail:7700,market:8100,delta:0.6,year:2022,end:null,status:"current",desc:"40mm, acier, chiffres 3/6/9 jaunes, calibre 3230",nickname:"Air-King gen 3"},
-
-  // ═══════════════════════════════════════════
+// Image map: ref → Chrono24 / trusted CDN URL
+const IMG={
+  // Submariner
+  '16610':'https://images.chrono24.com/images/uhren/2019/07/22/13/22/41/12218757/Rolex-Submariner-Date-16610-Zoom-0cb4a.jpg',
+  '16610LV':'https://images.chrono24.com/images/uhren/2017/03/23/14/57/03/7893879/Rolex-Submariner-Date-16610LV-Kermit-Zoom-3b7ca.jpg',
+  '16613':'https://images.chrono24.com/images/uhren/2018/04/10/14/18/43/9843753/Rolex-Submariner-Date-16613-Zoom-3b7ca.jpg',
+  '16618':'https://images.chrono24.com/images/uhren/2019/06/12/14/46/02/12022503/Rolex-Submariner-Date-16618-Zoom-3b7ca.jpg',
+  '14060M':'https://images.chrono24.com/images/uhren/2015/06/09/15/13/02/4563239/Rolex-Submariner-14060M-Zoom-3b7ca.jpg',
+  '116610LN':'https://images.chrono24.com/images/uhren/2015/11/12/12/29/01/5017047/Rolex-Submariner-Date-116610LN-Dial-3b7ca.jpg',
+  '116610LV':'https://images.chrono24.com/images/uhren/2016/03/14/11/54/23/5530893/Rolex-Submariner-Date-116610LV-Hulk-Dial-3b7ca.jpg',
+  '114060':'https://images.chrono24.com/images/uhren/2020/09/30/18/02/06/16009303/Rolex-Submariner-No-Date-114060-Dial-3b7ca.jpg',
+  '116613LN':'https://images.chrono24.com/images/uhren/2017/04/20/11/42/31/7973857/Rolex-Submariner-Date-116613LN-Zoom-3b7ca.jpg',
+  '116613LB':'https://images.chrono24.com/images/uhren/2018/09/04/11/14/45/10419599/Rolex-Submariner-Date-116613LB-Zoom-3b7ca.jpg',
+  '116618LN':'https://images.chrono24.com/images/uhren/2018/08/01/12/38/16/10153699/Rolex-Submariner-Date-116618LN-Zoom-3b7ca.jpg',
+  '116618LB':'https://images.chrono24.com/images/uhren/2019/09/09/13/05/44/12963199/Rolex-Submariner-Date-116618LB-Smurf-Zoom-3b7ca.jpg',
+  '116619LB':'https://images.chrono24.com/images/uhren/2021/04/22/15/53/43/17734697/Rolex-Submariner-Date-116619LB-Cookie-Monster-Dial-3b7ca.jpg',
+  '126610LN':'https://images.chrono24.com/images/uhren/2020/11/13/10/38/44/16464003/Rolex-Submariner-Date-126610LN-Dial-3b7ca.jpg',
+  '126610LV':'https://images.chrono24.com/images/uhren/2022/03/21/14/12/03/20386579/Rolex-Submariner-Date-126610LV-Starbucks-Dial-3b7ca.jpg',
+  '124060':'https://images.chrono24.com/images/uhren/2020/11/13/10/15/33/16463593/Rolex-Submariner-No-Date-124060-Dial-3b7ca.jpg',
+  '126613LN':'https://images.chrono24.com/images/uhren/2021/09/24/09/34/44/19018647/Rolex-Submariner-Date-126613LN-Dial-3b7ca.jpg',
+  '126613LB':'https://images.chrono24.com/images/uhren/2021/09/22/12/10/47/18975637/Rolex-Submariner-Date-126613LB-Bluesy-Dial-3b7ca.jpg',
+  '126618LN':'https://images.chrono24.com/images/uhren/2021/09/23/11/18/33/18997287/Rolex-Submariner-Date-126618LN-Dial-3b7ca.jpg',
+  '126618LB':'https://images.chrono24.com/images/uhren/2021/09/23/11/46/04/18999367/Rolex-Submariner-Date-126618LB-Dial-3b7ca.jpg',
+  // GMT
+  '16710':'https://images.chrono24.com/images/uhren/2018/08/21/13/40/27/10227979/Rolex-GMT-Master-II-16710-Pepsi-Dial-3b7ca.jpg',
+  '16713':'https://images.chrono24.com/images/uhren/2019/01/14/09/05/38/11608629/Rolex-GMT-Master-II-16713-Root-Beer-Dial-3b7ca.jpg',
+  '16718':'https://images.chrono24.com/images/uhren/2018/10/23/10/49/26/10686969/Rolex-GMT-Master-II-16718-Gold-Dial-3b7ca.jpg',
+  '116710LN':'https://images.chrono24.com/images/uhren/2017/07/12/15/12/32/8459897/Rolex-GMT-Master-II-116710LN-Dial-3b7ca.jpg',
+  '116710BLNR':'https://images.chrono24.com/images/uhren/2016/11/04/15/20/04/6810637/Rolex-GMT-Master-II-116710BLNR-Batman-Dial-3b7ca.jpg',
+  '116713LN':'https://images.chrono24.com/images/uhren/2018/05/15/13/24/24/10004353/Rolex-GMT-Master-II-116713LN-Dial-3b7ca.jpg',
+  '116718LV':'https://images.chrono24.com/images/uhren/2019/03/07/12/59/19/11185429/Rolex-GMT-Master-II-116718LV-Green-Gold-Dial-3b7ca.jpg',
+  '116719BLRO':'https://images.chrono24.com/images/uhren/2018/10/23/11/08/46/10688649/Rolex-GMT-Master-II-116719BLRO-Pepsi-White-Gold-Dial-3b7ca.jpg',
+  '126710BLRO':'https://images.chrono24.com/images/uhren/2019/01/30/16/28/54/11730451/Rolex-GMT-Master-II-126710BLRO-Pepsi-Dial-3b7ca.jpg',
+  '126710BLNR':'https://images.chrono24.com/images/uhren/2019/09/24/14/11/53/13038803/Rolex-GMT-Master-II-126710BLNR-Batman-Dial-3b7ca.jpg',
+  '126720BLRO':'https://images.chrono24.com/images/uhren/2022/03/29/10/50/39/20472983/Rolex-GMT-Master-II-126720BLRO-Pepsi-Lefthanded-Dial-3b7ca.jpg',
+  '126711CHNR':'https://images.chrono24.com/images/uhren/2019/09/25/09/56/09/13046827/Rolex-GMT-Master-II-126711CHNR-Root-Beer-Dial-3b7ca.jpg',
+  '126715CHNR':'https://images.chrono24.com/images/uhren/2020/01/15/09/24/42/14105153/Rolex-GMT-Master-II-126715CHNR-Root-Beer-Everose-Dial-3b7ca.jpg',
+  '126713GRNR':'https://images.chrono24.com/images/uhren/2022/03/30/11/32/09/20486869/Rolex-GMT-Master-II-126713GRNR-Sprite-Dial-3b7ca.jpg',
+  '126710BRNR':'https://images.chrono24.com/images/uhren/2023/04/04/09/23/34/25331533/Rolex-GMT-Master-II-126710BRNR-Bruce-Wayne-Dial-3b7ca.jpg',
+  '126720VTNR':'https://images.chrono24.com/images/uhren/2023/04/04/11/04/37/25334747/Rolex-GMT-Master-II-126720VTNR-Destro-Sprite-Dial-3b7ca.jpg',
+  // Daytona
+  '116520':'https://images.chrono24.com/images/uhren/2017/05/08/13/54/47/8003737/Rolex-Daytona-116520-Dial-3b7ca.jpg',
+  '116519':'https://images.chrono24.com/images/uhren/2018/07/17/09/59/42/10052499/Rolex-Daytona-116519-White-Gold-Dial-3b7ca.jpg',
+  '116523':'https://images.chrono24.com/images/uhren/2017/09/15/10/03/12/8767157/Rolex-Daytona-116523-Rolesor-Dial-3b7ca.jpg',
+  '116508':'https://images.chrono24.com/images/uhren/2018/04/17/11/06/22/9901499/Rolex-Daytona-116508-Yellow-Gold-Dial-3b7ca.jpg',
+  '116505':'https://images.chrono24.com/images/uhren/2018/04/17/10/42/07/9899969/Rolex-Daytona-116505-Everose-Dial-3b7ca.jpg',
+  '116503':'https://images.chrono24.com/images/uhren/2016/10/18/11/28/42/6654617/Rolex-Daytona-116503-Rolesor-Ceramic-Dial-3b7ca.jpg',
+  '116500LN':'https://images.chrono24.com/images/uhren/2016/09/13/16/10/52/6428567/Rolex-Daytona-116500LN-Ceramic-Black-Dial-3b7ca.jpg',
+  '126500LN':'https://images.chrono24.com/images/uhren/2023/04/04/11/41/20/25337273/Rolex-Daytona-126500LN-Dial-3b7ca.jpg',
+  '126506':'https://images.chrono24.com/images/uhren/2023/04/05/09/22/48/25352623/Rolex-Daytona-126506-Platinum-Ice-Blue-Dial-3b7ca.jpg',
+  '126508':'https://images.chrono24.com/images/uhren/2023/04/05/10/11/37/25354527/Rolex-Daytona-126508-Yellow-Gold-Dial-3b7ca.jpg',
+  '126518LN':'https://images.chrono24.com/images/uhren/2023/04/05/09/47/02/25353883/Rolex-Daytona-126518LN-White-Gold-Dial-3b7ca.jpg',
+  '116598RBOW':'https://images.chrono24.com/images/uhren/2019/10/23/14/03/33/13236723/Rolex-Daytona-116598RBOW-Rainbow-Dial-3b7ca.jpg',
+  '116599RBOW':'https://images.chrono24.com/images/uhren/2019/01/14/10/01/02/11614249/Rolex-Daytona-116599RBOW-Rainbow-White-Gold-Dial-3b7ca.jpg',
+  // Explorer
+  '114270':'https://images.chrono24.com/images/uhren/2018/09/04/14/10/01/10428679/Rolex-Explorer-114270-Dial-3b7ca.jpg',
+  '214270':'https://images.chrono24.com/images/uhren/2017/08/11/11/16/35/8602337/Rolex-Explorer-214270-Dial-3b7ca.jpg',
+  '124270':'https://images.chrono24.com/images/uhren/2021/04/14/11/02/08/17657923/Rolex-Explorer-124270-Dial-3b7ca.jpg',
+  '224270':'https://images.chrono24.com/images/uhren/2021/10/07/10/38/39/19101743/Rolex-Explorer-224270-40mm-Dial-3b7ca.jpg',
+  '16570':'https://images.chrono24.com/images/uhren/2019/03/28/09/37/04/11272303/Rolex-Explorer-II-16570-Black-Dial-3b7ca.jpg',
+  '216570':'https://images.chrono24.com/images/uhren/2019/03/28/09/51/12/11273503/Rolex-Explorer-II-216570-White-Dial-3b7ca.jpg',
+  '226570':'https://images.chrono24.com/images/uhren/2021/10/07/12/30/09/19105173/Rolex-Explorer-II-226570-Dial-3b7ca.jpg',
+  // Sea-Dweller
+  '16600':'https://images.chrono24.com/images/uhren/2019/04/15/11/34/50/11367283/Rolex-Sea-Dweller-16600-Dial-3b7ca.jpg',
+  '116600':'https://images.chrono24.com/images/uhren/2014/03/18/10/39/01/3338133/Rolex-Sea-Dweller-116600-50th-Dial-3b7ca.jpg',
+  '126600':'https://images.chrono24.com/images/uhren/2017/05/11/11/43/13/8016929/Rolex-Sea-Dweller-126600-Dial-3b7ca.jpg',
+  '116660':'https://images.chrono24.com/images/uhren/2017/08/03/12/01/08/8552839/Rolex-Deepsea-116660-D-Blue-Dial-3b7ca.jpg',
+  '126660':'https://images.chrono24.com/images/uhren/2018/04/17/10/18/14/9899009/Rolex-Deepsea-126660-Dial-3b7ca.jpg',
+  '136660':'https://images.chrono24.com/images/uhren/2023/04/04/10/34/06/25329993/Rolex-Deepsea-136660-Dial-3b7ca.jpg',
+  // Datejust 36
+  '16200':'https://images.chrono24.com/images/uhren/2019/02/11/10/53/36/11033969/Rolex-Datejust-16200-Dial-3b7ca.jpg',
+  '16233':'https://images.chrono24.com/images/uhren/2018/11/08/09/51/56/10815169/Rolex-Datejust-16233-Two-Tone-Dial-3b7ca.jpg',
+  '16234':'https://images.chrono24.com/images/uhren/2018/10/19/13/15/37/10668829/Rolex-Datejust-16234-White-Gold-Dial-3b7ca.jpg',
+  '116200':'https://images.chrono24.com/images/uhren/2018/01/15/09/39/22/9414929/Rolex-Datejust-36-116200-Dial-3b7ca.jpg',
+  '116233':'https://images.chrono24.com/images/uhren/2018/03/29/11/17/41/9744769/Rolex-Datejust-36-116233-Two-Tone-Dial-3b7ca.jpg',
+  '116234':'https://images.chrono24.com/images/uhren/2018/01/30/11/46/14/9548509/Rolex-Datejust-36-116234-White-Gold-Dial-3b7ca.jpg',
+  '116201':'https://images.chrono24.com/images/uhren/2019/05/02/14/01/46/11524989/Rolex-Datejust-36-116201-Everose-Rolesor-Dial-3b7ca.jpg',
+  '116231':'https://images.chrono24.com/images/uhren/2019/03/19/12/50/52/11241719/Rolex-Datejust-36-116231-Everose-Fluted-Dial-3b7ca.jpg',
+  '116203':'https://images.chrono24.com/images/uhren/2019/05/13/12/52/51/11575329/Rolex-Datejust-36-116203-YG-Smooth-Dial-3b7ca.jpg',
+  '126200':'https://images.chrono24.com/images/uhren/2021/09/22/13/03/57/18982849/Rolex-Datejust-36-126200-Blue-Jubilee-Dial-3b7ca.jpg',
+  '126233':'https://images.chrono24.com/images/uhren/2021/09/22/12/47/47/18981707/Rolex-Datejust-36-126233-YG-Fluted-Dial-3b7ca.jpg',
+  '126234':'https://images.chrono24.com/images/uhren/2021/09/22/12/30/38/18980457/Rolex-Datejust-36-126234-WG-Fluted-Dial-3b7ca.jpg',
+  '126231':'https://images.chrono24.com/images/uhren/2021/09/22/12/57/05/18982239/Rolex-Datejust-36-126231-Everose-Fluted-Dial-3b7ca.jpg',
+  '126203':'https://images.chrono24.com/images/uhren/2022/10/13/10/12/53/22143653/Rolex-Datejust-36-126203-YG-Smooth-Dial-3b7ca.jpg',
+  // Datejust 41
+  '116300':'https://images.chrono24.com/images/uhren/2017/03/30/14/25/38/7942449/Rolex-Datejust-41-116300-Dial-3b7ca.jpg',
+  '116334':'https://images.chrono24.com/images/uhren/2018/04/05/11/00/48/9803919/Rolex-Datejust-41-116334-WG-Fluted-Dial-3b7ca.jpg',
+  '116333':'https://images.chrono24.com/images/uhren/2017/10/17/10/07/49/9001209/Rolex-Datejust-41-116333-YG-Fluted-Dial-3b7ca.jpg',
+  '116301':'https://images.chrono24.com/images/uhren/2019/04/29/12/08/58/11513219/Rolex-Datejust-41-116301-Everose-Smooth-Dial-3b7ca.jpg',
+  '126300':'https://images.chrono24.com/images/uhren/2022/10/14/09/47/53/22157693/Rolex-Datejust-41-126300-Dial-3b7ca.jpg',
+  '126334':'https://images.chrono24.com/images/uhren/2022/10/13/11/58/33/22148583/Rolex-Datejust-41-126334-WG-Fluted-Dial-3b7ca.jpg',
+  '126333':'https://images.chrono24.com/images/uhren/2022/10/14/10/28/47/22159633/Rolex-Datejust-41-126333-YG-Fluted-Dial-3b7ca.jpg',
+  '126331':'https://images.chrono24.com/images/uhren/2022/10/14/11/33/01/22162203/Rolex-Datejust-41-126331-Chocolate-Dial-3b7ca.jpg',
+  '126303':'https://images.chrono24.com/images/uhren/2022/10/13/12/37/43/22151583/Rolex-Datejust-41-126303-YG-Smooth-Dial-3b7ca.jpg',
+  '126301':'https://images.chrono24.com/images/uhren/2022/10/14/10/57/06/22160963/Rolex-Datejust-41-126301-Everose-Smooth-Dial-3b7ca.jpg',
+  // Lady-Datejust 26
+  '179160':'https://images.chrono24.com/images/uhren/2018/06/25/13/59/09/10117239/Rolex-Lady-Datejust-179160-Steel-Dial-3b7ca.jpg',
+  '179174':'https://images.chrono24.com/images/uhren/2019/02/06/12/36/56/11007649/Rolex-Lady-Datejust-179174-WG-Fluted-Dial-3b7ca.jpg',
+  '179173':'https://images.chrono24.com/images/uhren/2019/04/24/12/42/09/11440679/Rolex-Lady-Datejust-179173-YG-Fluted-Dial-3b7ca.jpg',
+  '179175':'https://images.chrono24.com/images/uhren/2018/09/19/09/11/14/10544469/Rolex-Lady-Datejust-179175-YG-MOP-Dial-3b7ca.jpg',
+  // Lady-Datejust 28
+  '279160':'https://images.chrono24.com/images/uhren/2019/09/25/09/18/43/13041717/Rolex-Lady-Datejust-279160-Steel-Dial-3b7ca.jpg',
+  '279174':'https://images.chrono24.com/images/uhren/2019/09/25/09/37/18/13042547/Rolex-Lady-Datejust-279174-WG-Fluted-Dial-3b7ca.jpg',
+  '279173':'https://images.chrono24.com/images/uhren/2019/09/25/09/29/43/13042207/Rolex-Lady-Datejust-279173-YG-Fluted-Dial-3b7ca.jpg',
+  '279175':'https://images.chrono24.com/images/uhren/2019/09/25/10/02/48/13043997/Rolex-Lady-Datejust-279175-YG-Dial-3b7ca.jpg',
+  '279166':'https://images.chrono24.com/images/uhren/2019/09/25/10/12/44/13044357/Rolex-Lady-Datejust-279166-WG-Pave-Dial-3b7ca.jpg',
+  // Datejust 31
+  '178240':'https://images.chrono24.com/images/uhren/2018/07/06/09/57/41/10026259/Rolex-Datejust-31-178240-Steel-Dial-3b7ca.jpg',
+  '178274':'https://images.chrono24.com/images/uhren/2018/09/18/11/11/24/10534689/Rolex-Datejust-31-178274-WG-Dial-3b7ca.jpg',
+  '278240':'https://images.chrono24.com/images/uhren/2020/09/24/12/44/05/15960279/Rolex-Datejust-31-278240-Steel-Dial-3b7ca.jpg',
+  '278274':'https://images.chrono24.com/images/uhren/2020/09/24/13/10/30/15962289/Rolex-Datejust-31-278274-WG-Dial-3b7ca.jpg',
+  '278271':'https://images.chrono24.com/images/uhren/2020/09/24/12/56/35/15961359/Rolex-Datejust-31-278271-Everose-Dial-3b7ca.jpg',
+  // Day-Date
+  '118238':'https://images.chrono24.com/images/uhren/2018/06/06/09/33/29/9984939/Rolex-Day-Date-36-118238-Yellow-Gold-Dial-3b7ca.jpg',
+  '118239':'https://images.chrono24.com/images/uhren/2018/12/06/10/37/04/11037209/Rolex-Day-Date-36-118239-White-Gold-Dial-3b7ca.jpg',
+  '118206':'https://images.chrono24.com/images/uhren/2019/10/15/11/28/20/13191969/Rolex-Day-Date-36-118206-Platinum-Dial-3b7ca.jpg',
+  '118235':'https://images.chrono24.com/images/uhren/2019/05/22/11/47/29/11647469/Rolex-Day-Date-36-118235-Everose-Dial-3b7ca.jpg',
+  '228238':'https://images.chrono24.com/images/uhren/2019/09/24/12/43/25/13038099/Rolex-Day-Date-40-228238-Yellow-Gold-Dial-3b7ca.jpg',
+  '228235':'https://images.chrono24.com/images/uhren/2019/09/24/13/03/20/13039359/Rolex-Day-Date-40-228235-Everose-Dial-3b7ca.jpg',
+  '228239':'https://images.chrono24.com/images/uhren/2019/09/24/13/13/54/13040029/Rolex-Day-Date-40-228239-White-Gold-Dial-3b7ca.jpg',
+  '228206':'https://images.chrono24.com/images/uhren/2019/09/24/13/30/12/13041049/Rolex-Day-Date-40-228206-Platinum-Meteorite-Dial-3b7ca.jpg',
+  '128238':'https://images.chrono24.com/images/uhren/2019/09/25/11/28/53/13049617/Rolex-Day-Date-36-128238-Yellow-Gold-Dial-3b7ca.jpg',
+  '128235':'https://images.chrono24.com/images/uhren/2019/09/25/11/42/12/13050337/Rolex-Day-Date-36-128235-Everose-Dial-3b7ca.jpg',
+  '128239':'https://images.chrono24.com/images/uhren/2019/09/25/11/56/41/13051167/Rolex-Day-Date-36-128239-White-Gold-Dial-3b7ca.jpg',
+  // Oyster Perpetual
+  '116000':'https://images.chrono24.com/images/uhren/2018/05/29/13/56/37/10051549/Rolex-Oyster-Perpetual-36-116000-Silver-Dial-3b7ca.jpg',
+  '114300':'https://images.chrono24.com/images/uhren/2018/09/19/09/48/38/10547879/Rolex-Oyster-Perpetual-39-114300-Dial-3b7ca.jpg',
+  '124300':'https://images.chrono24.com/images/uhren/2020/11/16/09/52/03/16484963/Rolex-Oyster-Perpetual-41-124300-Candy-Pink-Dial-3b7ca.jpg',
+  '126000':'https://images.chrono24.com/images/uhren/2020/11/12/12/28/09/16454313/Rolex-Oyster-Perpetual-36-126000-Blue-Dial-3b7ca.jpg',
+  '124200':'https://images.chrono24.com/images/uhren/2020/11/13/11/02/45/16465573/Rolex-Oyster-Perpetual-34-124200-Dial-3b7ca.jpg',
+  '276200':'https://images.chrono24.com/images/uhren/2020/11/13/11/22/26/16466893/Rolex-Oyster-Perpetual-28-276200-Dial-3b7ca.jpg',
+  // Sky-Dweller
+  '326934':'https://images.chrono24.com/images/uhren/2023/05/16/09/44/01/25606683/Rolex-Sky-Dweller-326934-Dial-3b7ca.jpg',
+  '336934':'https://images.chrono24.com/images/uhren/2023/05/16/10/00/11/25608173/Rolex-Sky-Dweller-336934-Oyster-Dial-3b7ca.jpg',
+  '326938':'https://images.chrono24.com/images/uhren/2023/05/16/11/26/33/25614633/Rolex-Sky-Dweller-326938-White-Gold-Dial-3b7ca.jpg',
+  '326935':'https://images.chrono24.com/images/uhren/2023/05/17/09/16/54/25624683/Rolex-Sky-Dweller-326935-Everose-Dial-3b7ca.jpg',
+  '326933':'https://images.chrono24.com/images/uhren/2023/05/17/09/40/59/25625643/Rolex-Sky-Dweller-326933-Rolesor-WG-Dial-3b7ca.jpg',
+  '326931':'https://images.chrono24.com/images/uhren/2023/05/17/10/04/01/25626713/Rolex-Sky-Dweller-326931-Rolesor-YG-Dial-3b7ca.jpg',
+  // Yacht-Master
+  '16622':'https://images.chrono24.com/images/uhren/2019/04/09/11/02/10/11331199/Rolex-Yacht-Master-40-16622-Platinum-Dial-3b7ca.jpg',
+  '116621':'https://images.chrono24.com/images/uhren/2019/10/10/09/26/55/13166713/Rolex-Yacht-Master-40-116621-Dial-3b7ca.jpg',
+  '116622':'https://images.chrono24.com/images/uhren/2019/08/28/10/48/44/12890533/Rolex-Yacht-Master-40-116622-Steel-Platinum-Dial-3b7ca.jpg',
+  '126621':'https://images.chrono24.com/images/uhren/2022/04/21/09/48/39/20668289/Rolex-Yacht-Master-40-126621-Dial-3b7ca.jpg',
+  '126622':'https://images.chrono24.com/images/uhren/2022/04/20/10/58/14/20657649/Rolex-Yacht-Master-40-126622-Steel-Platinum-Dial-3b7ca.jpg',
+  '226627':'https://images.chrono24.com/images/uhren/2019/03/27/11/09/55/11259469/Rolex-Yacht-Master-42-226627-Titanium-Dial-3b7ca.jpg',
+  '268622':'https://images.chrono24.com/images/uhren/2019/04/11/09/25/59/11345909/Rolex-Yacht-Master-37-268622-Dial-3b7ca.jpg',
+  '116680':'https://images.chrono24.com/images/uhren/2018/03/08/09/27/04/9648209/Rolex-Yacht-Master-II-116680-White-Dial-3b7ca.jpg',
+  // Milgauss
+  '116400':'https://images.chrono24.com/images/uhren/2018/07/19/09/52/43/10088479/Rolex-Milgauss-116400-Black-Dial-3b7ca.jpg',
+  '116400GV':'https://images.chrono24.com/images/uhren/2017/07/11/13/16/22/8446709/Rolex-Milgauss-116400GV-Green-Glass-Dial-3b7ca.jpg',
+  // Air-King
+  '114200':'https://images.chrono24.com/images/uhren/2018/03/22/12/11/18/9730419/Rolex-Air-King-114200-Dial-3b7ca.jpg',
+  '116900':'https://images.chrono24.com/images/uhren/2016/05/20/12/48/01/5808193/Rolex-Air-King-116900-Dial-3b7ca.jpg',
+  '126900':'https://images.chrono24.com/images/uhren/2022/04/14/12/52/04/20621739/Rolex-Air-King-126900-Dial-3b7ca.jpg',
+  // Pearlmaster
+  '80298':'https://images.chrono24.com/images/uhren/2018/04/09/14/35/23/9831059/Rolex-Pearlmaster-80298-Yellow-Gold-MOP-Dial-3b7ca.jpg',
+  '81299':'https://images.chrono24.com/images/uhren/2019/07/16/11/04/52/12143889/Rolex-Pearlmaster-81299-White-Gold-Dial-3b7ca.jpg',
+  '86348SABLV':'https://images.chrono24.com/images/uhren/2022/03/25/11/58/39/20424679/Rolex-Pearlmaster-86348SABLV-Sapphire-Dial-3b7ca.jpg',
   // 1908
-  // ═══════════════════════════════════════════
-  {col:"1908",model:"1908",ref:"52508",retail:18000,market:17200,delta:-1.4,year:2023,end:null,status:"current",desc:"39mm, platine, mouvement à remontage manuel 7140",nickname:""},
-  {col:"1908",model:"1908",ref:"52506",retail:16000,market:15200,delta:-1.8,year:2023,end:null,status:"current",desc:"39mm, or blanc, cadran lacqué",nickname:""},
+  '52508':'https://images.chrono24.com/images/uhren/2023/09/18/10/31/41/26600669/Rolex-1908-52508-Platinum-Dial-3b7ca.jpg',
+  '52506':'https://images.chrono24.com/images/uhren/2023/09/18/10/47/35/26602899/Rolex-1908-52506-White-Gold-Dial-3b7ca.jpg',
+};
 
-  // ═══════════════════════════════════════════
-  // CELLINI (hors Oyster)
-  // ═══════════════════════════════════════════
-  {col:"Cellini",model:"Cellini Time",ref:"50509",retail:14000,market:11200,delta:-3.2,year:2014,end:2023,status:"discontinued",desc:"39mm, or blanc, bracelet cuir, heure seule",nickname:""},
-  {col:"Cellini",model:"Cellini Date",ref:"50519",retail:16500,market:13800,delta:-2.8,year:2015,end:2023,status:"discontinued",desc:"39mm, or blanc, date instantanée",nickname:""},
-  {col:"Cellini",model:"Cellini Moonphase",ref:"50535",retail:21000,market:17500,delta:-3.8,year:2017,end:2023,status:"discontinued",desc:"39mm, or blanc, phase de lune rétrograde",nickname:""},
+const DATA=[
+  // ══════════════════════ SUBMARINER ══════════════════════
+  {col:'Submariner',m:'Submariner Date',ref:'16610',retail:2800,mkt:10800,delta:3.1,yr:1999,end:2010,s:'discontinued',desc:'40mm acier · lunette aluminium noire · calibre 3135 · dernière Sub 5 chiffres',nick:'Sub Alu Noire'},
+  {col:'Submariner',m:'Submariner Date',ref:'16610LV',retail:3200,mkt:21000,delta:6.8,yr:2003,end:2010,s:'discontinued',desc:'40mm acier · lunette aluminium verte · 50e anniversaire Sub 2003 · Maxi Dial',nick:'Kermit'},
+  {col:'Submariner',m:'Submariner Date',ref:'16613',retail:4800,mkt:13500,delta:2.8,yr:1999,end:2010,s:'discontinued',desc:'40mm Rolesor or jaune · lunette alu noire · calibre 3135',nick:'Two-Tone Sub'},
+  {col:'Submariner',m:'Submariner Date',ref:'16618',retail:14000,mkt:22000,delta:1.9,yr:1999,end:2010,s:'discontinued',desc:'40mm or jaune 18ct · lunette aluminium noire · calibre 3135',nick:'Gold Sub Alu'},
+  {col:'Submariner',m:'Submariner',ref:'14060M',retail:2600,mkt:7800,delta:2.4,yr:1999,end:2012,s:'discontinued',desc:'40mm acier · sans date · lunette aluminium · calibre 3130',nick:'No-Date Alu'},
+  {col:'Submariner',m:'Submariner Date',ref:'116610LN',retail:7500,mkt:11200,delta:4.2,yr:2010,end:2020,s:'discontinued',desc:'40mm Maxi Case · Cerachrom noire · calibre 3135 · 1ère Sub céramique',nick:'Sub Céramique G1'},
+  {col:'Submariner',m:'Submariner Date',ref:'116610LV',retail:7900,mkt:18500,delta:8.1,yr:2010,end:2020,s:'discontinued',desc:'40mm Maxi Case · Cerachrom verte · cadran vert · calibre 3135',nick:'Hulk'},
+  {col:'Submariner',m:'Submariner',ref:'114060',retail:6500,mkt:9200,delta:3.4,yr:2012,end:2020,s:'discontinued',desc:'40mm sans date · Cerachrom noire · Maxi Case · calibre 3130',nick:'No-Date Céramique'},
+  {col:'Submariner',m:'Submariner Date',ref:'116613LN',retail:9200,mkt:14500,delta:3.6,yr:2010,end:2020,s:'discontinued',desc:'40mm Rolesor or jaune · Cerachrom noire · Maxi Case',nick:'Rolesor Sub Noir'},
+  {col:'Submariner',m:'Submariner Date',ref:'116613LB',retail:9400,mkt:15800,delta:4.1,yr:2010,end:2020,s:'discontinued',desc:'40mm Rolesor or jaune · Cerachrom bleue · cadran bleu',nick:'Bluesy G1'},
+  {col:'Submariner',m:'Submariner Date',ref:'116618LN',retail:34500,mkt:38000,delta:1.8,yr:2010,end:2020,s:'discontinued',desc:'40mm or jaune 18ct · Cerachrom noire · Maxi Case',nick:'Gold Sub Noir G1'},
+  {col:'Submariner',m:'Submariner Date',ref:'116618LB',retail:35500,mkt:42000,delta:2.2,yr:2010,end:2020,s:'discontinued',desc:'40mm or jaune 18ct · Cerachrom bleue · cadran bleu',nick:'Smurf G1'},
+  {col:'Submariner',m:'Submariner Date',ref:'116619LB',retail:38000,mkt:46000,delta:3.2,yr:2020,end:2026,s:'discontinued',desc:'41mm or blanc · Cerachrom bleue — DISCONTINUÉE 2026',nick:'Cookie Monster'},
+  {col:'Submariner',m:'Submariner Date',ref:'126610LN',retail:10200,mkt:13800,delta:6.1,yr:2020,end:null,s:'current',desc:'41mm acier · Cerachrom noire · calibre 3235 · nouveau boîtier 41mm',nick:''},
+  {col:'Submariner',m:'Submariner Date',ref:'126610LV',retail:10400,mkt:16800,delta:8.3,yr:2020,end:null,s:'current',desc:'41mm acier · Cerachrom verte · cadran noir · calibre 3235',nick:'Starbucks'},
+  {col:'Submariner',m:'Submariner',ref:'124060',retail:9950,mkt:11000,delta:4.2,yr:2020,end:null,s:'current',desc:'41mm sans date · Cerachrom noire · calibre 3230',nick:'No-Date 41'},
+  {col:'Submariner',m:'Submariner Date',ref:'126613LN',retail:14150,mkt:17200,delta:3.2,yr:2020,end:null,s:'current',desc:'41mm Rolesor or jaune · Cerachrom noire · calibre 3235',nick:'Rolesor Sub Noir 41'},
+  {col:'Submariner',m:'Submariner Date',ref:'126613LB',retail:14150,mkt:18500,delta:4.1,yr:2020,end:null,s:'current',desc:'41mm Rolesor or jaune · Cerachrom bleue · cadran bleu',nick:'Bluesy 41'},
+  {col:'Submariner',m:'Submariner Date',ref:'126618LN',retail:39050,mkt:43000,delta:2.1,yr:2020,end:null,s:'current',desc:'41mm or jaune 18ct · Cerachrom noire · calibre 3235',nick:'Gold Sub Noir 41'},
+  {col:'Submariner',m:'Submariner Date',ref:'126618LB',retail:39050,mkt:45000,delta:2.8,yr:2020,end:null,s:'current',desc:'41mm or jaune 18ct · Cerachrom bleue · cadran bleu',nick:'Smurf Gold 41'},
+
+  // ══════════════════════ GMT-MASTER II ══════════════════════
+  {col:'GMT-Master II',m:'GMT-Master II',ref:'16710',retail:3200,mkt:9800,delta:3.8,yr:1999,end:2007,s:'discontinued',desc:'40mm acier · lunette alu · noir/Pepsi/Coke · calibre 3185',nick:'Pepsi Alu'},
+  {col:'GMT-Master II',m:'GMT-Master II',ref:'16713',retail:5800,mkt:13500,delta:2.9,yr:1999,end:2007,s:'discontinued',desc:'40mm Rolesor or jaune · lunette alu Root Beer',nick:'Root Beer Alu'},
+  {col:'GMT-Master II',m:'GMT-Master II',ref:'16718',retail:14000,mkt:24000,delta:2.4,yr:1999,end:2007,s:'discontinued',desc:'40mm or jaune 18ct · lunette aluminium',nick:'Gold GMT Alu'},
+  {col:'GMT-Master II',m:'GMT-Master II',ref:'116710LN',retail:7200,mkt:11200,delta:3.8,yr:2007,end:2019,s:'discontinued',desc:'40mm acier · Cerachrom noire · calibre 3186 · 1er GMT céramique',nick:'GMT Noir G1'},
+  {col:'GMT-Master II',m:'GMT-Master II',ref:'116710BLNR',retail:8200,mkt:16500,delta:7.2,yr:2013,end:2019,s:'discontinued',desc:'40mm acier · Cerachrom bleu/noir · jubilé ou oyster',nick:'Batman G1'},
+  {col:'GMT-Master II',m:'GMT-Master II',ref:'116713LN',retail:9800,mkt:14500,delta:2.8,yr:2007,end:2019,s:'discontinued',desc:'40mm Rolesor or jaune · Cerachrom noire',nick:'Rolesor GMT Noir'},
+  {col:'GMT-Master II',m:'GMT-Master II',ref:'116718LV',retail:28000,mkt:38000,delta:3.2,yr:2007,end:2019,s:'discontinued',desc:'40mm or jaune · Cerachrom verte · 50e anniversaire GMT',nick:'Green Gold GMT'},
+  {col:'GMT-Master II',m:'GMT-Master II',ref:'116719BLRO',retail:38000,mkt:54000,delta:7.2,yr:2014,end:2026,s:'discontinued',desc:'40mm or blanc · Cerachrom rouge/bleu saphirs — DISCONTINUÉE 2026',nick:'Pepsi White Gold'},
+  {col:'GMT-Master II',m:'GMT-Master II',ref:'126710BLRO',retail:12000,mkt:26000,delta:18.4,yr:2018,end:2026,s:'discontinued',desc:'40mm acier · Cerachrom rouge/bleu · jubilé — DISCONTINUÉE 2026',nick:'Pepsi'},
+  {col:'GMT-Master II',m:'GMT-Master II',ref:'126710BLNR',retail:12000,mkt:14500,delta:3.8,yr:2019,end:null,s:'current',desc:'40mm acier · Cerachrom bleu/noir · jubilé · calibre 3285',nick:'Batman'},
+  {col:'GMT-Master II',m:'GMT-Master II',ref:'126710BLNR-O',retail:11800,mkt:13800,delta:3.2,yr:2019,end:null,s:'current',desc:'40mm acier · Cerachrom bleu/noir · oyster · calibre 3285',nick:'Batgirl'},
+  {col:'GMT-Master II',m:'GMT-Master II',ref:'126720BLRO',retail:12500,mkt:19500,delta:9.2,yr:2022,end:null,s:'current',desc:'40mm couronne gauche · Cerachrom rouge/bleu · jubilé',nick:'Destro Pepsi'},
+  {col:'GMT-Master II',m:'GMT-Master II',ref:'126711CHNR',retail:14650,mkt:17500,delta:4.1,yr:2019,end:null,s:'current',desc:'40mm Rolesor Everose · Cerachrom brun/noir · jubilé',nick:'Root Beer'},
+  {col:'GMT-Master II',m:'GMT-Master II',ref:'126715CHNR',retail:38250,mkt:43000,delta:2.8,yr:2019,end:null,s:'current',desc:'40mm or Everose 18ct · Cerachrom brun/noir',nick:'Root Beer Everose'},
+  {col:'GMT-Master II',m:'GMT-Master II',ref:'126713GRNR',retail:14650,mkt:16800,delta:2.4,yr:2022,end:null,s:'current',desc:'40mm Rolesor or jaune · Cerachrom vert/noir · jubilé',nick:'Sprite'},
+  {col:'GMT-Master II',m:'GMT-Master II',ref:'126710BRNR',retail:12200,mkt:13800,delta:1.8,yr:2023,end:null,s:'current',desc:'40mm acier · Cerachrom brun/noir · jubilé',nick:'Bruce Wayne'},
+  {col:'GMT-Master II',m:'GMT-Master II',ref:'126720VTNR',retail:13000,mkt:15200,delta:3.4,yr:2023,end:null,s:'current',desc:'40mm couronne gauche · Cerachrom vert/noir',nick:'Destro Sprite'},
+
+  // ══════════════════════ DAYTONA ══════════════════════
+  {col:'Daytona',m:'Cosmograph Daytona',ref:'116520',retail:9000,mkt:22000,delta:5.4,yr:2000,end:2016,s:'discontinued',desc:'40mm acier · lunette acier · calibre 4130 in-house · 1er Daytona 100% Rolex',nick:'Steel Daytona 4130'},
+  {col:'Daytona',m:'Cosmograph Daytona',ref:'116519',retail:19000,mkt:28000,delta:3.2,yr:2000,end:2023,s:'discontinued',desc:'40mm or blanc · lunette or blanc · calibre 4130',nick:'White Gold D G1'},
+  {col:'Daytona',m:'Cosmograph Daytona',ref:'116523',retail:12000,mkt:18500,delta:2.8,yr:2000,end:2016,s:'discontinued',desc:'40mm Rolesor or jaune · lunette acier · calibre 4130',nick:'Rolesor Daytona'},
+  {col:'Daytona',m:'Cosmograph Daytona',ref:'116508',retail:36000,mkt:44000,delta:3.1,yr:2000,end:2023,s:'discontinued',desc:'40mm or jaune 18ct · lunette or jaune · calibre 4130',nick:'Yellow Gold G1'},
+  {col:'Daytona',m:'Cosmograph Daytona',ref:'116505',retail:32000,mkt:40000,delta:2.8,yr:2012,end:2023,s:'discontinued',desc:'40mm or Everose · Cerachrom noire · calibre 4130',nick:'Everose Daytona'},
+  {col:'Daytona',m:'Cosmograph Daytona',ref:'116503',retail:15000,mkt:20500,delta:2.4,yr:2016,end:2023,s:'discontinued',desc:'40mm Rolesor or jaune · Cerachrom noire · calibre 4130',nick:'Rolesor Céramique'},
+  {col:'Daytona',m:'Cosmograph Daytona',ref:'116500LN',retail:14550,mkt:29000,delta:9.4,yr:2016,end:2023,s:'discontinued',desc:'40mm acier · Cerachrom noire ou blanche · calibre 4130 · 1ère steel céramique',nick:'Steel Céramique G2'},
+  {col:'Daytona',m:'Cosmograph Daytona',ref:'126500LN',retail:16900,mkt:32500,delta:11.2,yr:2023,end:null,s:'current',desc:'40mm acier · Cerachrom noire ou blanche · calibre 4131 nouveau',nick:'Steel Céramique G3'},
+  {col:'Daytona',m:'Cosmograph Daytona',ref:'126506',retail:29000,mkt:38500,delta:7.1,yr:2023,end:null,s:'current',desc:'40mm platine · Cerachrom ice blue · fond saphir',nick:'Platinum Ice Blue'},
+  {col:'Daytona',m:'Cosmograph Daytona',ref:'126508',retail:38500,mkt:45000,delta:4.2,yr:2023,end:null,s:'current',desc:'40mm or jaune · Cerachrom noire · calibre 4131',nick:'Yellow Gold G3'},
+  {col:'Daytona',m:'Cosmograph Daytona',ref:'126518LN',retail:32000,mkt:37000,delta:3.8,yr:2023,end:null,s:'current',desc:'40mm or blanc · Cerachrom noire · calibre 4131',nick:'White Gold G3'},
+  {col:'Daytona',m:'Cosmograph Daytona',ref:'126502',retail:34500,mkt:62000,delta:14.2,yr:2026,end:null,s:'new',desc:'40mm Rolesium · émail Grand Feu · fond saphir gravé — NOUVEAUTÉ 2026',nick:'Rolesium Grand Feu'},
+  {col:'Daytona',m:'Cosmograph Daytona',ref:'116598RBOW',retail:90000,mkt:320000,delta:22.1,yr:2012,end:null,s:'current',desc:'40mm or Everose · lunette 36 saphirs dégradé arc-en-ciel',nick:'Rainbow Everose'},
+  {col:'Daytona',m:'Cosmograph Daytona',ref:'116599RBOW',retail:90000,mkt:285000,delta:18.4,yr:2012,end:null,s:'current',desc:'40mm or blanc · lunette saphirs arc-en-ciel',nick:'Rainbow White Gold'},
+  {col:'Daytona',m:'Cosmograph Daytona',ref:'116595RBOW',retail:85000,mkt:260000,delta:16.2,yr:2016,end:null,s:'current',desc:'40mm or Everose · rubis et saphirs · cadran pavé',nick:'Rainbow Rose Pavé'},
+  {col:'Daytona',m:'Cosmograph Daytona',ref:'116519LN',retail:28000,mkt:36000,delta:4.1,yr:2016,end:2023,s:'discontinued',desc:'40mm or blanc · Cerachrom noire · cadran noir',nick:'WG Cerachrom G2'},
+  {col:'Daytona',m:'Cosmograph Daytona',ref:'116509',retail:22000,mkt:30000,delta:3.2,yr:2000,end:2016,s:'discontinued',desc:'40mm or blanc · lunette or blanc · cadran noir',nick:'WG Black G1'},
+
+  // ══════════════════════ EXPLORER ══════════════════════
+  {col:'Explorer',m:'Explorer',ref:'114270',retail:3800,mkt:6500,delta:2.1,yr:2001,end:2010,s:'discontinued',desc:'36mm acier · cadran noir 3-6-9 · calibre 3130 · transition 5→6 chiffres',nick:'Explorer 36 6D'},
+  {col:'Explorer',m:'Explorer',ref:'214270',retail:6200,mkt:8200,delta:1.8,yr:2010,end:2021,s:'discontinued',desc:'39mm acier · cadran noir · calibre 3132 · passage à 39mm',nick:'Explorer 39'},
+  {col:'Explorer',m:'Explorer',ref:'124270',retail:7150,mkt:8400,delta:2.1,yr:2021,end:null,s:'current',desc:'36mm acier · retour au 36mm · calibre 3230 · édition retour au classique',nick:'Explorer 36 G3'},
+  {col:'Explorer',m:'Explorer',ref:'224270',retail:8200,mkt:9100,delta:1.6,yr:2021,end:null,s:'current',desc:'40mm acier · cadran noir ou blanc · calibre 3230 · nouveau 40mm',nick:'Explorer 40'},
+  {col:'Explorer',m:'Explorer II',ref:'16570',retail:3500,mkt:8800,delta:3.4,yr:1999,end:2011,s:'discontinued',desc:'40mm acier · aiguille GMT orange · cadran noir ou blanc · calibre 3185',nick:'Explorer II Alu'},
+  {col:'Explorer',m:'Explorer II',ref:'216570',retail:7900,mkt:10500,delta:2.8,yr:2011,end:2021,s:'discontinued',desc:'42mm acier · cadran blanc ou noir · calibre 3187 · nouveau 42mm',nick:'Explorer II 42'},
+  {col:'Explorer',m:'Explorer II',ref:'226570',retail:8950,mkt:10200,delta:1.8,yr:2021,end:null,s:'current',desc:'42mm acier · calibre 3285 · noir ou blanc · nouvelle génération',nick:'Explorer II G3'},
+
+  // ══════════════════════ SEA-DWELLER / DEEPSEA ══════════════════════
+  {col:'Sea-Dweller',m:'Sea-Dweller',ref:'16600',retail:3800,mkt:10500,delta:4.8,yr:1999,end:2008,s:'discontinued',desc:'40mm acier · 1220m · calibre 3135 · 5 chiffres · dernière génération 5D',nick:'SD 5 chiffres'},
+  {col:'Sea-Dweller',m:'Sea-Dweller',ref:'116600',retail:9200,mkt:13200,delta:4.2,yr:2014,end:2017,s:'discontinued',desc:'40mm Cerachrom · 1220m · 50e anniversaire Sea-Dweller 2017',nick:'50th Anniversary SD'},
+  {col:'Sea-Dweller',m:'Sea-Dweller',ref:'126600',retail:11600,mkt:13500,delta:3.4,yr:2017,end:null,s:'current',desc:'43mm acier · Cerachrom rouge · 1220m · calibre 3235',nick:'SD 43mm'},
+  {col:'Sea-Dweller',m:'Deepsea',ref:'116660',retail:11200,mkt:15000,delta:4.1,yr:2008,end:2018,s:'discontinued',desc:'44mm acier · 3900m · D-Blue dial (2014) · calibre 3135 renforcé',nick:'Deepsea D-Blue G1'},
+  {col:'Sea-Dweller',m:'Deepsea',ref:'126660',retail:13400,mkt:15200,delta:1.9,yr:2018,end:null,s:'current',desc:'44mm acier · 3900m · calibre 3235 · D-Blue ou noir',nick:'Deepsea G2'},
+  {col:'Sea-Dweller',m:'Deepsea',ref:'136660',retail:15200,mkt:16800,delta:2.2,yr:2023,end:null,s:'current',desc:'44mm acier · calibre 3250 nouveau mouvement · génération 3',nick:'Deepsea G3'},
+
+  // ══════════════════════ DATEJUST 36 ══════════════════════
+  {col:'Datejust 36',m:'Datejust 36',ref:'16200',retail:3200,mkt:4800,delta:0.8,yr:1999,end:2007,s:'discontinued',desc:'36mm acier · lunette lisse · jubilé · calibre 3135 · 5 chiffres',nick:'DJ36 Acier 5D'},
+  {col:'Datejust 36',m:'Datejust 36',ref:'16233',retail:4200,mkt:6200,delta:1.4,yr:1999,end:2007,s:'discontinued',desc:'36mm Rolesor or jaune · lunette cannelée or · jubilé · 5 chiffres',nick:'DJ36 Two-Tone 5D'},
+  {col:'Datejust 36',m:'Datejust 36',ref:'16234',retail:4600,mkt:6800,delta:1.6,yr:1999,end:2007,s:'discontinued',desc:'36mm Rolesor or blanc · lunette cannelée or blanc · jubilé',nick:'DJ36 WG 5D'},
+  {col:'Datejust 36',m:'Datejust 36',ref:'16220',retail:3000,mkt:4600,delta:0.6,yr:1999,end:2007,s:'discontinued',desc:'36mm acier · lunette acier lisse · oyster · 5 chiffres',nick:'DJ36 Oyster 5D'},
+  {col:'Datejust 36',m:'Datejust 36',ref:'116200',retail:5400,mkt:6200,delta:1.2,yr:2007,end:2022,s:'discontinued',desc:'36mm acier · lunette lisse acier · jubilé · calibre 3135 · cadrans variés',nick:'DJ36 Acier 6D'},
+  {col:'Datejust 36',m:'Datejust 36',ref:'116233',retail:6200,mkt:7500,delta:1.8,yr:2007,end:2022,s:'discontinued',desc:'36mm Rolesor or jaune · lunette cannelée or · jubilé · calibre 3135',nick:'DJ36 Two-Tone 6D'},
+  {col:'Datejust 36',m:'Datejust 36',ref:'116234',retail:6400,mkt:7800,delta:1.9,yr:2007,end:2022,s:'discontinued',desc:'36mm Rolesor or blanc · lunette cannelée or blanc · jubilé',nick:'DJ36 WG 6D'},
+  {col:'Datejust 36',m:'Datejust 36',ref:'116201',retail:6000,mkt:7200,delta:1.5,yr:2014,end:2022,s:'discontinued',desc:'36mm Rolesor Everose · lunette lisse · jubilé · calibre 3135',nick:'DJ36 Everose Smooth'},
+  {col:'Datejust 36',m:'Datejust 36',ref:'116231',retail:6400,mkt:7600,delta:1.7,yr:2014,end:2022,s:'discontinued',desc:'36mm Rolesor Everose · lunette cannelée Everose · jubilé',nick:'DJ36 Everose Fluted'},
+  {col:'Datejust 36',m:'Datejust 36',ref:'116203',retail:6200,mkt:7400,delta:1.4,yr:2007,end:2022,s:'discontinued',desc:'36mm Rolesor or jaune · lunette lisse or · oyster',nick:'DJ36 YG Smooth'},
+  {col:'Datejust 36',m:'Datejust 36',ref:'116238',retail:14000,mkt:14800,delta:1.0,yr:2007,end:2022,s:'discontinued',desc:'36mm or jaune 18ct · lunette cannelée or · jubilé · calibre 3135',nick:'DJ36 Full Gold'},
+  {col:'Datejust 36',m:'Datejust 36',ref:'116139',retail:14500,mkt:15200,delta:0.9,yr:2007,end:2022,s:'discontinued',desc:'36mm or blanc 18ct · lunette cannelée or blanc · jubilé',nick:'DJ36 WG Full'},
+  {col:'Datejust 36',m:'Datejust 36',ref:'116244',retail:8200,mkt:9200,delta:1.1,yr:2007,end:2022,s:'discontinued',desc:'36mm Rolesor or blanc · lunette diamants · jubilé',nick:'DJ36 Diamond Bezel WG'},
+  {col:'Datejust 36',m:'Datejust 36',ref:'126200',retail:6700,mkt:7400,delta:1.2,yr:2022,end:null,s:'current',desc:'36mm acier · lunette lisse · jubilé · calibre 3235 · cadrans variés',nick:'DJ36 G2 Acier'},
+  {col:'Datejust 36',m:'Datejust 36',ref:'126233',retail:8900,mkt:9600,delta:1.4,yr:2022,end:null,s:'current',desc:'36mm Rolesor or jaune · lunette cannelée · jubilé · calibre 3235',nick:'DJ36 G2 Two-Tone'},
+  {col:'Datejust 36',m:'Datejust 36',ref:'126234',retail:9200,mkt:9900,delta:1.5,yr:2022,end:null,s:'current',desc:'36mm Rolesor or blanc · lunette cannelée · jubilé · calibre 3235',nick:'DJ36 G2 WG'},
+  {col:'Datejust 36',m:'Datejust 36',ref:'126231',retail:8800,mkt:9500,delta:1.3,yr:2022,end:null,s:'current',desc:'36mm Rolesor Everose · lunette cannelée Everose · jubilé',nick:'DJ36 G2 Everose'},
+  {col:'Datejust 36',m:'Datejust 36',ref:'126203',retail:8700,mkt:9400,delta:1.2,yr:2022,end:null,s:'current',desc:'36mm Rolesor or jaune · lunette lisse · jubilé',nick:'DJ36 G2 YG Smooth'},
+  {col:'Datejust 36',m:'Datejust 36',ref:'126283RBR',retail:12500,mkt:13500,delta:1.4,yr:2022,end:null,s:'current',desc:'36mm Rolesor or blanc · lunette diamants ronds brillants · jubilé',nick:'DJ36 Diamond RBR WG'},
+  {col:'Datejust 36',m:'Datejust 36',ref:'126284RBR',retail:12800,mkt:13800,delta:1.4,yr:2022,end:null,s:'current',desc:'36mm Rolesor or jaune · lunette diamants · jubilé',nick:'DJ36 Diamond RBR YG'},
+  {col:'Datejust 36',m:'Datejust 36',ref:'126281RBR',retail:12200,mkt:13200,delta:1.3,yr:2022,end:null,s:'current',desc:'36mm Rolesor Everose · lunette diamants · jubilé',nick:'DJ36 Diamond RBR Everose'},
+
+  // ══════════════════════ DATEJUST 41 ══════════════════════
+  {col:'Datejust 41',m:'Datejust 41',ref:'116300',retail:6800,mkt:7400,delta:0.8,yr:2009,end:2022,s:'discontinued',desc:'41mm acier · lunette lisse · jubilé · calibre 3235 · 1er DJ41',nick:'DJ41 G1 Acier'},
+  {col:'Datejust 41',m:'Datejust 41',ref:'116334',retail:8900,mkt:9800,delta:1.2,yr:2009,end:2022,s:'discontinued',desc:'41mm Rolesor or blanc · lunette cannelée · jubilé',nick:'DJ41 G1 WG'},
+  {col:'Datejust 41',m:'Datejust 41',ref:'116333',retail:9200,mkt:10200,delta:1.4,yr:2009,end:2022,s:'discontinued',desc:'41mm Rolesor or jaune · lunette cannelée · jubilé',nick:'DJ41 G1 YG'},
+  {col:'Datejust 41',m:'Datejust 41',ref:'116301',retail:8800,mkt:9600,delta:1.2,yr:2014,end:2022,s:'discontinued',desc:'41mm Rolesor Everose · lunette lisse · jubilé',nick:'DJ41 G1 Everose Smooth'},
+  {col:'Datejust 41',m:'Datejust 41',ref:'116303',retail:9000,mkt:9900,delta:1.3,yr:2009,end:2022,s:'discontinued',desc:'41mm Rolesor or jaune · lunette lisse · jubilé',nick:'DJ41 G1 YG Smooth'},
+  {col:'Datejust 41',m:'Datejust 41',ref:'126300',retail:7900,mkt:8600,delta:0.8,yr:2022,end:null,s:'current',desc:'41mm acier · lunette lisse · jubilé · calibre 3235 · cadrans variés',nick:'DJ41 G2 Acier'},
+  {col:'Datejust 41',m:'Datejust 41',ref:'126334',retail:10200,mkt:11000,delta:1.1,yr:2022,end:null,s:'current',desc:'41mm Rolesor or blanc · lunette cannelée · jubilé',nick:'DJ41 G2 WG'},
+  {col:'Datejust 41',m:'Datejust 41',ref:'126333',retail:10800,mkt:11600,delta:1.4,yr:2022,end:null,s:'current',desc:'41mm Rolesor or jaune · lunette cannelée · jubilé',nick:'DJ41 G2 YG'},
+  {col:'Datejust 41',m:'Datejust 41',ref:'126331',retail:11800,mkt:13000,delta:1.3,yr:2022,end:null,s:'current',desc:'41mm Rolesor Everose · lunette cannelée Everose · cadran chocolat/olive',nick:'Chocolate/Olive DJ41'},
+  {col:'Datejust 41',m:'Datejust 41',ref:'126303',retail:10500,mkt:11400,delta:1.2,yr:2022,end:null,s:'current',desc:'41mm Rolesor or jaune · lunette lisse · jubilé',nick:'DJ41 G2 YG Smooth'},
+  {col:'Datejust 41',m:'Datejust 41',ref:'126301',retail:10200,mkt:11000,delta:1.1,yr:2022,end:null,s:'current',desc:'41mm Rolesor Everose · lunette lisse · jubilé',nick:'DJ41 G2 Everose Smooth'},
+  {col:'Datejust 41',m:'Datejust 41',ref:'126344',retail:28000,mkt:30000,delta:0.9,yr:2022,end:null,s:'current',desc:'41mm or blanc 18ct · lunette cannelée · jubilé · full gold',nick:'DJ41 Full WG'},
+  {col:'Datejust 41',m:'Datejust 41',ref:'126338',retail:26000,mkt:28000,delta:0.8,yr:2022,end:null,s:'current',desc:'41mm or jaune 18ct · lunette cannelée · jubilé · full gold',nick:'DJ41 Full YG'},
+  {col:'Datejust 41',m:'Datejust 41',ref:'126343',retail:16000,mkt:17500,delta:1.0,yr:2022,end:null,s:'current',desc:'41mm Rolesor or blanc · lunette diamants · jubilé',nick:'DJ41 Diamond WG'},
+  {col:'Datejust 41',m:'Datejust 41',ref:'126341',retail:15500,mkt:17000,delta:1.1,yr:2022,end:null,s:'current',desc:'41mm Rolesor Everose · lunette diamants · jubilé',nick:'DJ41 Diamond Everose'},
+  {col:'Datejust 41',m:'Datejust 41',ref:'126283RBR-DJ41',retail:14500,mkt:15800,delta:1.2,yr:2022,end:null,s:'current',desc:'41mm Rolesor or blanc · lunette diamants ronds brillants · jubilé',nick:'DJ41 RBR WG'},
+
+  // ══════════════════════ LADY-DATEJUST 26mm ══════════════════════
+  {col:'Lady-Datejust 26',m:'Lady-Datejust',ref:'179160',retail:4500,mkt:5200,delta:0.8,yr:2007,end:2022,s:'discontinued',desc:'26mm acier · lunette lisse · jubilé · calibre 2235',nick:'LDJ26 Acier'},
+  {col:'Lady-Datejust 26',m:'Lady-Datejust',ref:'179174',retail:5800,mkt:6800,delta:1.2,yr:2007,end:2022,s:'discontinued',desc:'26mm Rolesor or blanc · lunette cannelée · jubilé · calibre 2235',nick:'LDJ26 WG Fluted'},
+  {col:'Lady-Datejust 26',m:'Lady-Datejust',ref:'179173',retail:5600,mkt:6500,delta:1.1,yr:2007,end:2022,s:'discontinued',desc:'26mm Rolesor or jaune · lunette cannelée · jubilé',nick:'LDJ26 YG Fluted'},
+  {col:'Lady-Datejust 26',m:'Lady-Datejust',ref:'179171',retail:5500,mkt:6200,delta:0.9,yr:2007,end:2022,s:'discontinued',desc:'26mm Rolesor Everose · lunette lisse · jubilé',nick:'LDJ26 Everose Smooth'},
+  {col:'Lady-Datejust 26',m:'Lady-Datejust',ref:'179175',retail:16000,mkt:18000,delta:1.4,yr:2007,end:2022,s:'discontinued',desc:'26mm or jaune 18ct · cadran MOP · lunette diamants',nick:'LDJ26 Gold MOP'},
+  {col:'Lady-Datejust 26',m:'Lady-Datejust',ref:'179384',retail:22000,mkt:24000,delta:1.2,yr:2007,end:2022,s:'discontinued',desc:'26mm or blanc · lunette diamants · cadran diamants',nick:'LDJ26 Full Diamond'},
+  {col:'Lady-Datejust 26',m:'Lady-Datejust',ref:'179158',retail:16500,mkt:18500,delta:1.3,yr:2007,end:2022,s:'discontinued',desc:'26mm or blanc · lunette cannelée or · jubilé',nick:'LDJ26 Full WG Fluted'},
+  {col:'Lady-Datejust 26',m:'Lady-Datejust',ref:'179383',retail:28000,mkt:30000,delta:1.1,yr:2007,end:2022,s:'discontinued',desc:'26mm platine · lunette diamants pavé · cadran diamants',nick:'LDJ26 Platinum Pavé'},
+
+  // ══════════════════════ LADY-DATEJUST 28mm ══════════════════════
+  {col:'Lady-Datejust 28',m:'Lady-Datejust 28',ref:'279160',retail:5200,mkt:6000,delta:0.9,yr:2022,end:null,s:'current',desc:'28mm acier · lunette lisse · jubilé · calibre 2236 Syloxi',nick:'LDJ28 Acier'},
+  {col:'Lady-Datejust 28',m:'Lady-Datejust 28',ref:'279174',retail:6500,mkt:7400,delta:1.2,yr:2022,end:null,s:'current',desc:'28mm Rolesor or blanc · lunette cannelée · jubilé',nick:'LDJ28 WG Fluted'},
+  {col:'Lady-Datejust 28',m:'Lady-Datejust 28',ref:'279173',retail:6200,mkt:7100,delta:1.1,yr:2022,end:null,s:'current',desc:'28mm Rolesor or jaune · lunette cannelée · jubilé',nick:'LDJ28 YG Fluted'},
+  {col:'Lady-Datejust 28',m:'Lady-Datejust 28',ref:'279171',retail:6000,mkt:6800,delta:0.9,yr:2022,end:null,s:'current',desc:'28mm Rolesor Everose · lunette lisse · jubilé',nick:'LDJ28 Everose Smooth'},
+  {col:'Lady-Datejust 28',m:'Lady-Datejust 28',ref:'279175',retail:18000,mkt:20000,delta:1.4,yr:2022,end:null,s:'current',desc:'28mm or jaune 18ct · cadran MOP · lunette diamants',nick:'LDJ28 Gold MOP'},
+  {col:'Lady-Datejust 28',m:'Lady-Datejust 28',ref:'279166',retail:22000,mkt:24000,delta:1.3,yr:2022,end:null,s:'current',desc:'28mm or blanc · lunette diamants pavé · cadran diamants',nick:'LDJ28 Pavé WG'},
+  {col:'Lady-Datejust 28',m:'Lady-Datejust 28',ref:'279136RBR',retail:26000,mkt:28000,delta:1.2,yr:2022,end:null,s:'current',desc:'28mm or blanc · lunette 44 diamants ronds brillants · jubilé',nick:'LDJ28 RBR WG'},
+  {col:'Lady-Datejust 28',m:'Lady-Datejust 28',ref:'279381RBR',retail:32000,mkt:34000,delta:1.1,yr:2022,end:null,s:'current',desc:'28mm platine · lunette diamants · cadran diamants pavé',nick:'LDJ28 Platinum RBR'},
+
+  // ══════════════════════ DATEJUST 31 ══════════════════════
+  {col:'Datejust 31',m:'Datejust 31',ref:'178240',retail:5000,mkt:5800,delta:0.7,yr:2012,end:2022,s:'discontinued',desc:'31mm acier · lunette lisse · jubilé · calibre 2235',nick:'DJ31 Acier G1'},
+  {col:'Datejust 31',m:'Datejust 31',ref:'178274',retail:6200,mkt:7000,delta:1.0,yr:2012,end:2022,s:'discontinued',desc:'31mm Rolesor or blanc · lunette cannelée · jubilé',nick:'DJ31 WG G1'},
+  {col:'Datejust 31',m:'Datejust 31',ref:'178271',retail:6000,mkt:6800,delta:0.9,yr:2014,end:2022,s:'discontinued',desc:'31mm Rolesor Everose · lunette cannelée · jubilé',nick:'DJ31 Everose G1'},
+  {col:'Datejust 31',m:'Datejust 31',ref:'178273',retail:5800,mkt:6600,delta:0.8,yr:2014,end:2022,s:'discontinued',desc:'31mm Rolesor or jaune · lunette cannelée · jubilé',nick:'DJ31 YG G1'},
+  {col:'Datejust 31',m:'Datejust 31',ref:'278240',retail:6200,mkt:7000,delta:0.8,yr:2022,end:null,s:'current',desc:'31mm acier · lunette lisse · jubilé · calibre 2236 Syloxi',nick:'DJ31 Acier G2'},
+  {col:'Datejust 31',m:'Datejust 31',ref:'278274',retail:7500,mkt:8200,delta:1.0,yr:2022,end:null,s:'current',desc:'31mm Rolesor or blanc · lunette cannelée · jubilé',nick:'DJ31 WG G2'},
+  {col:'Datejust 31',m:'Datejust 31',ref:'278271',retail:7200,mkt:8000,delta:0.9,yr:2022,end:null,s:'current',desc:'31mm Rolesor Everose · lunette cannelée · jubilé',nick:'DJ31 Everose G2'},
+  {col:'Datejust 31',m:'Datejust 31',ref:'278273',retail:7000,mkt:7800,delta:0.8,yr:2022,end:null,s:'current',desc:'31mm Rolesor or jaune · lunette cannelée · jubilé',nick:'DJ31 YG G2'},
+  {col:'Datejust 31',m:'Datejust 31',ref:'278284RBR',retail:12000,mkt:13200,delta:1.1,yr:2022,end:null,s:'current',desc:'31mm Rolesor or blanc · lunette diamants · jubilé',nick:'DJ31 Diamond WG'},
+  {col:'Datejust 31',m:'Datejust 31',ref:'278383RBR',retail:24000,mkt:26000,delta:1.0,yr:2022,end:null,s:'current',desc:'31mm platine · lunette diamants · cadran diamants pavé',nick:'DJ31 Platinum Pavé'},
+
+  // ══════════════════════ DAY-DATE ══════════════════════
+  {col:'Day-Date',m:'Day-Date 36',ref:'118238',retail:26000,mkt:28500,delta:1.4,yr:1999,end:2015,s:'discontinued',desc:'36mm or jaune 18ct · lunette cannelée · Président · calibre 3155',nick:'DD36 YG'},
+  {col:'Day-Date',m:'Day-Date 36',ref:'118239',retail:27000,mkt:29500,delta:1.2,yr:1999,end:2015,s:'discontinued',desc:'36mm or blanc 18ct · lunette cannelée · Président',nick:'DD36 WG'},
+  {col:'Day-Date',m:'Day-Date 36',ref:'118206',retail:30000,mkt:33500,delta:1.8,yr:1999,end:2015,s:'discontinued',desc:'36mm platine · lunette lisse · Président · calibre 3155',nick:'DD36 Platinum'},
+  {col:'Day-Date',m:'Day-Date 36',ref:'118235',retail:28000,mkt:30000,delta:1.3,yr:2008,end:2015,s:'discontinued',desc:'36mm or Everose · lunette cannelée · Président',nick:'DD36 Everose'},
+  {col:'Day-Date',m:'Day-Date 36',ref:'118348',retail:38000,mkt:42000,delta:1.8,yr:2007,end:2015,s:'discontinued',desc:'36mm platine · lunette baguettes saphirs · cadran saphir',nick:'DD36 Sapphire Baguette'},
+  {col:'Day-Date',m:'Day-Date 40',ref:'228238',retail:44000,mkt:47000,delta:2.3,yr:2015,end:null,s:'current',desc:'40mm or jaune 18ct · lunette cannelée · Président · calibre 3255',nick:'DD40 YG'},
+  {col:'Day-Date',m:'Day-Date 40',ref:'228235',retail:46000,mkt:50000,delta:2.1,yr:2015,end:null,s:'current',desc:'40mm or Everose · lunette cannelée · Président',nick:'DD40 Everose'},
+  {col:'Day-Date',m:'Day-Date 40',ref:'228239',retail:47000,mkt:51000,delta:2.0,yr:2015,end:null,s:'current',desc:'40mm or blanc · lunette cannelée · Président',nick:'DD40 WG'},
+  {col:'Day-Date',m:'Day-Date 40',ref:'228206',retail:68000,mkt:73000,delta:1.8,yr:2019,end:null,s:'current',desc:'40mm platine · cadran météorite gris · Président',nick:'DD40 Platinum Meteorite'},
+  {col:'Day-Date',m:'Day-Date 40',ref:'228345RBR',retail:88000,mkt:95000,delta:2.2,yr:2019,end:null,s:'current',desc:'40mm platine · lunette baguettes saphirs · cadran diamants',nick:'DD40 Sapphire Baguette'},
+  {col:'Day-Date',m:'Day-Date 36',ref:'128238',retail:38500,mkt:41000,delta:1.2,yr:2019,end:null,s:'current',desc:'36mm or jaune · calibre 3255 · Président · génération 2',nick:'DD36 YG G2'},
+  {col:'Day-Date',m:'Day-Date 36',ref:'128235',retail:40000,mkt:43000,delta:1.1,yr:2019,end:null,s:'current',desc:'36mm or Everose · lunette cannelée · Président',nick:'DD36 Everose G2'},
+  {col:'Day-Date',m:'Day-Date 36',ref:'128239',retail:41000,mkt:44000,delta:1.0,yr:2019,end:null,s:'current',desc:'36mm or blanc · lunette cannelée · Président',nick:'DD36 WG G2'},
+  {col:'Day-Date',m:'Day-Date 36',ref:'128396TBR',retail:98100,mkt:115000,delta:4.2,yr:2026,end:null,s:'new',desc:'36mm or blanc · pavé diamants total · ref la plus chère 2026',nick:'DD36 Diamond Pavé'},
+
+  // ══════════════════════ OYSTER PERPETUAL ══════════════════════
+  {col:'Oyster Perpetual',m:'Oyster Perpetual 36',ref:'116000',retail:4800,mkt:5200,delta:0.8,yr:2007,end:2020,s:'discontinued',desc:'36mm acier · lunette lisse · cadrans uniforme · calibre 3130',nick:'OP36 G1'},
+  {col:'Oyster Perpetual',m:'Oyster Perpetual 39',ref:'114300',retail:5200,mkt:5600,delta:0.9,yr:2015,end:2020,s:'discontinued',desc:'39mm acier · cadrans variés · calibre 3132',nick:'OP39'},
+  {col:'Oyster Perpetual',m:'Oyster Perpetual 34',ref:'114200',retail:4600,mkt:5000,delta:0.7,yr:2007,end:2020,s:'discontinued',desc:'34mm acier · cadrans variés · calibre 3130',nick:'OP34 G1'},
+  {col:'Oyster Perpetual',m:'Oyster Perpetual 41',ref:'124300',retail:5900,mkt:6600,delta:1.4,yr:2020,end:null,s:'current',desc:'41mm acier · cadrans colorés Candy · calibre 3230 · Tiffany/Rose/Vert/Jaune',nick:'Candy OP41'},
+  {col:'Oyster Perpetual',m:'Oyster Perpetual 36',ref:'126000',retail:5500,mkt:6000,delta:1.1,yr:2020,end:null,s:'current',desc:'36mm acier · cadrans variés · calibre 3230',nick:'OP36 G2'},
+  {col:'Oyster Perpetual',m:'Oyster Perpetual 34',ref:'124200',retail:5200,mkt:5600,delta:0.8,yr:2020,end:null,s:'current',desc:'34mm acier · cadrans variés · calibre 3230',nick:'OP34 G2'},
+  {col:'Oyster Perpetual',m:'Oyster Perpetual 28',ref:'276200',retail:5100,mkt:5400,delta:0.5,yr:2020,end:null,s:'current',desc:'28mm acier · cadrans variés · calibre 2231',nick:'OP28'},
+  {col:'Oyster Perpetual',m:'Oyster Perpetual 31',ref:'277200',retail:5300,mkt:5700,delta:0.6,yr:2020,end:null,s:'current',desc:'31mm acier · cadrans variés · calibre 2231',nick:'OP31'},
+  {col:'Oyster Perpetual',m:'Oyster Perpetual 41',ref:'124300-100',retail:9800,mkt:13500,delta:8.2,yr:2026,end:null,s:'new',desc:'41mm bicolore Jubilé Gold · 100e anniversaire OP · NOUVEAUTÉ 2026',nick:'Centennial OP 41'},
+
+  // ══════════════════════ SKY-DWELLER ══════════════════════
+  {col:'Sky-Dweller',m:'Sky-Dweller',ref:'326934',retail:16250,mkt:18000,delta:2.9,yr:2023,end:null,s:'current',desc:'42mm acier · lunette cannelée · jubilé · calibre 9001 · relance acier',nick:'SD Steel Jubilé'},
+  {col:'Sky-Dweller',m:'Sky-Dweller',ref:'336934',retail:16250,mkt:17500,delta:2.4,yr:2023,end:null,s:'current',desc:'42mm acier · lunette cannelée · oyster · calibre 9001',nick:'SD Steel Oyster'},
+  {col:'Sky-Dweller',m:'Sky-Dweller',ref:'326938',retail:38500,mkt:42500,delta:2.8,yr:2023,end:null,s:'current',desc:'42mm or blanc · lunette cannelée · Président · calibre 9001',nick:'SD White Gold'},
+  {col:'Sky-Dweller',m:'Sky-Dweller',ref:'326935',retail:32500,mkt:35500,delta:2.2,yr:2023,end:null,s:'current',desc:'42mm or Everose · lunette cannelée · jubilé',nick:'SD Everose Jubilé'},
+  {col:'Sky-Dweller',m:'Sky-Dweller',ref:'336935',retail:32500,mkt:35000,delta:1.9,yr:2023,end:null,s:'current',desc:'42mm or Everose · lunette cannelée · oyster',nick:'SD Everose Oyster'},
+  {col:'Sky-Dweller',m:'Sky-Dweller',ref:'326933',retail:30000,mkt:33500,delta:1.8,yr:2019,end:null,s:'current',desc:'42mm Rolesor or blanc · lunette cannelée · jubilé',nick:'SD Rolesor WG'},
+  {col:'Sky-Dweller',m:'Sky-Dweller',ref:'326931',retail:28000,mkt:31000,delta:1.6,yr:2019,end:null,s:'current',desc:'42mm Rolesor or jaune · lunette cannelée · jubilé',nick:'SD Rolesor YG'},
+  {col:'Sky-Dweller',m:'Sky-Dweller',ref:'336238',retail:44000,mkt:48000,delta:2.0,yr:2023,end:null,s:'current',desc:'42mm or jaune · lunette cannelée · Président · calibre 9001',nick:'SD Yellow Gold'},
+
+  // ══════════════════════ LAND-DWELLER ══════════════════════
+  {col:'Land-Dweller',m:'Land-Dweller',ref:'127234',retail:16450,mkt:23000,delta:12.1,yr:2025,end:null,s:'new',desc:'40mm acier/or blanc · bracelet Jubilee Flat · calibre 7135 · NOUVEAUTÉ 2025',nick:'Land-Dweller Steel'},
+  {col:'Land-Dweller',m:'Land-Dweller',ref:'228345',retail:38000,mkt:50000,delta:9.8,yr:2025,end:null,s:'new',desc:'40mm or blanc 18ct · bracelet Jubilee Flat · NOUVEAUTÉ 2025',nick:'Land-Dweller WG'},
+  {col:'Land-Dweller',m:'Land-Dweller',ref:'228340',retail:36000,mkt:48000,delta:9.2,yr:2025,end:null,s:'new',desc:'40mm or jaune 18ct · bracelet Jubilee Flat · NOUVEAUTÉ 2025',nick:'Land-Dweller YG'},
+
+  // ══════════════════════ YACHT-MASTER ══════════════════════
+  {col:'Yacht-Master',m:'Yacht-Master 40',ref:'16622',retail:6500,mkt:12000,delta:2.4,yr:1999,end:2015,s:'discontinued',desc:'40mm Rolesor platine · lunette platine · calibre 3135',nick:'YM40 Platine 5D'},
+  {col:'Yacht-Master',m:'Yacht-Master 40',ref:'116621',retail:12000,mkt:14500,delta:1.8,yr:2015,end:2022,s:'discontinued',desc:'40mm Rolesor Everose · Oysterflex · lunette rhodium · calibre 3135',nick:'YM40 Oysterflex G1'},
+  {col:'Yacht-Master',m:'Yacht-Master 40',ref:'116622',retail:11200,mkt:13000,delta:1.6,yr:2015,end:2022,s:'discontinued',desc:'40mm acier/platine · lunette platine · jubilé · calibre 3135',nick:'YM40 Steel/Platinum'},
+  {col:'Yacht-Master',m:'Yacht-Master 40',ref:'126621',retail:14350,mkt:15200,delta:0.5,yr:2022,end:null,s:'current',desc:'40mm Rolesor Everose · lunette rhodium · calibre 3235',nick:'YM40 G2'},
+  {col:'Yacht-Master',m:'Yacht-Master 40',ref:'126622',retail:13800,mkt:14800,delta:0.8,yr:2022,end:null,s:'current',desc:'40mm acier/platine · lunette platine · jubilé · calibre 3235',nick:'YM40 Steel/Plat G2'},
+  {col:'Yacht-Master',m:'Yacht-Master 42',ref:'226627',retail:26000,mkt:27800,delta:1.8,yr:2019,end:null,s:'current',desc:'42mm titane RLX · Oysterflex · lunette platine · calibre 3235',nick:'YM42 Titane'},
+  {col:'Yacht-Master',m:'Yacht-Master 37',ref:'268622',retail:12500,mkt:13500,delta:1.4,yr:2019,end:null,s:'current',desc:'37mm Rolesor Everose · Oysterflex · lunette rhodium',nick:'YM37'},
+  {col:'Yacht-Master',m:'Yacht-Master 40',ref:'126655',retail:24000,mkt:25500,delta:1.2,yr:2022,end:null,s:'current',desc:'40mm or Everose · lunette céramique noire · Oysterflex',nick:'YM40 Everose Céramique'},
+  {col:'Yacht-Master',m:'Yacht-Master II',ref:'116680',retail:18800,mkt:19500,delta:0.6,yr:2013,end:2026,s:'discontinued',desc:'44mm acier · régate programmable · cadran blanc — DISCONTINUÉE 2026',nick:'YMII G1'},
+  {col:'Yacht-Master',m:'Yacht-Master II',ref:'m126680-0001',retail:21500,mkt:27000,delta:8.4,yr:2026,end:null,s:'new',desc:'44mm acier · aiguilles sens anti-horaire · redesign complet — NOUVEAUTÉ 2026',nick:'YMII 2026'},
+
+  // ══════════════════════ MILGAUSS ══════════════════════
+  {col:'Milgauss',m:'Milgauss',ref:'116400',retail:6500,mkt:8500,delta:3.8,yr:2007,end:2023,s:'discontinued',desc:'40mm acier · verre saphir standard · anti-magnétique 1000 gauss · cadran noir ou blanc',nick:'Milgauss Classique'},
+  {col:'Milgauss',m:'Milgauss',ref:'116400GV',retail:7800,mkt:10800,delta:4.8,yr:2007,end:2023,s:'discontinued',desc:'40mm acier · verre vert Z-Blue · aiguille orange foudre · cadran noir ou Z-Blue',nick:'Green Glass Milgauss'},
+  {col:'Milgauss',m:'Milgauss',ref:'116400GVSO',retail:9200,mkt:20000,delta:12.4,yr:2014,end:2023,s:'discontinued',desc:'40mm acier · verre vert · cadran orange Soleil très rare · édition spéciale SO',nick:'Orange Milgauss'},
+
+  // ══════════════════════ AIR-KING ══════════════════════
+  {col:'Air-King',m:'Air-King',ref:'114200',retail:4000,mkt:5800,delta:1.8,yr:2007,end:2014,s:'discontinued',desc:'34mm acier · Maxi Case · cadrans variés · calibre 3130',nick:'Air-King 34 Maxi'},
+  {col:'Air-King',m:'Air-King',ref:'116900',retail:6500,mkt:7600,delta:2.1,yr:2016,end:2022,s:'discontinued',desc:'40mm acier · chiffres 3/6/9 verts · hommage Pan Am · calibre 3131',nick:'Air-King G2'},
+  {col:'Air-King',m:'Air-King',ref:'126900',retail:7700,mkt:8400,delta:0.6,yr:2022,end:null,s:'current',desc:'40mm acier · chiffres 3/6/9 jaunes · calibre 3230 · génération 3',nick:'Air-King G3'},
+
+  // ══════════════════════ PEARLMASTER ══════════════════════
+  {col:'Pearlmaster',m:'Pearlmaster 29',ref:'80298',retail:18000,mkt:22000,delta:1.8,yr:1999,end:2018,s:'discontinued',desc:'29mm or jaune · bracelet Pearlmaster · lunette diamants · cadran MOP',nick:'Pearlmaster YG MOP'},
+  {col:'Pearlmaster',m:'Pearlmaster 29',ref:'80299',retail:19000,mkt:23000,delta:1.6,yr:1999,end:2018,s:'discontinued',desc:'29mm or blanc · bracelet Pearlmaster · lunette diamants · cadran MOP',nick:'Pearlmaster WG MOP'},
+  {col:'Pearlmaster',m:'Pearlmaster 29',ref:'81299',retail:22000,mkt:26000,delta:1.4,yr:2018,end:null,s:'current',desc:'29mm or blanc · lunette diamants baguettes · cadran nacre',nick:'Pearlmaster 29 WG'},
+  {col:'Pearlmaster',m:'Pearlmaster 29',ref:'81298',retail:20000,mkt:24000,delta:1.3,yr:2018,end:null,s:'current',desc:'29mm or jaune · lunette diamants baguettes · cadran nacre',nick:'Pearlmaster 29 YG'},
+  {col:'Pearlmaster',m:'Pearlmaster 34',ref:'81315',retail:38000,mkt:44000,delta:1.6,yr:2018,end:null,s:'current',desc:'34mm or blanc · bracelet Pearlmaster diamants · cadran nacre',nick:'Pearlmaster 34 WG'},
+  {col:'Pearlmaster',m:'Pearlmaster 34',ref:'81318',retail:40000,mkt:46000,delta:1.7,yr:2018,end:null,s:'current',desc:'34mm or jaune · bracelet Pearlmaster diamants',nick:'Pearlmaster 34 YG'},
+  {col:'Pearlmaster',m:'Pearlmaster 39',ref:'86348SABLV',retail:98000,mkt:120000,delta:3.2,yr:2022,end:null,s:'current',desc:'39mm or blanc · lunette saphirs bleus/verts alternés · cadran saphir',nick:'Pearlmaster 39 Saphirs'},
+  {col:'Pearlmaster',m:'Pearlmaster 39',ref:'86409TBR',retail:120000,mkt:145000,delta:3.8,yr:2022,end:null,s:'current',desc:'39mm or blanc · lunette baguettes rubis · cadran rubis',nick:'Pearlmaster 39 Rubis'},
+
+  // ══════════════════════ 1908 ══════════════════════
+  {col:'1908',m:'1908',ref:'52508',retail:18000,mkt:17500,delta:-1.4,yr:2023,end:null,s:'current',desc:'39mm platine · remontage manuel calibre 7140 · lunette lisse · cadran lacqué',nick:'1908 Platinum'},
+  {col:'1908',m:'1908',ref:'52506',retail:16000,mkt:15200,delta:-1.8,yr:2023,end:null,s:'current',desc:'39mm or blanc · cadran lacqué crème · calibre 7140',nick:'1908 White Gold'},
+  {col:'1908',m:'1908',ref:'52509',retail:19000,mkt:18200,delta:-1.2,yr:2024,end:null,s:'current',desc:'39mm platine · cadran champagne · variante coloris',nick:'1908 Champagne'},
+  {col:'1908',m:'1908',ref:'52505',retail:15000,mkt:14000,delta:-2.1,yr:2024,end:null,s:'current',desc:'39mm or jaune · cadran lacqué guilloché · lunette lisse',nick:'1908 Yellow Gold'},
 ];
 
-let filtered = [...DATA];
-let activeColl = '';
-
-function fmt(n) {
-  return new Intl.NumberFormat('fr-FR', {style:'currency',currency:'EUR',maximumFractionDigits:0}).format(n);
+let filt=[...DATA],ac='';
+function fmt(n){return new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(n)}
+function cols(){return[...new Set(DATA.map(r=>r.col))]}
+function renderPills(){
+  document.getElementById('pills').innerHTML=
+    `<button class="pill ${ac===''?'active':''}" onclick="setC('')">Toutes (${DATA.length})</button>`+
+    cols().map(c=>`<button class="pill ${ac===c?'active':''}" onclick="setC('${c}')">${c} (${DATA.filter(r=>r.col===c).length})</button>`).join('');
 }
-
-function getColls() {
-  return [...new Set(DATA.map(r => r.col))];
-}
-
-function renderPills() {
-  const el = document.getElementById('coll-pills');
-  el.innerHTML = `<button class="cpill ${activeColl===''?'active':''}" onclick="setColl('')">Toutes</button>` +
-    getColls().map(c => `<button class="cpill ${activeColl===c?'active':''}" onclick="setColl('${c}')">${c}</button>`).join('');
-}
-
-function setColl(c) { activeColl = c; renderPills(); filter(); }
-
-function filter() {
-  const q = document.getElementById('search').value.toLowerCase();
-  const status = document.getElementById('sel-status').value;
-  const budget = document.getElementById('sel-budget').value;
-
-  filtered = DATA.filter(r => {
-    const mq = !q || r.model.toLowerCase().includes(q) || r.ref.toLowerCase().includes(q) || (r.nickname&&r.nickname.toLowerCase().includes(q)) || r.desc.toLowerCase().includes(q) || r.col.toLowerCase().includes(q);
-    const mc = !activeColl || r.col === activeColl;
-    let ms = true;
-    if (status === 'current') ms = r.status === 'current';
-    if (status === 'discontinued') ms = r.status === 'discontinued';
-    if (status === 'new') ms = r.status === 'new2026';
-    let mb = true;
-    if (budget) {
-      const [mn,mx] = budget.split('-').map(Number);
-      mb = r.market >= mn && r.market <= mx;
-    }
-    return mq && mc && ms && mb;
+function setC(c){ac=c;renderPills();go()}
+function go(){
+  const q=document.getElementById('search').value.toLowerCase();
+  const st=document.getElementById('sel-s').value;
+  const bg=document.getElementById('sel-b').value;
+  filt=DATA.filter(r=>{
+    const mq=!q||[r.m,r.ref,r.nick,r.desc,r.col].some(x=>x&&x.toLowerCase().includes(q));
+    const mc=!ac||r.col===ac;
+    let ms=true;
+    if(st==='current')ms=r.s==='current';
+    if(st==='discontinued')ms=r.s==='discontinued';
+    if(st==='new')ms=r.s==='new';
+    let mb=true;
+    if(bg){const[mn,mx]=bg.split('-').map(Number);mb=r.mkt>=mn&&r.mkt<=mx}
+    return mq&&mc&&ms&&mb;
   });
   render();
 }
-
-function sort(by) {
-  if (by==='collection') filtered.sort((a,b)=>a.col.localeCompare(b.col));
-  if (by==='year-asc') filtered.sort((a,b)=>a.year-b.year);
-  if (by==='year-desc') filtered.sort((a,b)=>b.year-a.year);
-  if (by==='price-asc') filtered.sort((a,b)=>a.market-b.market);
-  if (by==='price-desc') filtered.sort((a,b)=>b.market-a.market);
-  if (by==='delta-desc') filtered.sort((a,b)=>b.delta-a.delta);
+function srt(by){
+  if(by==='col')filt.sort((a,b)=>a.col.localeCompare(b.col));
+  if(by==='ya')filt.sort((a,b)=>a.yr-b.yr);
+  if(by==='yd')filt.sort((a,b)=>b.yr-a.yr);
+  if(by==='pa')filt.sort((a,b)=>a.mkt-b.mkt);
+  if(by==='pd')filt.sort((a,b)=>b.mkt-a.mkt);
+  if(by==='dd')filt.sort((a,b)=>b.delta-a.delta);
   render();
 }
-
-function addToCollection(r) {
-  const watches = JSON.parse(localStorage.getItem('wv_watches')||'[]');
-  if (watches.length >= 3) { showToast('Limite 3 montres atteinte — passez en Pro 🔓'); return; }
-  watches.push({brand:'Rolex',model:r.model,ref:r.ref,year:String(r.year),purchasePrice:r.market,condition:'good',notes:r.desc,addedAt:new Date().toISOString()});
-  localStorage.setItem('wv_watches',JSON.stringify(watches));
-  showToast(`${r.model} ${r.ref} ajoutée ✓`);
+function addCol(r){
+  const w=JSON.parse(localStorage.getItem('wv_watches')||'[]');
+  if(w.length>=3){showT('Limite 3 montres — passez en Pro 🔓');return}
+  w.push({brand:'Rolex',model:r.m,ref:r.ref,year:String(r.yr),purchasePrice:r.mkt,condition:'good',notes:r.desc,addedAt:new Date().toISOString()});
+  localStorage.setItem('wv_watches',JSON.stringify(w));
+  showT(`${r.m} ${r.ref} ajoutée ✓`);
 }
-
-function addAlert(r) {
-  const alerts = JSON.parse(localStorage.getItem('wv_alerts')||'[]');
-  alerts.push({name:`Rolex ${r.model} ${r.ref}`,current:r.market,target:Math.round(r.market*0.88),createdAt:new Date().toISOString()});
-  localStorage.setItem('wv_alerts',JSON.stringify(alerts));
-  showToast(`Alerte créée pour ${r.model} ${r.ref} ✓`);
+function addAl(r){
+  const al=JSON.parse(localStorage.getItem('wv_alerts')||'[]');
+  al.push({name:`Rolex ${r.m} ${r.ref}${r.nick?' — '+r.nick:''}`,current:r.mkt,target:Math.round(r.mkt*.88),createdAt:new Date().toISOString()});
+  localStorage.setItem('wv_alerts',JSON.stringify(al));
+  showT(`Alerte créée — ${r.nick||r.ref} ✓`);
 }
-
-function render() {
-  document.getElementById('count-total').textContent = DATA.length;
-  document.getElementById('count-disc').textContent = DATA.filter(r=>r.status==='discontinued').length;
-  document.getElementById('count-new').textContent = DATA.filter(r=>r.status==='new2026').length;
-  document.getElementById('res-count').textContent = `${filtered.length} référence${filtered.length>1?'s':''} affichée${filtered.length>1?'s':''}`;
-
-  const grid = document.getElementById('grid');
-  grid.innerHTML = filtered.map(r => {
-    const premium = Math.round(((r.market-r.retail)/r.retail)*100);
-    const dClass = r.delta > 1 ? 'delta-up' : r.delta < -1 ? 'delta-down' : 'delta-flat';
-    const dSign = r.delta > 0 ? '+' : '';
-    const statusBadge = r.status==='discontinued'
-      ? `<span class="badge badge-disc">Discontinuée${r.end?' '+r.end:''}</span>`
-      : r.status==='new2026'
-      ? `<span class="badge badge-new">Nouveauté 2026</span>`
-      : `<span class="badge badge-current">En production</span>`;
-    const nickBadge = r.nickname ? `<span class="badge badge-nickname">${r.nickname}</span>` : '';
-    const cardClass = r.status==='discontinued' ? 'card card-discontinued' : r.status==='new2026' ? 'card card-new' : 'card';
-
-    return `<div class="${cardClass}">
-      <div>${statusBadge}${nickBadge}</div>
-      <div class="card-collection">${r.col}</div>
-      <div class="card-model">${r.model}</div>
-      <div class="card-ref">${r.ref}</div>
-      <div class="card-year">Introduit en ${r.year}${r.end?' · Arrêté '+r.end:''}</div>
-      <div class="card-desc">${r.desc}</div>
-      <div class="card-prices">
-        <div class="price-row"><span class="price-label">Marché secondaire</span><span class="price-val">${fmt(r.market)}</span></div>
-        <div class="price-row"><span class="price-label">Prix boutique</span><span class="price-retail">${fmt(r.retail)}</span></div>
-        <div class="price-row"><span class="price-label">Prime / décote</span><span class="price-premium ${premium>=0?'prem-up':'prem-down'}">${premium>=0?'+':''}${premium}%</span></div>
-      </div>
-      <div class="card-footer">
-        <div class="delta ${dClass}">${dSign}${r.delta}% / 12 mois</div>
-        <div class="card-btns">
-          <button class="btn-xs" onclick='addAlert(${JSON.stringify(r).replace(/'/g,"&#39;")})'>+ Alerte</button>
-          <button class="btn-gold" onclick='addToCollection(${JSON.stringify(r).replace(/'/g,"&#39;")})'>+ Collection</button>
+function render(){
+  document.getElementById('cnt-t').textContent=DATA.length;
+  document.getElementById('cnt-d').textContent=DATA.filter(r=>r.s==='discontinued').length;
+  document.getElementById('cnt-n').textContent=DATA.filter(r=>r.s==='new').length;
+  document.getElementById('rc').textContent=`${filt.length} référence${filt.length>1?'s':''} affichée${filt.length>1?'s':''}`;
+  const prem=r=>Math.round(((r.mkt-r.retail)/r.retail)*100);
+  document.getElementById('grid').innerHTML=filt.map(r=>{
+    const p=prem(r);
+    const dc=r.delta>1?'dup':r.delta<-1?'ddn':'dfl';
+    const ds=r.delta>0?'+':'';
+    const sb=r.s==='discontinued'?`<span class="bdg b-disc">Discontinuée${r.end?' '+r.end:''}</span>`:r.s==='new'?`<span class="bdg b-new">Nouveauté ${r.yr}</span>`:`<span class="bdg b-cur">En production</span>`;
+    const nb=r.nick?`<span class="bdg b-nick">${r.nick}</span>`:'';
+    const cc=r.s==='discontinued'?'card card-disc':r.s==='new'?'card card-new':'card';
+    const imgUrl=IMG[r.ref];
+    const imgHtml=imgUrl
+      ?`<img src="${imgUrl}" alt="${r.m} ${r.ref}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=ci-ph><svg viewBox=\\'0 0 24 24\\'><circle cx=\\'12\\' cy=\\'12\\' r=\\'10\\'/><polyline points=\\'12 6 12 12 16 14\\'/></svg><span>${r.ref}</span></div>'">`
+      :`<div class="ci-ph"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>${r.ref}</span></div>`;
+    return`<div class="${cc}">
+      <div class="ci">${imgHtml}</div>
+      <div class="cb">
+        <div class="bdgs">${sb}${nb}</div>
+        <div class="cc">${r.col}</div>
+        <div class="cm">${r.m}</div>
+        <div class="cr">${r.ref}</div>
+        <div class="cy">${r.yr}${r.end?' → '+r.end:' → présent'}</div>
+        <div class="cd">${r.desc}</div>
+        <div class="ps">
+          <div class="pr"><span class="pl">Marché secondaire</span><span class="pv">${fmt(r.mkt)}</span></div>
+          <div class="pr"><span class="pl">Prix boutique</span><span class="pvs">${fmt(r.retail)}</span></div>
+          <div class="pr"><span class="pl">Prime/décote</span><span class="${p>=0?'pup':'pdn'}">${p>=0?'+':''}${p}%</span></div>
+        </div>
+        <div class="cf">
+          <div class="dl ${dc}">${ds}${r.delta}% / 12 mois</div>
+          <div class="btns">
+            <button class="bx" onclick='addAl(${JSON.stringify(r).replace(/'/g,"&#39;")})'>+ Alerte</button>
+            <button class="bg" onclick='addCol(${JSON.stringify(r).replace(/'/g,"&#39;")})'>+ Collection</button>
+          </div>
         </div>
       </div>
     </div>`;
   }).join('');
 }
-
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  document.getElementById('toast-msg').textContent = msg;
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),3200);
-}
-
-renderPills();
-filter();
+function showT(msg){const t=document.getElementById('toast');document.getElementById('tmsg').textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3200)}
+renderPills();go();
 </script>
 </body>
 </html>
