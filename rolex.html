@@ -625,7 +625,149 @@ function render(){
   }).join('');
 }
 function showT(msg){const t=document.getElementById('toast');document.getElementById('tmsg').textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3200)}
+
+// ── ADMIN PANEL ────────────────────────────────────────────────────────────────
+// Charge les overrides sauvegardés dans localStorage
+function loadOverrides(){
+  try { return JSON.parse(localStorage.getItem('mw_price_overrides')||'{}'); } catch(e){ return {}; }
+}
+function saveOverrides(o){ localStorage.setItem('mw_price_overrides',JSON.stringify(o)); }
+
+// Applique les overrides au chargement
+function applyOverrides(){
+  const o = loadOverrides();
+  DATA.forEach(r => {
+    if(o[r.ref]) {
+      if(o[r.ref].retail !== undefined) r.retail = o[r.ref].retail;
+      if(o[r.ref].mkt !== undefined) r.mkt = o[r.ref].mkt;
+      if(o[r.ref].delta !== undefined) r.delta = o[r.ref].delta;
+    }
+  });
+}
+
+function openAdmin(){
+  document.getElementById('admin-modal').classList.add('open');
+  renderAdminList('');
+}
+function closeAdmin(){ document.getElementById('admin-modal').classList.remove('open'); }
+
+function renderAdminList(q){
+  const overrides = loadOverrides();
+  const list = DATA.filter(r => !q || r.ref.toLowerCase().includes(q.toLowerCase()) || r.m.toLowerCase().includes(q.toLowerCase()) || (r.nick&&r.nick.toLowerCase().includes(q.toLowerCase())));
+  const el = document.getElementById('admin-list');
+  el.innerHTML = list.slice(0,80).map(r => {
+    const ov = overrides[r.ref]||{};
+    const hasOv = ov.retail!==undefined||ov.mkt!==undefined;
+    return `<div class="al-row ${hasOv?'al-modified':''}">
+      <div class="al-info">
+        <div class="al-ref">${r.ref} ${hasOv?'<span class="al-badge">Modifié</span>':''}</div>
+        <div class="al-name">${r.m}${r.nick?' — '+r.nick:''}</div>
+      </div>
+      <div class="al-fields">
+        <div class="al-field">
+          <label>Prix boutique (€)</label>
+          <input type="number" value="${ov.retail!==undefined?ov.retail:r.retail}" onchange="updatePrice('${r.ref}','retail',this.value)" step="50">
+        </div>
+        <div class="al-field">
+          <label>Prix marché (€)</label>
+          <input type="number" value="${ov.mkt!==undefined?ov.mkt:r.mkt}" onchange="updatePrice('${r.ref}','mkt',this.value)" step="50">
+        </div>
+        <div class="al-field">
+          <label>Δ 12 mois (%)</label>
+          <input type="number" value="${ov.delta!==undefined?ov.delta:r.delta}" onchange="updatePrice('${r.ref}','delta',this.value)" step="0.1">
+        </div>
+        ${hasOv?`<button class="al-reset" onclick="resetPrice('${r.ref}')">↺</button>`:''}
+      </div>
+    </div>`;
+  }).join('');
+  if(list.length>80) el.innerHTML += `<div style="text-align:center;padding:1rem;color:var(--tm);font-size:12px">Affichage limité à 80 résultats — affinez la recherche</div>`;
+}
+
+function updatePrice(ref, field, val){
+  const o = loadOverrides();
+  if(!o[ref]) o[ref]={};
+  o[ref][field] = parseFloat(val);
+  saveOverrides(o);
+  // Applique immédiatement à DATA
+  const r = DATA.find(d=>d.ref===ref);
+  if(r) r[field] = parseFloat(val);
+  // Marque la ligne comme modifiée
+  renderAdminList(document.getElementById('admin-search').value);
+  showT(`${ref} — ${field} mis à jour à ${val}`);
+  go(); // Re-render la grille
+}
+
+function resetPrice(ref){
+  const o = loadOverrides();
+  delete o[ref];
+  saveOverrides(o);
+  // Recharge la page pour restaurer les valeurs d'origine
+  location.reload();
+}
+
+function exportPrices(){
+  const o = loadOverrides();
+  const lines = ['Référence,Prix boutique,Prix marché,Delta %'];
+  Object.entries(o).forEach(([ref,v])=>{
+    lines.push(`${ref},${v.retail||''},${v.mkt||''},${v.delta||''}`);
+  });
+  const blob = new Blob([lines.join('\n')], {type:'text/csv'});
+  const a = document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='prix-rolex-modifies.csv'; a.click();
+}
+
+applyOverrides();
 renderPills();go();
 </script>
+
+<!-- BOUTON ADMIN -->
+<button onclick="openAdmin()" style="position:fixed;bottom:1.5rem;left:1.5rem;z-index:200;background:var(--surface2);border:.5px solid var(--b2);border-radius:4px;padding:8px 14px;color:var(--tm);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px;">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+  Modifier les prix
+</button>
+
+<!-- MODAL ADMIN -->
+<div id="admin-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:500;flex-direction:column;">
+<style>
+#admin-modal.open{display:flex}
+.am-wrap{background:var(--s2);border:.5px solid var(--b2);border-radius:6px;width:100%;max-width:860px;margin:auto;max-height:90vh;display:flex;flex-direction:column;overflow:hidden}
+.am-head{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;border-bottom:.5px solid var(--b1);flex-shrink:0}
+.am-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;color:var(--tx)}
+.am-actions{display:flex;gap:8px;align-items:center}
+.am-close{background:none;border:none;color:var(--tm);cursor:pointer;font-size:20px;line-height:1}
+.am-search{background:var(--s3);border:.5px solid var(--b3);border-radius:3px;padding:7px 12px;color:var(--tx);font-size:13px;font-family:'DM Sans',sans-serif;width:220px}
+.am-search:focus{outline:none;border-color:var(--b2)}
+.am-export{font-size:11px;padding:6px 12px;border-radius:3px;background:none;border:.5px solid var(--b2);color:var(--tm);cursor:pointer;font-family:'DM Sans',sans-serif}
+.am-export:hover{color:var(--tx)}
+.am-body{overflow-y:auto;flex:1}
+#admin-list{padding:.75rem 1.5rem}
+.al-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:.5px solid var(--b1);flex-wrap:wrap}
+.al-row.al-modified{background:rgba(201,168,76,.04);margin:0 -1.5rem;padding:10px 1.5rem}
+.al-info{min-width:180px}
+.al-ref{font-size:12px;font-family:monospace;color:var(--tx);font-weight:500}
+.al-name{font-size:11px;color:var(--tm);margin-top:2px}
+.al-badge{font-size:9px;padding:1px 5px;border-radius:2px;background:rgba(201,168,76,.15);color:var(--gold);margin-left:4px;vertical-align:middle}
+.al-fields{display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap}
+.al-field{display:flex;flex-direction:column;gap:3px}
+.al-field label{font-size:10px;color:var(--tm)}
+.al-field input{background:var(--s3);border:.5px solid var(--b3);border-radius:3px;padding:5px 8px;color:var(--tx);font-size:12px;font-family:'DM Sans',sans-serif;width:120px}
+.al-field input:focus{outline:none;border-color:var(--gold-d)}
+.al-reset{background:none;border:.5px solid var(--b2);border-radius:3px;color:var(--tm);cursor:pointer;padding:4px 8px;font-size:13px;align-self:flex-end}
+.al-reset:hover{color:var(--rd)}
+.am-note{font-size:11px;color:var(--tm);padding:.75rem 1.5rem;border-top:.5px solid var(--b1);flex-shrink:0}
+</style>
+<div class="am-wrap">
+  <div class="am-head">
+    <div class="am-title">Modifier les prix</div>
+    <div class="am-actions">
+      <input type="text" id="admin-search" class="am-search" placeholder="Rechercher une référence..." oninput="renderAdminList(this.value)">
+      <button class="am-export" onclick="exportPrices()">⬇ Exporter CSV</button>
+      <button class="am-close" onclick="closeAdmin()">×</button>
+    </div>
+  </div>
+  <div class="am-body"><div id="admin-list"></div></div>
+  <div class="am-note">Les modifications sont sauvegardées dans votre navigateur. Cliquez ↺ pour restaurer un prix d'origine. Exporter le CSV pour garder une trace.</div>
+</div>
+</div>
+
 </body>
 </html>
