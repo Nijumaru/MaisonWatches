@@ -209,7 +209,31 @@ tbody td { padding: 12px 1.25rem; font-size: 13px; color: var(--text); }
 
 <!-- SIDEBAR -->
 <aside class="sidebar">
-  <div class="sidebar-logo">Maison Watches</div>
+  <a href="index.html" class="sidebar-logo" style="display:flex;align-items:center;gap:10px;text-decoration:none">
+    <svg id="mw-clock-sb" width="28" height="28" viewBox="0 0 28 28">
+      <circle cx="14" cy="14" r="13" fill="#0D0D0D"/>
+      <circle cx="14" cy="14" r="11" fill="none" stroke="#C9A84C" stroke-width="1" opacity="0.9"/>
+      <line x1="12.8" y1="4" x2="12.8" y2="6.5" stroke="#F0EDE8" stroke-width="1.1" stroke-linecap="round"/>
+      <line x1="15.2" y1="4" x2="15.2" y2="6.5" stroke="#F0EDE8" stroke-width="1.1" stroke-linecap="round"/>
+      <line x1="24" y1="12.8" x2="21.5" y2="12.8" stroke="#F0EDE8" stroke-width="0.9" stroke-linecap="round" opacity="0.6"/>
+      <line x1="24" y1="15.2" x2="21.5" y2="15.2" stroke="#F0EDE8" stroke-width="0.9" stroke-linecap="round" opacity="0.6"/>
+      <line x1="4" y1="12.8" x2="6.5" y2="12.8" stroke="#F0EDE8" stroke-width="0.9" stroke-linecap="round" opacity="0.6"/>
+      <line x1="4" y1="15.2" x2="6.5" y2="15.2" stroke="#F0EDE8" stroke-width="0.9" stroke-linecap="round" opacity="0.6"/>
+      <circle cx="21" cy="7" r="1" fill="#C9A84C" opacity="0.5"/>
+      <circle cx="7" cy="7" r="1" fill="#C9A84C" opacity="0.5"/>
+      <line id="mw-hour-sb" x1="14" y1="14" x2="14" y2="8" stroke="#F0EDE8" stroke-width="1.6" stroke-linecap="round"/>
+      <line id="mw-min-sb" x1="14" y1="14" x2="14" y2="4.5" stroke="#F0EDE8" stroke-width="1.1" stroke-linecap="round" opacity="0.9"/>
+      <line id="mw-sec-sb" x1="14" y1="14" x2="14" y2="20" stroke="#C9A84C" stroke-width="0.6" stroke-linecap="round" opacity="0.7"/>
+      <circle cx="14" cy="14" r="2" fill="#C9A84C"/>
+      <circle cx="14" cy="14" r="1" fill="#0D0D0D"/>
+      <circle cx="14" cy="14" r="0.4" fill="#C9A84C"/>
+    </svg>
+    <div style="line-height:1.15">
+      <div style="font-family:'DM Sans',sans-serif;font-size:11px;font-weight:200;letter-spacing:4px;color:#F0EDE8">MAISON</div>
+      <div style="height:0.5px;background:rgba(201,168,76,0.35);margin:2px 0"></div>
+      <div style="font-family:'DM Sans',sans-serif;font-size:11px;font-weight:200;letter-spacing:4px;color:#C9A84C">WATCHES</div>
+    </div>
+  </a>
   <nav class="sidebar-nav">
     <div class="nav-section-label">Collection</div>
     <button class="nav-item active" onclick="showView('collection')">
@@ -752,6 +776,25 @@ if (!watches.length && !localStorage.getItem('wv_init')) {
 }
 
 render();
+</script>
+<script>
+(function(){
+  function setHand(id,cx,cy,angle,len){
+    var el=document.getElementById(id); if(!el)return;
+    var rad=(angle-90)*Math.PI/180;
+    el.setAttribute('x2',cx+Math.cos(rad)*len);
+    el.setAttribute('y2',cy+Math.sin(rad)*len);
+  }
+  function tick(){
+    var now=new Date();
+    var h=now.getHours()%12,m=now.getMinutes(),s=now.getSeconds(),ms=now.getMilliseconds();
+    var sa=(s+ms/1000)*6, ma=(m+s/60)*6, ha=(h+m/60)*30;
+    setHand('mw-hour-sb',14,14,ha,6);
+    setHand('mw-min-sb',14,14,ma,9.5);
+    setHand('mw-sec-sb',14,14,sa+180,6);
+  }
+  tick(); setInterval(tick,50);
+})();
 </script>
 </body>
 </html>
