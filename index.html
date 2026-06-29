@@ -262,16 +262,58 @@
     <div class="eyebrow">Gestionnaire de collection</div>
     <h1>Votre collection,<br><em>sa vraie valeur</em></h1>
     <p class="hero-sub">Suivez en temps réel ce que valent vos montres sur le marché secondaire. Alertes prix, historique, rapport d'assurance.</p>
-    <div id="signup-form" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;max-width:440px;margin:0 auto;">
-      <input type="email" id="email-input" placeholder="votre@email.com" style="flex:1;min-width:200px;padding:13px 16px;border-radius:2px;border:0.5px solid rgba(201,168,76,0.4);background:rgba(255,255,255,0.04);color:#F0EDE8;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;">
-      <button class="btn-primary" onclick="submitEmail()">Accès anticipé gratuit</button>
+    <div style="max-width:480px;margin:0 auto;">
+      <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
+      <style>
+        #sib-container{background:transparent!important;border:0.5px solid rgba(201,168,76,0.3)!important;border-radius:3px!important;padding:1.5rem!important}
+        #sib-form-container .sib-form{background:transparent!important}
+        .sib-form-block p{color:#F0EDE8!important;font-family:'DM Sans',sans-serif!important;font-size:14px!important;font-weight:400!important}
+        .sib-form-block p:first-child{font-size:13px!important;color:rgba(201,168,76,0.8)!important;letter-spacing:0.06em!important;text-transform:uppercase!important;margin-bottom:4px!important}
+        .entry__field input{background:rgba(255,255,255,0.04)!important;border:0.5px solid rgba(201,168,76,0.3)!important;border-radius:2px!important;color:#F0EDE8!important;font-family:'DM Sans',sans-serif!important;font-size:14px!important;padding:12px 16px!important}
+        .entry__field input::placeholder{color:rgba(240,237,232,0.3)!important}
+        .sib-form-block__button{background:var(--gold)!important;color:#0D0D0D!important;font-family:'DM Sans',sans-serif!important;font-size:13px!important;font-weight:500!important;letter-spacing:0.06em!important;border-radius:2px!important;padding:12px 28px!important;width:100%!important;text-align:center!important}
+        .sib-form-block__button:hover{background:#E8D5A3!important}
+        .sib-form{background:transparent!important}
+      </style>
+      <div class="sib-form" style="background:transparent;text-align:center;">
+        <div id="sib-form-container" class="sib-form-container">
+          <div id="sib-container" class="sib-container--large sib-container--vertical">
+            <form id="sib-form" method="POST" action="https://b8584c80.sibforms.com/serve/MUIFAIjXuK6RBE-578ZuitgSAcnQaiEazAyu1rP466rQUxN3-FGpJ2oPheVvUh5waNaFc1Gs4bogAxRsvnN1s336sRU24ykdUpabaiXXXQvcQip6IXVRW5sDgObDs7FxeLOKKW24sdtvdFfV2ap4PcNtFNAARQg7arYpgAocswHIKkUkldLF1JfRu5IbqiWLw70h_J5mxLXiD6UGdA==">
+              <div style="padding:6px 0">
+                <div class="sib-form-block" style="text-align:center"><p>Accès anticipé gratuit</p></div>
+              </div>
+              <div style="padding:6px 0">
+                <div class="sib-form-block" style="text-align:center"><div class="sib-text-form-block"><p>Rejoignez les premiers collectionneurs sur Maison Watches.</p></div></div>
+              </div>
+              <div style="padding:6px 0">
+                <div class="sib-input sib-form-block">
+                  <div class="form__entry entry_block">
+                    <div class="form__label-row">
+                      <div class="entry__field">
+                        <input class="input" type="text" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="votre@email.com" data-required="true" required/>
+                      </div>
+                    </div>
+                    <label class="entry__error entry__error--primary" style="font-size:13px;color:#ff4949"></label>
+                  </div>
+                </div>
+              </div>
+              <div style="padding:6px 0">
+                <div class="sib-form-block" style="text-align:center">
+                  <button class="sib-form-block__button sib-form-block__button-with-loader" form="sib-form" type="submit">
+                    <svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512"><path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z"/></svg>
+                    S'INSCRIRE
+                  </button>
+                </div>
+              </div>
+              <input type="text" name="email_address_check" value="" class="input--hidden">
+              <input type="hidden" name="locale" value="fr">
+              <input type="hidden" name="html_type" value="simple">
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
-    <p style="font-size:12px;color:var(--text-muted);margin-top:12px;">Déjà <span id="counter">47</span> collectionneurs inscrits · Sans engagement</p>
-    <div id="signup-success" style="display:none;text-align:center;">
-      <div style="font-size:15px;color:var(--gold);margin-bottom:6px;">✓ Vous êtes sur la liste</div>
-      <p style="font-size:13px;color:var(--text-muted);">On vous contacte en priorité au lancement.</p>
-      <a href="dashboard.html" style="font-size:13px;color:var(--gold-dark);text-decoration:underline;margin-top:8px;display:inline-block;">Voir la démo →</a>
-    </div>
+    <p style="font-size:12px;color:var(--text-muted);margin-top:12px;">Sans engagement · 0€</p>
   </div>
 
   <div class="ticker">
